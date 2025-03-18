@@ -48,6 +48,27 @@ const experiences = [
     color: "from-indigo-600 to-purple-600",
   },
   {
+    id: "Web Developer (Remote)",
+    title: "Website redesign",
+    company: "Leiferando.de",
+    location: "Germany",
+    period: "December 2024 - Present",
+    type: "work",
+    description:
+      "Redesigned the website for Lieferando.de",
+    responsibilities: [
+      "Improving UI/UX",
+      "Reduction in overall loading times and improved performance",
+      "Integrated security features to protect user data",
+    ],
+    skills: ["NextJS", "MongoDB", "Angular", "Cloudflare", "React", "TailwindCSS", "TypeScript"],
+    metrics: [
+      { value: "2000+", label: "Users Daily" },
+      { value: "8", label: "Team Project" },
+    ],
+    color: "from-indigo-600 to-purple-600",
+  },
+  {
     id: "calories-detection",
     title: "Calories detection image processing system (Work in Progress)",
     company: "Team Project",

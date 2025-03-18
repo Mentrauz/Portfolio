@@ -156,7 +156,7 @@ export default function RedesignedHero() {
                 variant="outline"
                 className="px-2 py-1 sm:px-3 sm:py-1.5 backdrop-blur-sm border-estragon/30 hover:bg-estragon/10 transition-colors"
               >
-                Web Development
+                NextJs
               </Badge>
               <Badge
                 variant="outline"

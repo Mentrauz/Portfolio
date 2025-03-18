@@ -83,7 +83,7 @@ const projects = [
     technologies: ["PyTorch", "CUDA", "Docker", "HuggingFace", "Python"],
     imageUrl: "/dalle.png",
     demoUrl: "#",
-    githubUrl: "Coming Soon",
+    githubUrl: "#",
     color: "from-purple-600 to-pink-600",
     featured: false,
     completed: "--",
@@ -129,7 +129,7 @@ const projects = [
     technologies: ["Next.js", "MongoDB", "TypeScript", "NextAuth"],
     imageUrl: "/tms.png",
     demoUrl: "#",
-    githubUrl: "www.tmsgroups.in",
+    githubUrl: "https://tmsgroups.in/",
     color: "from-amber-600 to-orange-600",
     featured: false,
     completed: "2024 - Present",
@@ -365,17 +365,17 @@ export default function RedesignedProjects() {
                           className="border-white text-white hover:bg-white/20 gap-2 text-sm"
                           asChild
                         >
-                          <a
+                          {/* <a
                             href={featuredProjects[currentFeaturedIndex].githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             <Github className="h-4 w-4" />
                             View Code
-                          </a>
+                          </a> */}
                         </Button>
 
-                        <Button
+                        {/* <Button
                           variant="outline"
                           className="border-white text-white hover:bg-white/20 gap-2 text-sm"
                           onClick={() => {
@@ -385,7 +385,7 @@ export default function RedesignedProjects() {
                         >
                           <Code className="h-4 w-4" />
                           Details
-                        </Button>
+                        </Button> */}
                       </div>
                     </div>
                   </div>

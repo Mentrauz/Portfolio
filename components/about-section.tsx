@@ -58,7 +58,7 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                 <div className="p-4 text-white">
                   <p className="font-medium">Soumya Singh</p>
-                  <p className="text-sm text-white/80">AI Engineer & Web Developer</p>
+                  <p className="text-sm text-white/80">AI Engineer & NextJs Developer</p>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@ export default function AboutSection() {
               <p className="text-muted-foreground mb-6">
                 I'm an innovative Web Developer, AI Specialist, and Community Organizer with expertise in
                 machine learning, cybersecurity. With a background in CS and a
-                deep understanding of computational methods, I specialize in developing AI-driven, open-source tools for
+                deep understanding of computational methods, I specialize in NextJs based Web Development and open-source tools for
                 impactful, equitable social change.
               </p>
             </StaggerItem>

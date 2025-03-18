@@ -15,7 +15,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Soumya Singh | AI Engineer & Web Developer",
   description:
-    "Portfolio of Soumya Singh, AI Engineer, Web Developer and specializing in machine learning",
+    "Portfolio of Soumya Singh, AI Engineer, Machine Learning Enthusiast and Specializing NextJS Web Development.",
 }
 
 export default function RootLayout({

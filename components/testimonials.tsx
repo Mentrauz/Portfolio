@@ -16,8 +16,18 @@ const testimonials = [
       "Soumya's Excellence in Web Development helped us build a better HR and Payroll system for our company.",
     author: "Mr.Abhishek Tondak",
     role: "CEO",
-    avatar: "/public/web-app-manifest-192x192.png",
+    avatar: "",
     company: "TMS Groups",
+    rating: 5,
+  },
+  {
+    id: 2,
+    content:
+      "He collaborated very well with the team to build our all new website and we are very happy with the results.",
+    author: "Jürgen",
+    role: "Senior Developer",
+    avatar: "",
+    company: "Lieferando.de",
     rating: 5,
   },
 ]

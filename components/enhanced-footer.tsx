@@ -77,7 +77,7 @@ export default function EnhancedFooter() {
             >
               <div className="font-bold text-xl mb-4">Soumya Singh</div>
               <p className="text-muted-foreground mb-6">
-                AI Engineer & Web Developer specializing in machine learning, Web Development.
+                AI & ML Enthusiast specializing in NextJs based Web development.
               </p>
 
               <div className="flex gap-3">
