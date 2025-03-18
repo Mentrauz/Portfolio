@@ -13,7 +13,7 @@ export default function Education() {
           <CardHeader className="pb-2">
             <div className="flex items-center gap-2">
               <GraduationCap className="h-5 w-5" />
-              <CardTitle>Bachelor of Science in Physics</CardTitle>
+              <CardTitle>B.Tech in Computer Science and Engineering</CardTitle>
             </div>
             <div className="flex justify-between items-center mt-2">
               <div className="text-muted-foreground">Marwadi University</div>
