@@ -1,0 +1,46 @@
+{
+  "components\\3d-skills-globe.tsx -> three": {
+    "id": 7274,
+    "files": [
+      "static/chunks/bd904a5c.fa9e0cec1ec49cc5.js",
+      "static/chunks/b536a0f1.0a0544d5fa218650.js"
+    ]
+  },
+  "components\\3d-skills-globe.tsx -> three/examples/jsm/controls/OrbitControls": {
+    "id": 3451,
+    "files": [
+      "static/chunks/bd904a5c.fa9e0cec1ec49cc5.js",
+      "static/chunks/451.508a62497a2e221a.js"
+    ]
+  },
+  "components\\client-diagnostic-wrapper.tsx -> @/components/diagnostic-tool": {
+    "id": 5208,
+    "files": [
+      "static/chunks/208.7efbcb075b38fe76.js"
+    ]
+  },
+  "components\\redesigned-skills.tsx -> @/components/3d-skills-globe": {
+    "id": 8,
+    "files": [
+      "static/chunks/8.6650c72d1ea197cc.js"
+    ]
+  },
+  "components\\skills-section-wrapper.tsx -> @/components/redesigned-skills": {
+    "id": 6006,
+    "files": [
+      "static/chunks/6.88ab694c0f2a774e.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 5203,
+    "files": [
+      "static/chunks/203.2b4c1ee4fbe3a7cf.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 6218,
+    "files": [
+      "static/chunks/218.d8ec56f1948566fd.js"
+    ]
+  }
+}
