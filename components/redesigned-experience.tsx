@@ -69,6 +69,27 @@ const experiences = [
     color: "from-indigo-600 to-purple-600",
   },
   {
+    id: "Web Developer",
+    title: "Website Development",
+    company: "Chowdeshwari Catering",
+    location: "Bengaluru, India",
+    period: "December 2024 - Present",
+    type: "work",
+    description:
+      "Designed the website for Chowdeshwari Catering",
+    responsibilities: [
+      "User Friendly UI",
+      "Smooth and consistent Experience throughout the website",
+      "Easy display of all the information",
+    ],
+    skills: ["NextJS", "TailwindCSS", "TypeScript"],
+    metrics: [
+      { value: "100+", label: "Visitors Daily" },
+      { value: "1", label: "Solo Project" },
+    ],
+    color: "from-indigo-600 to-purple-600",
+  },
+  {
     id: "calories-detection",
     title: "Calories detection image processing system (Work in Progress)",
     company: "Team Project",
