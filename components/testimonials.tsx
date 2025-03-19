@@ -23,6 +23,16 @@ const testimonials = [
   {
     id: 2,
     content:
+      "Website looks very professional and we are very happy with the results. He is very professional and easy to work with.",
+    author: "Mr.Jayanth",
+    role: "Treasurer",
+    avatar: "",
+    company: "Chowdeshwari Catering",
+    rating: 5,
+  },
+  {
+    id: 3,
+    content:
       "He collaborated very well with the team to build our all new website and we are very happy with the results.",
     author: "Jürgen",
     role: "Senior Developer",

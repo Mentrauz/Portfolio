@@ -60,7 +60,7 @@ const projects = [
       "Making MS apps more powerful and efficient through agentic tool, providing a more personalized and efficient experience for users.",
     technologies: ["Research in progress"],
     imageUrl: "/powerzi.jpg",
-    demoUrl: "#",
+    // demoUrl: "#",
     githubUrl: "Coming Soon",
     color: "from-blue-600 to-violet-600",
     featured: true,
@@ -82,7 +82,7 @@ const projects = [
       "A PyTorch implementation of the DALL-E 2 architecture for generating high-quality images from text descriptions. The project includes optimizations for CUDA acceleration and containerization with Docker for easy deployment and scaling.",
     technologies: ["PyTorch", "CUDA", "Docker", "HuggingFace", "Python"],
     imageUrl: "/dalle.png",
-    demoUrl: "#",
+    // demoUrl: "#",
     githubUrl: "#",
     color: "from-purple-600 to-pink-600",
     featured: false,
@@ -103,15 +103,15 @@ const projects = [
     description: "Designed the website for Chowdeshwari Catering",
     longDescription:
       "User friendly and professional design that perfectly meets clent's and user's expectations",
-    technologies: ["Python", "TensorFlow", "OpenAI Gym", "Ray", "Docker"],
+    technologies: ["NextJs", "Tailwind", "NodeJs"],
     imageUrl: "/urbaneats.png",
-    demoUrl: "#",
+    demoUrl: "https://urban-eats-catering.vercel.app/",
     githubUrl: "https://github.com/Mentrauz/urban-eats-catering",
     color: "from-green-600 to-teal-600",
     featured: false,
     completed: "2024",
-    teamSize: 2,
-    difficulty: 4,
+    teamSize: 1,
+    difficulty: 2,
     achievements: [
       "User Friendly UI",
       "Smooth and consistent Experience throughout the website",
@@ -127,11 +127,11 @@ const projects = [
       "A full-stack web application that streamlines the process of generating payroll for employees and also provides a dashboard for HR to manage employees edit and maintain data and also to make it easier for the company to manage large database",
     technologies: ["Next.js", "MongoDB", "TypeScript", "NextAuth"],
     imageUrl: "/tms.png",
-    demoUrl: "https://urban-eats-catering.vercel.app/",
-    githubUrl: "https://tmsgroups.in/",
+    demoUrl: "https://tmsgroups.in/",
+    // githubUrl: "https://tmsgroups.in/",
     color: "from-amber-600 to-orange-600",
     featured: false,
-    completed: "2024 - Present",
+    completed: "2024",
     teamSize: 1,
     difficulty: 4,
     achievements: [
@@ -359,20 +359,20 @@ export default function RedesignedProjects() {
                           <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Button> */}
 
-                        <Button
+                        {/* <Button
                           variant="outline"
                           className="border-white text-white hover:bg-white/20 gap-2 text-sm"
                           asChild
                         >
-                          {/* <a
+                          <a
                             href={featuredProjects[currentFeaturedIndex].githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             <Github className="h-4 w-4" />
                             View Code
-                          </a> */}
-                        </Button>
+                          </a>
+                        </Button> */}
 
                         {/* <Button
                           variant="outline"
@@ -558,14 +558,14 @@ export default function RedesignedProjects() {
                         </div>
 
                         <div className="flex flex-wrap gap-3 mt-6">
-                          {/* <Button
+                          <Button
                             variant="default"
                             className="gap-2"
                             onClick={() => handleDemoClick(selectedProject.demoUrl)}
                           >
                             <ExternalLink className="h-4 w-4" />
                             Live Demo
-                          </Button> */}
+                          </Button>
                           <Button variant="outline" className="gap-2" asChild>
                             <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
                               <Github className="h-4 w-4" />

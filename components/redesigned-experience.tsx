@@ -49,7 +49,7 @@ const experiences = [
   },
   {
     id: "Web Developer (Remote)",
-    title: "Website redesign",
+    title: "Website redesign (remote)",
     company: "Leiferando.de",
     location: "Germany",
     period: "December 2024 - Present",
@@ -73,7 +73,7 @@ const experiences = [
     title: "Website Development",
     company: "Chowdeshwari Catering",
     location: "Bengaluru, India",
-    period: "December 2024 - Present",
+    period: "December 2024",
     type: "work",
     description:
       "Designed the website for Chowdeshwari Catering",
