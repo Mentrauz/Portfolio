@@ -31,7 +31,7 @@ const experiences = [
     title: "Payroll Developer for a Start-Up",
     company: "TMS Groups",
     location: "Gurgaon, India",
-    period: "December 2024 - Present",
+    period: "January 2025 - Present",
     type: "work",
     description:
       "Developed a payroll system for a start-up using NextJS and MongoDB",
@@ -52,7 +52,7 @@ const experiences = [
     title: "Website redesign (remote)",
     company: "Leiferando.de",
     location: "Germany",
-    period: "December 2024 - Present",
+    period: "July 2024",
     type: "work",
     description:
       "Redesigned the website for Lieferando.de",
