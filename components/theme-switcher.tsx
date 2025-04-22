@@ -121,8 +121,8 @@ export function ThemeSwitcher() {
           align="end" 
           className="w-[240px] p-0"
           sideOffset={5}
-          side="top"
-          avoidCollisions={false}
+          side="bottom"
+          avoidCollisions={true}
           collisionPadding={20}
           sticky="always"
         >
