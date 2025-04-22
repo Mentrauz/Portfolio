@@ -9,7 +9,6 @@ import Testimonials from "@/components/testimonials"
 import EnhancedFooter from "@/components/enhanced-footer"
 import FloatingNav from "@/components/floating-nav"
 import ScrollProgress from "@/components/scroll-progress"
-import { FloatingThemeSwitcher } from "@/components/floating-theme-switcher"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { SectionFallback } from "@/components/section-fallback"
 import { Loader2 } from "lucide-react"
@@ -29,7 +28,6 @@ export default function Home() {
     <main className="min-h-screen bg-background pt-16">
       <ScrollProgress />
       <FloatingNav />
-      <FloatingThemeSwitcher />
 
       <ErrorBoundary fallback={<SectionFallback title="Hero" />}>
         <Suspense fallback={<LoadingSection name="Hero" />}>
