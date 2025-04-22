@@ -58,7 +58,7 @@ export default function RedesignedHero() {
   // Typing effect for the subtitle
   const [displayedText, setDisplayedText] = useState("")
   const [typingComplete, setTypingComplete] = useState(false)
-  const fullText = "Web Developer, Learning ML, and Cybersecurity."
+  const fullText = "Web Developer, Learning ML and Cybersecurity."
 
   useEffect(() => {
     if (!isClient) return
