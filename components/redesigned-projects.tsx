@@ -75,20 +75,20 @@ const projects = [
   },
   {
     id: 2,
-    title: "DALL-E 2 PyTorch Implementation",
-    category: "ai",
-    description: "Open-source implementation of OpenAI's DALL-E 2 image generation model using PyTorch.",
+    title: "Frontend Demo",
+    category: "web",
+    description: "A frontend demo",
     longDescription:
-      "A PyTorch implementation of the DALL-E 2 architecture for generating high-quality images from text descriptions. The project includes optimizations for CUDA acceleration and containerization with Docker for easy deployment and scaling.",
-    technologies: ["PyTorch", "CUDA", "Docker", "HuggingFace", "Python"],
-    imageUrl: "/dalle.png",
-    // demoUrl: "#",
-    githubUrl: "#",
+      "A frontend demo showcasing the power of React, Next.js, and Tailwind CSS",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Shadcn UI"],
+    imageUrl: "/uix.png",
+    demoUrl: "https://simple-frontend-liart.vercel.app/",
+    // githubUrl: "#",
     color: "from-purple-600 to-pink-600",
     featured: false,
-    completed: "--",
-    teamSize: 2,
-    difficulty: 5,
+    completed: "2024",
+    teamSize: 1,
+    difficulty: 1,
     achievements: [
       "Implemented the full DALL-E 2 architecture with PyTorch",
       "Optimized for CUDA acceleration with 40% performance improvement",
@@ -200,13 +200,17 @@ export default function RedesignedProjects() {
   const isClient = useIsClient()
 
   // Get featured projects
-  const featuredProjects = projects.filter((project) => project.featured)
+  const featuredProjects = projects
 
   // Filter projects based on category
   const filteredProjects =
     selectedCategory === "all"
-      ? projects.filter((project) => !project.featured)
-      : projects.filter((project) => project.category === selectedCategory && !project.featured)
+      ? projects.filter(project => project.id !== featuredProjects[currentFeaturedIndex].id)
+      : projects.filter(
+          project => 
+            project.category === selectedCategory && 
+            project.id !== featuredProjects[currentFeaturedIndex].id
+        )
 
   const handleNext = () => {
     if (!isClient) return
@@ -283,23 +287,23 @@ export default function RedesignedProjects() {
                   key={featuredProjects[currentFeaturedIndex].id}
                   custom={direction}
                   initial={{
-                    x: direction > 0 ? 1000 : -1000,
+                    x: direction > 0 ? 500 : -500,
                     opacity: 0,
                   }}
                   animate={{
                     x: 0,
                     opacity: 1,
                     transition: {
-                      x: { type: "spring", stiffness: 300, damping: 30 },
-                      opacity: { duration: 0.2 },
+                      x: { type: "spring", stiffness: 100, damping: 20 },
+                      opacity: { duration: 0.4 },
                     },
                   }}
                   exit={{
-                    x: direction > 0 ? -1000 : 1000,
+                    x: direction < 0 ? 500 : -500,
                     opacity: 0,
                     transition: {
-                      x: { type: "spring", stiffness: 300, damping: 30 },
-                      opacity: { duration: 0.2 },
+                      x: { type: "spring", stiffness: 100, damping: 20 },
+                      opacity: { duration: 0.3 },
                     },
                   }}
                   className="relative w-full aspect-[16/9]"
