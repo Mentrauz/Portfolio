@@ -61,7 +61,7 @@ export default function ResponsiveHeader() {
             </div>
             <div className="hidden md:block">
               <div className="font-bold">Soumya Singh</div>
-              <div className="text-xs text-muted-foreground">AI Engineer & Web Developer</div>
+              <div className="text-xs text-muted-foreground">AI Enthusiast & Web Developer</div>
             </div>
           </div>
         </motion.div>

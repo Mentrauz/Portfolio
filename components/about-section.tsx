@@ -90,13 +90,12 @@ export default function AboutSection() {
         <div className="relative z-20">
           <StaggeredContainer>
             <StaggerItem>
-              <h3 className="text-2xl font-bold mb-4">Web Developer & AI Specialist</h3>
+              <h3 className="text-2xl font-bold mb-4">Web Developer & AI Enthusiast</h3>
             </StaggerItem>
 
             <StaggerItem>
               <p className="text-muted-foreground mb-6">
-                I'm an innovative Web Developer, AI Specialist, and Community Organizer with expertise in
-                machine learning, cybersecurity. With a background in CS and a
+                I'm an innovative Web Developer, AI Enthusiast, and Community Organizer. With a background in CSE and a
                 deep understanding of computational methods, I specialize in NextJs based Web Development and open-source tools for
                 impactful, equitable social change.
               </p>

@@ -109,7 +109,7 @@ export default function ResumeDownload() {
                 <div className="space-y-8">
                   <div className="text-center mb-8">
                     <h1 className="text-2xl font-bold">Soumya Singh</h1>
-                    <p className="text-muted-foreground">AI Engineer & Web Developer</p>
+                    <p className="text-muted-foreground">AI Enthusiast & Web Developer</p>
                     <div className="flex justify-center gap-4 mt-2 text-sm text-muted-foreground">
                       <span>11soumyasingh2@gmail.com</span>
                       <span>|</span>

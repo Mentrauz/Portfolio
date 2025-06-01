@@ -58,7 +58,7 @@ export default function RedesignedHero() {
   // Typing effect for the subtitle
   const [displayedText, setDisplayedText] = useState("")
   const [typingComplete, setTypingComplete] = useState(false)
-  const fullText = "Web Developer, Learning ML and Cybersecurity."
+  const fullText = "Web Developer, Learning ML and DevOps."
 
   useEffect(() => {
     if (!isClient) return
@@ -91,7 +91,7 @@ export default function RedesignedHero() {
 
   // Function to highlight specific terms in the text
   const highlightText = (text: string) => {
-    const termsToHighlight = ["Web", "ML", "Cybersecurity"]
+    const termsToHighlight = ["Web", "ML", "DevOps"]
     let highlightedText = text
 
     termsToHighlight.forEach((term) => {
@@ -162,7 +162,7 @@ export default function RedesignedHero() {
                 variant="outline"
                 className="px-2 py-1 sm:px-3 sm:py-1.5 backdrop-blur-sm border-white/20 hover:bg-white/10 transition-colors"
               >
-                Computer Vision
+                DevOps
               </Badge>
               <Badge
                 variant="outline"
