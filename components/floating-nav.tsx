@@ -21,6 +21,7 @@ const navItems: NavItem[] = [
   { name: "Experience", href: "#experience", icon: <Briefcase className="h-[18px] w-[18px]" /> },
   { name: "Projects", href: "#projects", icon: <Code className="h-[18px] w-[18px] rotate-90" /> },
   { name: "Education", href: "#education", icon: <GraduationCap className="h-[18px] w-[18px]" /> },
+  { name: "Reading List", href: "/reading-list", icon: <Book className="h-[18px] w-[18px]" /> },
   { name: "Contact", href: "#contact", icon: <Send className="h-[18px] w-[18px]" /> },
 ]
 
@@ -126,6 +127,12 @@ export default function FloatingNav() {
   }, [])
 
   const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's an external page (starts with /), let the browser handle it normally
+    if (href.startsWith('/')) {
+      setIsOpen(false) // Close mobile menu on click
+      return
+    }
+    
     e.preventDefault()
     const element = document.querySelector(href)
     if (element) {

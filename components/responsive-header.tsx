@@ -29,11 +29,12 @@ export default function ResponsiveHeader() {
   }, [])
 
   const navItems = [
-    { name: "Home", href: "#" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Experience", href: "/#experience" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Reading List", href: "/reading-list" },
+    { name: "Contact", href: "/#contact" },
   ]
 
   // If not mounted yet or user has scrolled, don't render the header
