@@ -113,7 +113,7 @@ export default function EnhancedFooter() {
                 <FooterLink href="#" label="Home" />
                 <FooterLink href="#skills" label="Skills" />
                 <FooterLink href="#experience" label="Experience" />
-                <FooterLink href="#projects" label="Projects" />
+                {/* <FooterLink href="#projects" label="Projects" /> */}
                 <FooterLink href="#education" label="Education" />
                 <FooterLink href="#contact" label="Contact" />
               </ul>

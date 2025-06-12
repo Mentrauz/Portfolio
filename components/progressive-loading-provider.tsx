@@ -8,7 +8,7 @@ type SectionName =
   | "about"
   | "skills"
   | "experience"
-  | "projects"
+  // | "projects"
   | "caseStudies"
   | "education"
   | "testimonials"

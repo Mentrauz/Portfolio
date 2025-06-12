@@ -32,7 +32,7 @@ export default function ResponsiveHeader() {
     { name: "Home", href: "/" },
     { name: "Skills", href: "/#skills" },
     { name: "Experience", href: "/#experience" },
-    { name: "Projects", href: "/#projects" },
+    // { name: "Projects", href: "/#projects" },
     { name: "Reading List", href: "/reading-list" },
     { name: "Contact", href: "/#contact" },
   ]

@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
   { name: "Home", href: "#", icon: <Home className="h-[18px] w-[18px]" /> },
   { name: "Skills", href: "#skills", icon: <Code className="h-[18px] w-[18px]" /> },
   { name: "Experience", href: "#experience", icon: <Briefcase className="h-[18px] w-[18px]" /> },
-  { name: "Projects", href: "#projects", icon: <Code className="h-[18px] w-[18px] rotate-90" /> },
+  // { name: "Projects", href: "#projects", icon: <Code className="h-[18px] w-[18px] rotate-90" /> },
   { name: "Education", href: "#education", icon: <GraduationCap className="h-[18px] w-[18px]" /> },
   { name: "Reading List", href: "/reading-list", icon: <Book className="h-[18px] w-[18px]" /> },
   { name: "Contact", href: "#contact", icon: <Send className="h-[18px] w-[18px]" /> },
@@ -157,10 +157,11 @@ export default function FloatingNav() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block"
+            className="fixed top-4 left-0 right-0 z-50 hidden md:block"
           >
-            <div className="backdrop-blur-md bg-background/80 rounded-full border shadow-lg p-1.5">
-              <nav className="flex items-center gap-1">
+            <div className="flex justify-center">
+              <div className="backdrop-blur-md bg-background/80 rounded-full border shadow-lg p-1.5">
+                <nav className="flex items-center gap-1">
                 {navItems.map((item) => (
                   <a
                     key={item.name}
@@ -188,7 +189,8 @@ export default function FloatingNav() {
                     )}
                   </a>
                 ))}
-              </nav>
+                </nav>
+              </div>
             </div>
           </motion.div>
         )}
