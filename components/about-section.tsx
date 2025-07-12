@@ -9,6 +9,15 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 
 export default function AboutSection() {
+  const handleDownloadResume = () => {
+    const link = document.createElement('a')
+    link.href = '/CV.pdf'
+    link.download = 'Soumya_Singh_Resume.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <SectionContainer id="about" className="relative overflow-hidden">
       {/* Background decorative elements */}
@@ -129,7 +138,10 @@ export default function AboutSection() {
 
             <StaggerItem>
               <div className="mt-8">
-                <Button className="gap-2 group shadow-lg hover:shadow-primary/20 transition-all duration-300">
+                <Button 
+                  onClick={handleDownloadResume}
+                  className="gap-2 group shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                >
                   <Download className="h-4 w-4 group-hover:animate-bounce" />
                   Download Resume
                 </Button>

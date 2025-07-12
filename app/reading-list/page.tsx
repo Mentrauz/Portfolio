@@ -45,6 +45,12 @@ const readingList: ReadingItem[] = [
     title: "The Design of Everyday Things",
     author: "Don Norman",
     coverImage: "https://m.media-amazon.com/images/I/71sF8kuMW3L._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    id: "7",
+    title: "Ikigai",
+    author: "Hector Garcia and Francesc Miralles",
+    coverImage: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg"
   }
 ]
 
