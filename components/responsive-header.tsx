@@ -32,9 +32,9 @@ export default function ResponsiveHeader() {
     { name: "Home", href: "/" },
     { name: "Skills", href: "/#skills" },
     { name: "Experience", href: "/#experience" },
-    // { name: "Projects", href: "/#projects" },
-    { name: "Reading List", href: "/reading-list" },
+    { name: "Projects", href: "/#projects" },
     { name: "Contact", href: "/#contact" },
+    { name: "Reading List", href: "/reading-list" },
   ]
 
   // If not mounted yet or user has scrolled, don't render the header

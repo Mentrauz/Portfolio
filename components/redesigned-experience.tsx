@@ -21,8 +21,18 @@ import {
   GraduationCap,
   Users,
   Target,
-  NotebookTabs
+  NotebookTabs,
+  Image as ImageIcon,
+  ExternalLink,
+  ZoomIn
 } from "lucide-react"
+
+// Screenshot interface
+interface Screenshot {
+  url: string
+  caption: string
+  alt: string
+}
 
 // Experience data
 const experiences = [
@@ -45,6 +55,33 @@ const experiences = [
       { value: "1500+", label: "Employees" },
       { value: "1", label: "Solo Developer" },
     ],
+    screenshots: [
+      {
+        url: "/screenshot/tms-1.png",
+        caption: "Landing Page",
+        alt: "TMS Groups payroll system landing page"
+      },
+      {
+        url: "/screenshot/tms-2.png",
+        caption: "Bulk Uploads Processing Page",
+        alt: "Bulk employee data upload and processing interface"
+      },
+      {
+        url: "/screenshot/tms-3.png",
+        caption: "Attendance Page",
+        alt: "Employee attendance tracking and management system"
+      },
+      {
+        url: "/screenshot/tms-4.png",
+        caption: "Login Page",
+        alt: "Secure login interface for payroll system access"
+      },
+      {
+        url: "/screenshot/tms-5.png",
+        caption: "Reports and Analytics Dashboard",
+        alt: "Comprehensive reporting and analytics dashboard"
+      }
+    ],
     color: "from-indigo-600 to-purple-600",
   },
   {
@@ -65,6 +102,28 @@ const experiences = [
     metrics: [
       { value: "2000+", label: "Users Daily" },
       { value: "8", label: "Team Project" },
+    ],
+    screenshots: [
+      {
+        url: "/screenshot/le-1.png",
+        caption: "Landing Page",
+        alt: "Lieferando.de redesigned landing page with modern UI"
+      },
+      {
+        url: "/screenshot/le2.png",
+        caption: "Design 2",
+        alt: "Lieferando.de redesigned landing page with modern UI"
+      },
+      {
+        url: "/screenshot/le3.png",
+        caption: "Design 3",
+        alt: "Lieferando.de redesigned landing page with modern UI"
+      },
+      {
+        url: "/screenshot/le4.png",
+        caption: "Design 4",
+        alt: "Lieferando.de redesigned landing page with modern UI"
+      }
     ],
     color: "from-indigo-600 to-purple-600",
   },
@@ -87,29 +146,63 @@ const experiences = [
       { value: "100+", label: "Visitors Daily" },
       { value: "1", label: "Solo Project" },
     ],
+    screenshots: [
+      {
+        url: "/screenshot/cat1.png",
+        caption: "Homepage with hero section and services overview",
+        alt: "Chowdeshwari Catering website homepage"
+      },
+      {
+        url: "/screenshot/cat2.png",
+        caption: "Services Page",
+        alt: "Chowdeshwari Catering website homepage"
+      },
+      {
+        url: "/screenshot/cat3.png",
+        caption: "Menu Page",
+        alt: "Chowdeshwari Catering website homepage"
+      },
+      {
+        url: "/screenshot/cat4.png",
+        caption: "Cloudinary Kitchen",
+        alt: "Chowdeshwari Catering website homepage"
+      },
+    ],
     color: "from-indigo-600 to-purple-600",
   },
-  {
-    id: "calories-detection",
-    title: "Calories detection image processing system (Work in Progress)",
-    company: "Team Project",
-    location: "Rajkot, India",
-    period: "March 2025 - present",
-    type: "research",
-    description:
-      "Developed a system for detecting calories in Vegetables and Fruits images using Python and TensorFlow",
-    responsibilities: [
-      "To Process and train the model on the dataset",
-      "Fix technical issues in the model",  
-    ],
-    skills: ["Python", "TensorFlow", "Machine Learning", "Image Processing"],
-    metrics: [
-      { value: "Est. 1000+", label: "People" },
-      { value: "2", label: "Team Size" },
-      { value: "95%", label: "Pass Rate" },
-    ],
-    color: "from-green-600 to-emerald-600",
-  },
+  // {
+  //   id: "calories-detection",
+  //   title: "Calories detection image processing system",
+  //   company: "Team Project",
+  //   location: "Rajkot, India",
+  //   period: "March 2025 - May 2025",
+  //   type: "research",
+  //   description:
+  //     "Developed a system for detecting calories in Vegetables and Fruits images using Python and TensorFlow",
+  //   responsibilities: [
+  //     "To Process and train the model on the dataset",
+  //     "Fix technical issues in the model",  
+  //   ],
+  //   skills: ["Python", "TensorFlow", "Machine Learning", "Image Processing"],
+  //   metrics: [
+  //     { value: "Est. 1000+", label: "People" },
+  //     { value: "2", label: "Team Size" },
+  //     { value: "95%", label: "Pass Rate" },
+  //   ],
+  //   screenshots: [
+  //     {
+  //       url: "/screenshot/calories-demo.png",
+  //       caption: "Live demo of calorie detection on fruit images",
+  //       alt: "Screenshot showing AI model detecting calories in fruit images"
+  //     },
+  //     {
+  //       url: "/screenshot/calories-training.png",
+  //       caption: "Model training interface and accuracy metrics",
+  //       alt: "Training dashboard showing model performance and accuracy graphs"
+  //     }
+  //   ],
+  //   color: "from-green-600 to-emerald-600",
+  // },
   {
     id: "power-zi",
     title: "PowerZI - A Powerful Agentic tool for MS apps",
@@ -131,36 +224,49 @@ const experiences = [
       { value: ":)", label: "Conferences" },
       { value: ":)", label: "Research Grants" },
     ],
+    // screenshots: [
+    //   {
+    //     url: "/screenshots/powerzi-architecture.png",
+    //     caption: "System architecture diagram",
+    //     alt: "PowerZI system architecture showing microservices integration"
+    //   },
+    //   {
+    //     url: "/screenshots/powerzi-ui.png",
+    //     caption: "Early prototype user interface",
+    //     alt: "PowerZI prototype interface for MS Office integration"
+    //   }
+    // ],
     color: "from-blue-600 to-cyan-600",
   },
-  {
-    id: "btech",
-    title: "B.Tech in Computer Science and Engineering",
-    company: "Marwadi University",
-    location: "Rajkot, India",
-    period: "2022 - 2026",
-    type: "education",
-    description:
-      "Completing my B.Tech in Computer Science and Engineering with a focus on Machine Learning and Web Development",
-    responsibilities: [
-      "To learn and implement the latest technologies",
-      "To work on real-world projects",
-      "To Learn Teamwork and Leadership",
-      "To implement best practices in the industry",
-    ],
-    skills: ["Python", "Data Analysis", "Research", "Scientific Computing", "ML", "Agentic AI", "Microservices", "NextJS", "MongoDB", "React", "TailwindCSS", "TypeScript"],
-    metrics: [
-      { value: ":)", label: "Publications" },
-      { value: ":)", label: "Conferences" },
-      { value: ":)", label: "Research Grants" },
-    ],
-    color: "from-blue-600 to-cyan-600",
-  },
+  // {
+  //   id: "btech",
+  //   title: "B.Tech in Computer Science and Engineering",
+  //   company: "Marwadi University",
+  //   location: "Rajkot, India",
+  //   period: "2022 - 2026",
+  //   type: "education",
+  //   description:
+  //     "Completing my B.Tech in Computer Science and Engineering with a focus on Machine Learning and Web Development",
+  //   responsibilities: [
+  //     "To learn and implement the latest technologies",
+  //     "To work on real-world projects",
+  //     "To Learn Teamwork and Leadership",
+  //     "To implement best practices in the industry",
+  //   ],
+  //   skills: ["Python", "Data Analysis", "Research", "Scientific Computing", "ML", "Agentic AI", "Microservices", "NextJS", "MongoDB", "React", "TailwindCSS", "TypeScript"],
+  //   metrics: [
+  //     { value: ":)", label: "Publications" },
+  //     { value: ":)", label: "Conferences" },
+  //     { value: ":)", label: "Research Grants" },
+  //   ],
+  //   color: "from-blue-600 to-cyan-600",
+  // },
 ]
 
 export default function RedesignedExperience() {
   const [expandedExperience, setExpandedExperience] = useState<string | null>(null)
-  const [experienceType, setExperienceType] = useState<"all" | "work" | "education">("all")
+  const [experienceType, setExperienceType] = useState<"all" | "work" | "education" | "research">("all")
+  const [selectedScreenshot, setSelectedScreenshot] = useState<Screenshot | null>(null)
 
   const toggleExpand = (id: string) => {
     setExpandedExperience(expandedExperience === id ? null : id)
@@ -173,6 +279,46 @@ export default function RedesignedExperience() {
   // When rendering the list, add a check to prevent duplicates by ID
   const renderedExperienceIds = new Set()
 
+  // Screenshot Modal Component
+  const ScreenshotModal = ({ screenshot, onClose }: { screenshot: Screenshot; onClose: () => void }) => (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="relative max-w-4xl w-full bg-card/95 backdrop-blur-sm border border-border/50 rounded-lg overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="relative">
+            <img
+              src={screenshot.url}
+              alt={screenshot.alt}
+              className="w-full h-auto max-h-[80vh] object-contain"
+            />
+            <Button
+              variant="secondary"
+              size="icon"
+              className="absolute top-4 right-4"
+              onClick={onClose}
+            >
+              ×
+            </Button>
+          </div>
+          <div className="p-4">
+            <p className="text-sm text-muted-foreground">{screenshot.caption}</p>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  )
+
   return (
     <SectionContainer id="experience" className="bg-gradient-to-b from-background/95 to-background">
       <SectionHeader
@@ -183,16 +329,16 @@ export default function RedesignedExperience() {
       <ScrollReveal>
         <Tabs
           defaultValue="all"
-          onValueChange={(value) => setExperienceType(value as "all" | "work" | "education")}
+          onValueChange={(value) => setExperienceType(value as "all" | "work" | "education" | "research")}
           className="w-full"
         >
           <div className="overflow-x-auto pb-2 no-scrollbar">
-            <TabsList className="flex justify-center gap-2 mb-8 bg-transparent w-fit mx-auto">
+            <TabsList className="flex justify-center gap-2 mb-8 bg-card/30 backdrop-blur-sm border border-border/20 w-fit mx-auto">
               <TabsTrigger
                 value="all"
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "all" ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80",
+                  experienceType === "all" ? "bg-primary text-primary-foreground" : "bg-muted/50 hover:bg-muted/70 backdrop-blur-sm",
                 )}
               >
                 <div className="flex items-center gap-2">
@@ -204,7 +350,7 @@ export default function RedesignedExperience() {
                 value="work"
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "work" ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80",
+                  experienceType === "work" ? "bg-primary text-primary-foreground" : "bg-muted/50 hover:bg-muted/70 backdrop-blur-sm",
                 )}
               >
                 <div className="flex items-center gap-2">
@@ -213,24 +359,24 @@ export default function RedesignedExperience() {
                 </div>
               </TabsTrigger>
 
-              <TabsTrigger
+              {/* <TabsTrigger
                 value="education"
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "education" ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80",
+                  experienceType === "educa tion" ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80",
                 )}
               >
                 <div className="flex items-center gap-2">
                   <GraduationCap className="h-4 w-4" />
                   <span>Education</span>
                 </div>
-              </TabsTrigger>
+              </TabsTrigger> */}
 
               <TabsTrigger
                 value="research"
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "research" ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80",
+                  experienceType === "research" ? "bg-primary text-primary-foreground" : "bg-muted/50 hover:bg-muted/70 backdrop-blur-sm",
                 )}
               >
                 <div className="flex items-center gap-2">
@@ -257,9 +403,9 @@ export default function RedesignedExperience() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <Card
-                      className={cn("overflow-hidden border-none shadow-lg", `bg-gradient-to-br ${experience.color}/10`)}
+                      className="overflow-hidden bg-card/80 backdrop-blur-sm border-border/50 shadow-md hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:border-primary/20"
                     >
-                      <CardContent className="p-0">
+                      <CardContent className="p-0 bg-card/50">
                         <div
                           className={cn(
                             "p-4 sm:p-6 cursor-pointer transition-all duration-300",
@@ -271,12 +417,12 @@ export default function RedesignedExperience() {
                             <div>
                               <Badge
                                 className={cn(
-                                  "mb-2 px-3 py-1",
+                                  "mb-2 px-3 py-1 border-border/50",
                                   experience.type === "work"
-                                    ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
+                                    ? "bg-primary/20 text-primary border-primary/30"
                                     : experience.type === "research"
-                                      ? "bg-amber-500/20 text-amber-500 border-amber-500/30"
-                                      : "bg-green-500/20 text-green-500 border-green-500/30"
+                                      ? "bg-secondary/20 text-secondary-foreground border-secondary/30"
+                                      : "bg-accent/20 text-accent-foreground border-accent/30"
                                 )}
                               >
                                 {experience.type === "work" ? (
@@ -355,7 +501,7 @@ export default function RedesignedExperience() {
                                       </h4>
                                       <div className="flex flex-wrap gap-2">
                                         {experience.skills.map((skill, i) => (
-                                          <Badge key={i} variant="secondary">
+                                          <Badge key={i} variant="secondary" className="bg-muted/50 hover:bg-muted/70 transition-colors">
                                             {skill}
                                           </Badge>
                                         ))}
@@ -371,7 +517,7 @@ export default function RedesignedExperience() {
 
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
                                       {experience.metrics.map((metric, i) => (
-                                        <div key={i} className="bg-primary/10 rounded-lg p-3 text-center">
+                                        <div key={i} className="bg-muted/30 backdrop-blur-sm rounded-lg p-3 text-center border border-border/20">
                                           <div className="text-xl sm:text-2xl font-bold">{metric.value}</div>
                                           <div className="text-xs sm:text-sm text-muted-foreground">{metric.label}</div>
                                         </div>
@@ -395,6 +541,46 @@ export default function RedesignedExperience() {
                                     )}
                                   </div>
                                 </div>
+
+                                {/* Screenshots Section */}
+                                {experience.screenshots && experience.screenshots.length > 0 && (
+                                  <div className="mt-8 pt-6 border-t">
+                                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                                      <ImageIcon className="h-5 w-5 text-primary" />
+                                      Project Screenshots
+                                    </h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                                      {experience.screenshots.map((screenshot, i) => (
+                                        <motion.div
+                                          key={i}
+                                          whileHover={{ scale: 1.02 }}
+                                          className="group relative bg-muted/50 backdrop-blur-sm border border-border/20 rounded-lg overflow-hidden cursor-pointer hover:border-primary/20 transition-colors"
+                                          onClick={() => setSelectedScreenshot(screenshot)}
+                                        >
+                                          <div className="aspect-video relative">
+                                            <img
+                                              src={screenshot.url}
+                                              alt={screenshot.alt}
+                                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-300 flex items-center justify-center">
+                                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div className="bg-card/90 backdrop-blur-sm rounded-full p-2 border border-border/20">
+                                                  <ZoomIn className="h-5 w-5 text-foreground" />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div className="p-3">
+                                            <p className="text-sm text-muted-foreground line-clamp-2">
+                                              {screenshot.caption}
+                                            </p>
+                                          </div>
+                                        </motion.div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             </motion.div>
                           )}
@@ -408,6 +594,14 @@ export default function RedesignedExperience() {
           </div>
         </Tabs>
       </ScrollReveal>
+
+      {/* Screenshot Modal */}
+      {selectedScreenshot && (
+        <ScreenshotModal
+          screenshot={selectedScreenshot}
+          onClose={() => setSelectedScreenshot(null)}
+        />
+      )}
     </SectionContainer>
   )
 }

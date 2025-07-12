@@ -38,39 +38,39 @@ import {
 // Project categories
 const projectCategories = [
   { id: "all", name: "All Projects" },
-  { id: "ai", name: "AI & ML", icon: <Cpu className="h-4 w-4" /> },
-  { id: "audio", name: "Audio", icon: <Zap className="h-4 w-4" /> },
+  // { id: "ai", name: "AI & ML", icon: <Cpu className="h-4 w-4" /> },
+  // { id: "audio", name: "Audio", icon: <Zap className="h-4 w-4" /> },
   { id: "web", name: "Web Dev", icon: <Globe className="h-4 w-4" /> },
-  { id: "data", name: "Data Science", icon: <Database className="h-4 w-4" /> },
-  { id: "network", name: "Network", icon: <Share2 className="h-4 w-4" /> },
-  { id: "security", name: "Security", icon: <Shield className="h-4 w-4" /> },
-  { id: "communication", name: "Communication", icon: <MessageSquare className="h-4 w-4" /> },
-  { id: "research", name: "Research", icon: <BookOpen className="h-4 w-4" /> },
+  // { id: "data", name: "Data Science", icon: <Database className="h-4 w-4" /> },
+  // { id: "network", name: "Network", icon: <Share2 className="h-4 w-4" /> },
+  // { id: "security", name: "Security", icon: <Shield className="h-4 w-4" /> },
+  // { id: "communication", name: "Communication", icon: <MessageSquare className="h-4 w-4" /> },
+  // { id: "research", name: "Research", icon: <BookOpen className="h-4 w-4" /> },
 ]
 
 // Project data
 const projects = [
   {
     id: 1,
-    title: "PowerZI",
-    category: "ai",
+    title: "Daily Pulse",
+    category: "web",
     description:
-      "A powerful agentic tool for MS apps",
+      "A news website built with Next.js, Tailwind CSS, and Shadcn UI",
     longDescription:
-      "Making MS apps more powerful and efficient through agentic tool, providing a more personalized and efficient experience for users.",
-    technologies: ["Research in progress"],
-    imageUrl: "/powerzi.jpg",
-    // demoUrl: "#",
-    githubUrl: "Coming Soon",
-    color: "from-blue-600 to-violet-600",
+      "No more fake news, only verified news from best and trusted sources, with a user friendly interface and a lot of features to make it more engaging and informative.",
+    technologies: ["NextJs", "Tailwind", "NodeJs, Typescript, ShadcnUI, Gemini"],
+    imageUrl: "/dailypulse.png",
+    demoUrl: "https://news-theta-sepia.vercel.app/",
+    // githubUrl: "Coming Soon",
     featured: true,
-    completed: "--",
-    teamSize: 5,
-    difficulty: 5,
+    completed: "2025",
+    teamSize: 1,
+    difficulty: 1,
     achievements: [
-      "Coming Soon",
-      "Coming Soon",
-      "Coming Soon",
+      "Architected a cutting-edge news verification platform that programmatically scrapes, cross-validates, and filters real-time headlines from a consortium of reputed global media outlets, reducing the risk of false news by upto 70%",
+      "Leveraged Gemini AI to algorithmically invalidate misinformation, ensuring semantic coherence, factual consistency of upto 97%, and source redundancy before publication",
+      "Achieved a false-positive reduction rate of over 90% using an ensemble-based AI verification pipeline combined with contextual news analysis",
+      "Formulated for scalability and latency minimization, the system asynchronously scrapes news with fault-tolerant architecture using modern concurrency paradigms, also improving speed upto 1.5x",
     ],
   },
   {
@@ -83,8 +83,7 @@ const projects = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Shadcn UI"],
     imageUrl: "/uix.png",
     demoUrl: "https://simple-frontend-liart.vercel.app/",
-    // githubUrl: "#",
-    color: "from-purple-600 to-pink-600",
+    githubUrl: "#",
     featured: false,
     completed: "2024",
     teamSize: 1,
@@ -247,7 +246,7 @@ export default function RedesignedProjects() {
   // If not client-side yet, show a loading state
   if (!isClient || isLoading) {
     return (
-      <SectionContainer id="projects" className="relative">
+      <SectionContainer className="relative">
         <SectionHeader
           title="Project Portfolio"
           subtitle="Explore my portfolio of AI, machine learning, and software development projects."
@@ -262,9 +261,9 @@ export default function RedesignedProjects() {
 
   return (
     <SectionContainer id="projects" className="relative">
-      {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -z-10" />
+      {/* Background decorative elements - improved for light mode */}
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-3xl -z-10" />
 
       <SectionHeader
         title="Project Portfolio"
@@ -274,14 +273,14 @@ export default function RedesignedProjects() {
       {featuredProjects.length > 0 && (
         <div className="mb-16">
           <ScrollReveal>
-            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 justify-center">
+            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 justify-center text-foreground">
               <Layers className="h-5 w-5 text-primary" />
               <span>Featured Projects</span>
             </h3>
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="relative rounded-xl overflow-hidden">
+            <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/20 bg-background/50 backdrop-blur-sm">
               <AnimatePresence mode="wait" initial={false} custom={direction}>
                 <motion.div
                   key={featuredProjects[currentFeaturedIndex].id}
@@ -319,22 +318,17 @@ export default function RedesignedProjects() {
                       />
                     </div>
 
-                    <div
-                      className={cn(
-                        "w-full md:w-1/2 p-6 flex flex-col justify-center opacity-90 bg-gradient-to-r",
-                        featuredProjects[currentFeaturedIndex].color,
-                      )}
-                    >
+                    <div className="w-full md:w-1/2 p-6 flex flex-col justify-center bg-background/95 backdrop-blur-sm border-l border-border/20">
                       <Badge
                         variant="outline"
-                        className="w-fit mb-4 bg-black/50 backdrop-blur-sm text-white border-white/20"
+                        className="w-fit mb-4 bg-primary/10 backdrop-blur-sm border-primary/40 text-primary font-medium"
                       >
                         Featured Project
                       </Badge>
-                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 md:mb-4">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4 text-foreground">
                         {featuredProjects[currentFeaturedIndex].title}
                       </h3>
-                      <p className="text-white/90 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
+                      <p className="text-foreground/80 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none font-medium">
                         {featuredProjects[currentFeaturedIndex].description}
                       </p>
 
@@ -342,86 +336,73 @@ export default function RedesignedProjects() {
                         {featuredProjects[currentFeaturedIndex].technologies.slice(0, 3).map((tech, index) => (
                           <Badge
                             key={index}
-                            className="bg-white/20 hover:bg-white/30 text-white border-none backdrop-blur-sm"
+                            variant="secondary"
+                            className="bg-muted/80 hover:bg-muted text-foreground/90 backdrop-blur-sm transition-colors border border-border/30 font-medium"
                           >
                             {tech}
                           </Badge>
                         ))}
                         {featuredProjects[currentFeaturedIndex].technologies.length > 3 && (
-                          <Badge className="bg-white/20 hover:bg-white/30 text-white border-none backdrop-blur-sm">
+                          <Badge variant="secondary" className="bg-muted/80 hover:bg-muted text-foreground/90 backdrop-blur-sm transition-colors border border-border/30 font-medium">
                             +{featuredProjects[currentFeaturedIndex].technologies.length - 3} more
                           </Badge>
                         )}
                       </div>
 
                       <div className="flex flex-wrap gap-3">
-                        {/* <Button
-                          className="bg-white text-black hover:bg-white/90 group text-sm"
-                          onClick={() => handleDemoClick(featuredProjects[currentFeaturedIndex].demoUrl)}
-                        >
-                          Live Demo
-                          <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Button> */}
-
-                        {/* <Button
-                          variant="outline"
-                          className="border-white text-white hover:bg-white/20 gap-2 text-sm"
-                          asChild
-                        >
-                          <a
-                            href={featuredProjects[currentFeaturedIndex].githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        {featuredProjects[currentFeaturedIndex].demoUrl && (
+                          <Button
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-200 font-medium"
+                            onClick={() => handleDemoClick(featuredProjects[currentFeaturedIndex].demoUrl)}
                           >
-                            <Github className="h-4 w-4" />
-                            View Code
-                          </a>
-                        </Button> */}
-
-                        {/* <Button
+                            Live Demo
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                          </Button>
+                        )}
+                        <Button
                           variant="outline"
-                          className="border-white text-white hover:bg-white/20 gap-2 text-sm"
+                          className="border-border/50 bg-background/80 hover:bg-background/90 text-foreground backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 font-medium"
                           onClick={() => {
                             setSelectedProject(featuredProjects[currentFeaturedIndex])
                             setIsDialogOpen(true)
                           }}
                         >
-                          <Code className="h-4 w-4" />
-                          Details
-                        </Button> */}
+                          <Code className="h-4 w-4 mr-2" />
+                          View Details
+                        </Button>
                       </div>
                     </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Navigation controls */}
+              {/* Navigation controls - improved for light mode */}
               <Button
                 size="icon"
                 variant="ghost"
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-black/50 text-white hover:bg-black/70"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/95 backdrop-blur-sm hover:bg-background border border-border/40 shadow-md hover:shadow-lg transition-all duration-200"
                 onClick={handlePrev}
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5 text-foreground" />
               </Button>
 
               <Button
                 size="icon"
                 variant="ghost"
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-black/50 text-white hover:bg-black/70"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/95 backdrop-blur-sm hover:bg-background border border-border/40 shadow-md hover:shadow-lg transition-all duration-200"
                 onClick={handleNext}
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-5 w-5 text-foreground" />
               </Button>
 
-              {/* Progress dots */}
+              {/* Progress dots - improved visibility */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1">
                 {featuredProjects.map((_, index) => (
                   <button
                     key={index}
                     className={cn(
                       "w-2 h-2 rounded-full transition-all",
-                      currentFeaturedIndex === index ? "bg-white scale-125" : "bg-white/50 hover:bg-white/80",
+                      currentFeaturedIndex === index ? "bg-primary scale-125 shadow-sm" : "bg-foreground/50 hover:bg-foreground/70 shadow-sm",
                     )}
                     onClick={() => {
                       setDirection(index > currentFeaturedIndex ? 1 : -1)
@@ -439,16 +420,16 @@ export default function RedesignedProjects() {
       <ScrollReveal>
         <Tabs defaultValue="all" onValueChange={setSelectedCategory} className="w-full">
           <div className="overflow-x-auto pb-2 no-scrollbar">
-            <TabsList className="flex justify-start gap-2 mb-8 bg-transparent w-max mx-auto">
+            <TabsList className="flex justify-start gap-2 mb-8 bg-background/80 backdrop-blur-sm border border-border/40 w-max mx-auto shadow-sm">
               {projectCategories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all data-[state=active]:shadow-lg whitespace-nowrap",
+                    "px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all data-[state=active]:shadow-md whitespace-nowrap",
                     selectedCategory === category.id
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted hover:bg-muted/80",
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "bg-background/70 hover:bg-background/90 text-foreground/90 hover:text-foreground backdrop-blur-sm border border-border/30 shadow-sm",
                   )}
                 >
                   <div className="flex items-center gap-1 sm:gap-2">
@@ -485,15 +466,15 @@ export default function RedesignedProjects() {
         </Tabs>
       </ScrollReveal>
 
-      {/* Project details dialog */}
+      {/* Project details dialog - improved for light mode */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 w-[95vw]">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 w-[95vw] bg-background/95 backdrop-blur-sm border-border/50 shadow-xl">
           {selectedProject && (
             <div className="flex flex-col h-full">
-              <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-2">
+              <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-2 border-b border-border/20">
                 <div className="flex justify-between items-start">
                   <div>
-                    <Badge className="mb-2">
+                    <Badge className="mb-2 bg-primary/15 text-primary border-primary/30 font-medium">
                       {selectedProject.category === "ai"
                         ? "AI & Machine Learning"
                         : selectedProject.category === "web"
@@ -504,14 +485,14 @@ export default function RedesignedProjects() {
                               ? "Audio & Voice Tech"
                               : "Research"}
                     </Badge>
-                    <DialogTitle className="text-xl sm:text-2xl">{selectedProject.title}</DialogTitle>
-                    <DialogDescription className="mt-2 text-sm">{selectedProject.description}</DialogDescription>
+                    <DialogTitle className="text-xl sm:text-2xl text-foreground">{selectedProject.title}</DialogTitle>
+                    <DialogDescription className="mt-2 text-sm text-foreground/80 font-medium">{selectedProject.description}</DialogDescription>
                   </div>
                   <div className="flex">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-muted"}`}
+                        className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
                       />
                     ))}
                   </div>
@@ -519,15 +500,15 @@ export default function RedesignedProjects() {
               </DialogHeader>
 
               <Tabs defaultValue="overview" className="flex-1 overflow-hidden">
-                <div className="px-4 sm:px-6 border-b">
+                <div className="px-4 sm:px-6 border-b border-border/20">
                   <TabsList className="justify-start rounded-none bg-transparent h-10">
-                    <TabsTrigger value="overview" className="text-sm">
+                    <TabsTrigger value="overview" className="text-sm text-foreground/80 data-[state=active]:text-foreground font-medium">
                       Overview
                     </TabsTrigger>
-                    <TabsTrigger value="details" className="text-sm">
+                    <TabsTrigger value="details" className="text-sm text-foreground/80 data-[state=active]:text-foreground font-medium">
                       Details
                     </TabsTrigger>
-                    <TabsTrigger value="gallery" className="text-sm">
+                    <TabsTrigger value="gallery" className="text-sm text-foreground/80 data-[state=active]:text-foreground font-medium">
                       Gallery
                     </TabsTrigger>
                   </TabsList>
@@ -537,66 +518,70 @@ export default function RedesignedProjects() {
                   <TabsContent value="overview" className="mt-0 h-full">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                       <div className="lg:col-span-2">
-                        <h4 className="text-lg font-semibold mb-3">Project Details</h4>
-                        <p className="mb-6 text-sm sm:text-base">{selectedProject.longDescription}</p>
+                        <h4 className="text-lg font-semibold mb-3 text-foreground">Project Details</h4>
+                        <p className="mb-6 text-sm sm:text-base text-foreground/80 font-medium">{selectedProject.longDescription}</p>
 
-                        <h4 className="text-lg font-semibold mb-3">Key Achievements</h4>
+                        <h4 className="text-lg font-semibold mb-3 text-foreground">Key Achievements</h4>
                         <ul className="space-y-2 mb-6">
                           {selectedProject.achievements.map((achievement, i) => (
                             <li key={i} className="flex items-start gap-2">
                               <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                                <span className="text-xs text-primary">✓</span>
+                                <span className="text-xs text-primary font-bold">✓</span>
                               </div>
-                              <span className="text-sm sm:text-base">{achievement}</span>
+                              <span className="text-sm sm:text-base text-foreground/80 font-medium">{achievement}</span>
                             </li>
                           ))}
                         </ul>
 
-                        <h4 className="text-lg font-semibold mb-3">Technologies</h4>
+                        <h4 className="text-lg font-semibold mb-3 text-foreground">Technologies</h4>
                         <div className="flex flex-wrap gap-2 mb-6">
                           {selectedProject.technologies.map((tech, index) => (
-                            <Badge key={index} variant="secondary">
+                            <Badge key={index} variant="secondary" className="bg-muted/80 text-foreground/90 border border-border/30 font-medium">
                               {tech}
                             </Badge>
                           ))}
                         </div>
 
                         <div className="flex flex-wrap gap-3 mt-6">
-                          <Button
-                            variant="default"
-                            className="gap-2"
-                            onClick={() => handleDemoClick(selectedProject.demoUrl)}
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                            Live Demo
-                          </Button>
-                          <Button variant="outline" className="gap-2" asChild>
-                            <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
-                              <Github className="h-4 w-4" />
-                              GitHub
-                            </a>
-                          </Button>
+                          {selectedProject.demoUrl && (
+                            <Button
+                              variant="default"
+                              className="gap-2 shadow-md hover:shadow-lg transition-all duration-200 font-medium"
+                              onClick={() => handleDemoClick(selectedProject.demoUrl as string)}
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                              Live Demo
+                            </Button>
+                          )}
+                          {(selectedProject as any).githubUrl && (
+                            <Button variant="outline" className="gap-2 bg-background/70 border-border/50 text-foreground shadow-sm hover:shadow-md transition-all duration-200 font-medium" asChild>
+                              <a href={(selectedProject as any).githubUrl} target="_blank" rel="noopener noreferrer">
+                                <Github className="h-4 w-4" />
+                                GitHub
+                              </a>
+                            </Button>
+                          )}
                         </div>
                       </div>
 
-                      <div>
-                        <h4 className="text-lg font-semibold mb-3">Project Info</h4>
+                      <div className="bg-muted/30 rounded-lg p-4 border border-border/30">
+                        <h4 className="text-lg font-semibold mb-3 text-foreground">Project Info</h4>
                         <div className="space-y-4">
                           <div className="flex flex-col">
-                            <span className="text-sm text-muted-foreground">Completed</span>
-                            <span>{selectedProject.completed}</span>
+                            <span className="text-sm text-foreground/70 font-medium">Completed</span>
+                            <span className="text-foreground font-medium">{selectedProject.completed}</span>
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-sm text-muted-foreground">Team Size</span>
-                            <span>{selectedProject.teamSize} people</span>
+                            <span className="text-sm text-foreground/70 font-medium">Team Size</span>
+                            <span className="text-foreground font-medium">{selectedProject.teamSize} people</span>
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-sm text-muted-foreground">Difficulty</span>
+                            <span className="text-sm text-foreground/70 font-medium">Difficulty</span>
                             <div className="flex">
                               {Array.from({ length: 5 }).map((_, i) => (
                                 <Star
                                   key={i}
-                                  className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-muted"}`}
+                                  className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
                                 />
                               ))}
                             </div>
@@ -607,7 +592,7 @@ export default function RedesignedProjects() {
                   </TabsContent>
 
                   <TabsContent value="details" className="mt-0">
-                    <div className="relative aspect-video mb-6 rounded-lg overflow-hidden">
+                    <div className="relative aspect-video mb-6 rounded-lg overflow-hidden border border-border/20">
                       <Image
                         src={selectedProject.imageUrl || "/placeholder.svg"}
                         alt={selectedProject.title}
@@ -618,13 +603,13 @@ export default function RedesignedProjects() {
 
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-lg font-semibold mb-2">Project Description</h4>
-                        <p className="text-sm sm:text-base">{selectedProject.longDescription}</p>
+                        <h4 className="text-lg font-semibold mb-2 text-foreground">Project Description</h4>
+                        <p className="text-sm sm:text-base text-foreground/80 font-medium">{selectedProject.longDescription}</p>
                       </div>
 
                       <div>
-                        <h4 className="text-lg font-semibold mb-2">Implementation Details</h4>
-                        <p className="text-sm sm:text-base">
+                        <h4 className="text-lg font-semibold mb-2 text-foreground">Implementation Details</h4>
+                        <p className="text-sm sm:text-base text-foreground/80 font-medium">
                           This project was implemented using {selectedProject.technologies.join(", ")}. The development
                           process involved careful planning, iterative development, and rigorous testing to ensure
                           high-quality results.
@@ -632,8 +617,8 @@ export default function RedesignedProjects() {
                       </div>
 
                       <div>
-                        <h4 className="text-lg font-semibold mb-2">Challenges & Solutions</h4>
-                        <p className="text-sm sm:text-base">
+                        <h4 className="text-lg font-semibold mb-2 text-foreground">Challenges & Solutions</h4>
+                        <p className="text-sm sm:text-base text-foreground/80 font-medium">
                           During development, we encountered several challenges including performance optimization,
                           scalability concerns, and integration complexities. These were addressed through innovative
                           approaches and best practices in software engineering.
@@ -645,7 +630,7 @@ export default function RedesignedProjects() {
                   <TabsContent value="gallery" className="mt-0">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {[1, 2, 3, 4].map((index) => (
-                        <div key={index} className="overflow-hidden rounded-lg">
+                        <div key={index} className="overflow-hidden rounded-lg border border-border/20">
                           <Image
                             src={`/placeholder.svg?height=400&width=600&text=Screenshot ${index}`}
                             alt={`${selectedProject.title} screenshot ${index}`}
@@ -678,9 +663,10 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
 
   return (
     <Card
-      className="overflow-hidden h-full flex flex-col border-none shadow-md hover:shadow-lg transition-all duration-300 group"
+      className="overflow-hidden h-full flex flex-col bg-background/95 backdrop-blur-sm border border-border/40 shadow-lg hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group hover:border-primary/40 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onSelect}
     >
       <div className="relative aspect-video overflow-hidden">
         <Image
@@ -692,23 +678,18 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
             isClient && isHovered ? "scale-110" : "scale-100",
           )}
         />
-        <div
-          className={cn(
-            "absolute inset-0 opacity-0 group-hover:opacity-80 transition-opacity duration-300 bg-gradient-to-r",
-            project.color,
-          )}
-        />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-70 transition-opacity duration-300 bg-background/50 backdrop-blur-sm" />
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button variant="outline" className="border-white text-white hover:bg-white/20" onClick={onSelect}>
+          <Button variant="outline" className="border-border/60 bg-background/95 hover:bg-background text-foreground backdrop-blur-sm shadow-md font-medium">
             View Details
           </Button>
         </div>
       </div>
 
-      <CardContent className="p-4 flex-1 flex flex-col">
+      <CardContent className="p-4 flex-1 flex flex-col bg-background/90 backdrop-blur-sm border-t border-border/30">
         <div className="flex justify-between items-start mb-2">
-          <Badge variant="outline" className="text-xs">
+          <Badge variant="outline" className="text-xs border-border/60 bg-background/80 text-foreground/90 backdrop-blur-sm font-medium">
             {project.category === "ai"
               ? "AI & ML"
               : project.category === "web"
@@ -723,36 +704,36 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                className={`h-3 w-3 ${i < project.difficulty ? "fill-yellow-500 text-yellow-500" : "text-muted"}`}
+                className={`h-3 w-3 ${i < project.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
               />
             ))}
           </div>
         </div>
 
-        <h3 className="font-bold mb-2 line-clamp-1">{project.title}</h3>
-        <p className="text-muted-foreground text-sm line-clamp-3 mb-4">{project.description}</p>
+        <h3 className="font-bold mb-2 line-clamp-1 text-foreground">{project.title}</h3>
+        <p className="text-foreground/80 text-sm line-clamp-3 mb-4 font-medium">{project.description}</p>
 
         <div className="flex flex-wrap gap-1 mb-4 mt-auto">
           {project.technologies.slice(0, 3).map((tech, i) => (
-            <Badge key={i} variant="secondary" className="text-xs">
+            <Badge key={i} variant="secondary" className="text-xs bg-muted/80 hover:bg-muted text-foreground/90 transition-colors border border-border/30 font-medium">
               {tech}
             </Badge>
           ))}
           {project.technologies.length > 3 && (
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="secondary" className="text-xs bg-muted/80 hover:bg-muted text-foreground/90 transition-colors border border-border/30 font-medium">
               +{project.technologies.length - 3} more
             </Badge>
           )}
         </div>
 
-        <div className="flex justify-between items-center text-xs text-muted-foreground">
+        <div className="flex justify-between items-center text-xs text-foreground/80">
           <div className="flex items-center gap-1">
             <Calendar className="h-3 w-3" />
-            <span>{project.completed}</span>
+            <span className="font-medium">{project.completed}</span>
           </div>
           <div className="flex items-center gap-1">
             <Users className="h-3 w-3" />
-            <span>Team: {project.teamSize}</span>
+            <span className="font-medium">Team: {project.teamSize}</span>
           </div>
         </div>
       </CardContent>

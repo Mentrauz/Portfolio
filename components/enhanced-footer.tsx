@@ -64,7 +64,7 @@ export default function EnhancedFooter() {
   return (
     <footer 
       id="contact" 
-      className="relative bg-black/80 backdrop-blur-sm border-t border-white/10 pt-16 pb-8"
+      className="relative bg-muted/30 backdrop-blur-sm border-t border-border/30 pt-16 pb-8 shadow-lg"
     >
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -75,8 +75,8 @@ export default function EnhancedFooter() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="font-bold text-xl mb-4">Soumya Singh</div>
-              <p className="text-muted-foreground mb-6">
+              <div className="font-bold text-xl mb-4 text-foreground">Soumya Singh</div>
+              <p className="text-foreground/80 mb-6 font-medium">
                 AI & ML Enthusiast specializing in NextJs based Web development.
               </p>
 
@@ -91,7 +91,7 @@ export default function EnhancedFooter() {
                   url="https://www.linkedin.com/in/mentrauz-soumyasingh/"
                   label="LinkedIn"
                 />
-                <SocialButton icon={<Twitter className="h-5 w-5" />} url="https://twitter.com" label="Twitter" />
+                <SocialButton icon={<Twitter className="h-5 w-5" />} url="https://twitter.com/mentrauz" label="Twitter" />
                 <SocialButton
                   icon={<Mail className="h-5 w-5" />}
                   url="mailto:11soumyasingh2@gmail.com"
@@ -108,12 +108,12 @@ export default function EnhancedFooter() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h3 className="font-semibold mb-4">Quick Links</h3>
+              <h3 className="font-semibold mb-4 text-foreground">Quick Links</h3>
               <ul className="space-y-2">
                 <FooterLink href="#" label="Home" />
                 <FooterLink href="#skills" label="Skills" />
                 <FooterLink href="#experience" label="Experience" />
-                {/* <FooterLink href="#projects" label="Projects" /> */}
+                <FooterLink href="#projects" label="Projects" />
                 <FooterLink href="#education" label="Education" />
                 <FooterLink href="#contact" label="Contact" />
               </ul>
@@ -127,23 +127,23 @@ export default function EnhancedFooter() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h3 className="font-semibold mb-4">Contact Info</h3>
+              <h3 className="font-semibold mb-4 text-foreground">Contact Info</h3>
               <ul className="space-y-3">
-                <li className="flex items-center gap-3 text-muted-foreground">
+                <li className="flex items-center gap-3 text-foreground/80">
                   <Mail className="h-4 w-4 text-primary" />
-                  <span>11soumyasingh2@gmail.com</span>
+                  <span className="font-medium">11soumyasingh2@gmail.com</span>
                 </li>
-                <li className="flex items-center gap-3 text-muted-foreground">
+                <li className="flex items-center gap-3 text-foreground/80">
                   <Phone className="h-4 w-4 text-primary" />
-                  <span>+91 9641564644</span>
+                  <span className="font-medium">+91 9641564644</span>
                 </li>
-                <li className="flex items-center gap-3 text-muted-foreground">
+                <li className="flex items-center gap-3 text-foreground/80">
                   <MapPin className="h-4 w-4 text-primary" />
-                  <span>Gurgaon, India</span>
+                  <span className="font-medium">Gurgaon, India</span>
                 </li>
-                <li className="flex items-center gap-3 text-muted-foreground">
+                <li className="flex items-center gap-3 text-foreground/80">
                   <Calendar className="h-4 w-4 text-primary" />
-                  <span>Available for projects</span>
+                  <span className="font-medium">Available for projects</span>
                 </li>
               </ul>
 
@@ -161,8 +161,8 @@ export default function EnhancedFooter() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h3 className="font-semibold mb-4">Newsletter</h3>
-              <p className="text-muted-foreground mb-4">Subscribe to receive updates on new projects and articles.</p>
+              <h3 className="font-semibold mb-4 text-foreground">Newsletter</h3>
+              <p className="text-foreground/80 mb-4 font-medium">Subscribe to receive updates on new projects and articles.</p>
 
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -173,9 +173,9 @@ export default function EnhancedFooter() {
                       <FormItem>
                         <div className="flex gap-2">
                           <FormControl>
-                            <Input placeholder="Your email" {...field} />
+                            <Input placeholder="Your email" {...field} className="bg-background/50 border-border/50 text-foreground placeholder:text-foreground/60" />
                           </FormControl>
-                          <Button type="submit" size="icon" disabled={isSubmitting}>
+                          <Button type="submit" size="icon" disabled={isSubmitting} className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md">
                             {isSubmitting ? (
                               <svg
                                 className="animate-spin h-4 w-4"
@@ -209,13 +209,13 @@ export default function EnhancedFooter() {
                 </form>
               </Form>
 
-              <p className="text-xs text-muted-foreground mt-2">I respect your privacy. Unsubscribe at any time.</p>
+              <p className="text-xs text-foreground/70 mt-2 font-medium">I respect your privacy. Unsubscribe at any time.</p>
             </motion.div>
           </div>
         </div>
 
-        <div className="border-t pt-6 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-muted-foreground mb-4 md:mb-0">
+        <div className="border-t border-border/30 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-sm text-foreground/80 mb-4 md:mb-0 font-medium">
             © {currentYear} Soumya Singh. All rights reserved.
           </div>
 
@@ -223,7 +223,7 @@ export default function EnhancedFooter() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full border-border/50 bg-background/50 hover:bg-background/70 text-foreground shadow-md hover:shadow-lg transition-all duration-200"
               onClick={scrollToTop}
               aria-label="Scroll to top"
             >
@@ -248,7 +248,7 @@ function SocialButton({ icon, url, label }: SocialButtonProps) {
       variant="outline"
       size="icon"
       asChild
-      className="rounded-full hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+      className="rounded-full border-border/50 bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary/50 text-foreground shadow-md hover:shadow-lg transition-all duration-300"
     >
       <a href={url} target="_blank" rel="noopener noreferrer" aria-label={label}>
         {icon}
@@ -267,7 +267,7 @@ function FooterLink({ href, label }: FooterLinkProps) {
     <li>
       <a
         href={href}
-        className="text-muted-foreground hover:text-primary transition-colors duration-200 inline-block"
+        className="text-foreground/80 hover:text-primary transition-colors duration-200 inline-block font-medium hover:underline"
         onClick={(e) => {
           e.preventDefault()
           document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })

@@ -47,12 +47,12 @@ const skillCategories = [
     icon: <Laptop className="h-5 w-5" />,
     color: "from-blue-500 to-indigo-500",
   },
-  {
-    id: "audio",
-    name: "Audio & Voice Tech",
-    icon: <Zap className="h-5 w-5" />,
-    color: "from-purple-500 to-violet-500",
-  },
+  // {
+  //   id: "audio",
+  //   name: "Audio & Voice Tech",
+  //   icon: <Zap className="h-5 w-5" />,
+  //   color: "from-purple-500 to-violet-500",
+  // },
   {
     id: "programming",
     name: "Programming",
@@ -60,41 +60,47 @@ const skillCategories = [
     color: "from-emerald-500 to-green-500",
   },
   {
-    id: "frameworks",
-    name: "AI Frameworks",
-    icon: <Cpu className="h-5 w-5" />,
+    id: "webdev",
+    name: "Web Development",
+    icon: <Globe className="h-5 w-5" />,
     color: "from-purple-500 to-violet-500",
   },
-  {
-    id: "data",
-    name: "Data Science",
-    icon: <Database className="h-5 w-5" />,
-    color: "from-amber-500 to-yellow-500",
-  },
-  {
-    id: "network",
-    name: "Network Analysis",
-    icon: <Globe className="h-5 w-5" />,
-    color: "from-cyan-500 to-blue-500",
-  },
+  // {
+  //   id: "frameworks",
+  //   name: "AI Frameworks",
+  //   icon: <Cpu className="h-5 w-5" />,
+  //   color: "from-purple-500 to-violet-500",
+  // },
+  // {
+  //   id: "data",
+  //   name: "Data Science",
+  //   icon: <Database className="h-5 w-5" />,
+  //   color: "from-amber-500 to-yellow-500",
+  // },
+  // {
+  //   id: "network",
+  //   name: "Network Analysis",
+  //   icon: <Globe className="h-5 w-5" />,
+  //   color: "from-cyan-500 to-blue-500",
+  // },
   {
     id: "cloud",
     name: "Cloud & DevOps",
     icon: <Cloud className="h-5 w-5" />,
     color: "from-sky-500 to-blue-500",
   },
-  {
-    id: "chatbots",
-    name: "Chatbots & AI",
-    icon: <MessageSquare className="h-5 w-5" />,
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    id: "security",
-    name: "Cybersecurity",
-    icon: <Shield className="h-5 w-5" />,
-    color: "from-red-500 to-rose-500",
-  },
+  // {
+  //   id: "chatbots",
+  //   name: "Chatbots & AI",
+  //   icon: <MessageSquare className="h-5 w-5" />,
+  //   color: "from-green-500 to-emerald-500",
+  // },
+  // {
+  //   id: "security",
+  //   name: "Cybersecurity",
+  //   icon: <Shield className="h-5 w-5" />,
+  //   color: "from-red-500 to-rose-500",
+  // },
   {
     id: "research",
     name: "Research",
@@ -113,12 +119,12 @@ const skillCategories = [
     icon: <Briefcase className="h-5 w-5" />,
     color: "from-indigo-500 to-blue-500",
   },
-  {
-    id: "math",
-    name: "Mathematics",
-    icon: <Microscope className="h-5 w-5" />,
-    color: "from-cyan-500 to-teal-500",
-  },
+  // {
+  //   id: "math",
+  //   name: "Mathematics",
+  //   icon: <Microscope className="h-5 w-5" />,
+  //   color: "from-cyan-500 to-teal-500",
+  // },
 ]
 
 // Skill data
@@ -149,6 +155,26 @@ const skillsData = {
     { name: "MATLAB", level: 45 },
     { name: "Go", level: 70 },
     { name: "Java", level: 80 },
+  ],
+  webdev: [
+    { name: "React", level: 90 },
+    { name: "Next.js", level: 100 },
+    { name: "HTML/CSS", level: 95 },
+    { name: "Tailwind CSS", level: 90 },
+    { name: "Node.js", level: 95 },
+    { name: "Express.js", level: 80 },
+    { name: "MongoDB", level: 90 },
+    { name: "PostgreSQL", level: 90 },
+    { name: "REST APIs", level: 90 },
+    { name: "GraphQL", level: 90 },
+    { name: "Redux", level: 90 },
+    { name: "Webpack", level: 90 },
+    { name: "Vite", level: 90 },
+    { name: "Jest", level: 95 },
+    { name: "Cypress", level: 75 },
+    { name: "Responsive Design", level: 100 },
+    { name: "Web Performance", level: 90 },
+    { name: "SEO", level: 95 },
   ],
   frameworks: [
     { name: "PyTorch", level: 90 },
@@ -187,8 +213,8 @@ const skillsData = {
     { name: "GCP", level: 75 },
     { name: "Docker", level: 80 },
     { name: "Kubernetes", level: 80 },
-    { name: "Microservices", level: 40 },
-    { name: "DevOps", level: 40 },
+    { name: "Microservices", level: 80 },
+    { name: "DevOps", level: 80 },
   ],
   chatbots: [
     { name: "Emotion-Aware Chatbots", level: 60 },
@@ -247,7 +273,7 @@ const skillsData = {
 }
 
 export default function RedesignedSkills() {
-  const [activeCategory, setActiveCategory] = useState("ml-ai")
+  const [activeCategory, setActiveCategory] = useState("webdev")
   const [visualizationType, setVisualizationType] = useState<"chart" | "globe">("chart")
   const [isMounted, setIsMounted] = useState(false)
 
@@ -263,7 +289,7 @@ export default function RedesignedSkills() {
       />
 
       <ScrollReveal>
-        <Tabs defaultValue="ml-ai" onValueChange={setActiveCategory} className="w-full">
+        <Tabs defaultValue="webdev" onValueChange={setActiveCategory} className="w-full">
           <TabsList className="flex flex-wrap justify-center gap-2 mb-8 bg-transparent">
             {skillCategories.map((category) => (
               <TabsTrigger
@@ -410,7 +436,7 @@ function SkillVisualization({ category, skills }: SkillVisualizationProps) {
       const colorMap: Record<string, string> = {
         "blue-500": "#3b82f6",
         "indigo-500": "#6366f1",
-        "purple-500": "#8b5cf6",
+        "purple-500": "#a855f7",
         "violet-500": "#8b5cf6",
         "emerald-500": "#10b981",
         "green-500": "#22c55e",

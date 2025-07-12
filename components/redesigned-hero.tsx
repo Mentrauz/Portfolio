@@ -51,8 +51,9 @@ export default function RedesignedHero() {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const scrollToExperience = () => {
-    document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" })
+
+  const scrollToProjects = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
   }
 
   // Typing effect for the subtitle
@@ -177,10 +178,10 @@ export default function RedesignedHero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-6 md:mb-8">
               <Button
                 size="lg"
-                onClick={scrollToExperience}
+                onClick={scrollToProjects}
                 className="group relative overflow-hidden shadow-lg hover:shadow-happy-hearts/20 transition-all duration-300 bg-happy-hearts hover:bg-happy-hearts/90 text-white"
               >
-                <span className="relative z-10">View Experience</span>
+                <span className="relative z-10">View Projects</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-happy-hearts to-bite-tongue opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
               </Button>

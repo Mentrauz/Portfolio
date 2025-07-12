@@ -3,7 +3,7 @@ import RedesignedHero from "@/components/redesigned-hero"
 import AboutSection from "@/components/about-section"
 import SkillsSectionWrapper from "@/components/skills-section-wrapper"
 import RedesignedExperience from "@/components/redesigned-experience"
-// import RedesignedProjects from "@/components/redesigned-projects"
+import RedesignedProjects from "@/components/redesigned-projects"
 import Education from "@/components/education"
 import Testimonials from "@/components/testimonials"
 import EnhancedFooter from "@/components/enhanced-footer"
@@ -51,11 +51,11 @@ export default function Home() {
         </Suspense>
       </ErrorBoundary>
 
-      {/* <ErrorBoundary fallback={<SectionFallback title="Projects" />}>
+      <ErrorBoundary fallback={<SectionFallback title="Projects" />}>
         <Suspense fallback={<LoadingSection name="Projects" />}>
           <RedesignedProjects />
         </Suspense>
-      </ErrorBoundary> */}
+      </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Education" />}>
         <Suspense fallback={<LoadingSection name="Education" />}>

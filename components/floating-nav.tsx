@@ -19,10 +19,10 @@ const navItems: NavItem[] = [
   { name: "Home", href: "#", icon: <Home className="h-[18px] w-[18px]" /> },
   { name: "Skills", href: "#skills", icon: <Code className="h-[18px] w-[18px]" /> },
   { name: "Experience", href: "#experience", icon: <Briefcase className="h-[18px] w-[18px]" /> },
-  // { name: "Projects", href: "#projects", icon: <Code className="h-[18px] w-[18px] rotate-90" /> },
+  { name: "Projects", href: "#projects", icon: <Code className="h-[18px] w-[18px] rotate-90" /> },
   { name: "Education", href: "#education", icon: <GraduationCap className="h-[18px] w-[18px]" /> },
-  { name: "Reading List", href: "/reading-list", icon: <Book className="h-[18px] w-[18px]" /> },
   { name: "Contact", href: "#contact", icon: <Send className="h-[18px] w-[18px]" /> },
+  { name: "Reading List", href: "/reading-list", icon: <Book className="h-[18px] w-[18px]" /> },
 ]
 
 export default function FloatingNav() {
