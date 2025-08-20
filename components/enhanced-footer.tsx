@@ -139,7 +139,7 @@ export default function EnhancedFooter() {
                 </li>
                 <li className="flex items-center gap-3 text-foreground/80">
                   <MapPin className="h-4 w-4 text-primary" />
-                  <span className="font-medium">Gurgaon, India</span>
+                  <span className="font-medium">Bengaluru, India</span>
                 </li>
                 <li className="flex items-center gap-3 text-foreground/80">
                   <Calendar className="h-4 w-4 text-primary" />
