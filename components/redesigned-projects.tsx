@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
@@ -71,6 +71,93 @@ const projects = [
       "Built a web interface for text-to-image generation",
     ],
   },
+  {
+      id: 3,
+      title: "Website Development",
+      category: "web",
+      description: "Designed the website for Chowdeshwari Catering",
+      longDescription:
+        "User friendly and professional design that perfectly meets clent's and user's expectations",
+      technologies: ["NextJs", "Tailwind", "NodeJs"],
+      imageUrl: "/urbaneats.png",
+      demoUrl: "https://urban-eats-catering.vercel.app/",
+      githubUrl: "https://github.com/Mentrauz/urban-eats-catering",
+      color: "from-green-600 to-teal-600",
+      featured: false,
+      completed: "2024",
+      teamSize: 1,
+      difficulty: 2,
+      achievements: [
+        "User Friendly UI",
+        "Smooth and consistent Experience throughout the website",
+        "Easy display of all the information",
+      ],
+    },
+    {
+      id: 4,
+      title: "Pokemon Game",
+      category: "web",
+      description: "Guess the pokemon game based on HTML",
+      longDescription:
+        "A simple and clean UI for a pokemon game",
+      technologies: ["HTML"],
+      imageUrl: "/urbaneats.png",
+      demoUrl: "https://poke-game-ivory.vercel.app/",
+      githubUrl: "https://github.com/Mentrauz/Poke-game",
+      color: "from-green-600 to-teal-600",
+      featured: false,
+      completed: "2024",
+      teamSize: 1,
+      difficulty: 2,
+      achievements: [
+        "Simple and clean UI",
+        "Pokemon Game",
+      ],
+    },
+    {
+      id: 5,
+      title: "Analytics Dashboard",
+      category: "web",
+      description: "Analytics Dashboard for Admybrand (Internship Test Project)",
+      longDescription:
+        "Professional and clean UI for a analytics dashboard, with hearbeat to mimick backend updates on realtime",
+      technologies: ["NextJs", "Tailwind"],
+      imageUrl: "/admybrand.png",
+      demoUrl: "https://admybrand-ai-dashboard.vercel.app/",
+      githubUrl: "https://github.com/Mentrauz/admybrand-ai-dashboard",
+      color: "from-green-600 to-teal-600",
+      featured: false,
+      completed: "2024",
+      teamSize: 1,
+      difficulty: 2,
+      achievements: [
+        "Simple and clean UI",
+        "AI Dashboa",
+      ],
+    },
+    {
+      id: 6,
+      title: "Gaming News",
+      category: "web",
+      description:
+        "A news website built with Next.js, Tailwind CSS, and Shadcn UI, for gaming news",
+      longDescription:
+        "A news website built with Next.js, Tailwind CSS, and Shadcn UI, for gaming news",
+      technologies: ["NextJs", "Tailwind", "NodeJs, Typescript, ShadcnUI, Gemini"],
+      imageUrl: "/gamingnews.png",
+      demoUrl: "https://gaming-news-sooty.vercel.app/",
+      githubUrl: "https://github.com/Mentrauz/Gaming-News",
+      featured: true,
+      completed: "2025",
+      teamSize: 1,
+      difficulty: 1,
+      achievements: [
+        "Built on NextJs and Tailwind CSS, it showcases dystopian style design language",
+        "Leveraged Gemini AI to algorithmically invalidate misinformation, ensuring semantic coherence, factual consistency of upto 97%, and source redundancy before publication",
+        "Achieved a false-positive reduction rate of over 90% using an ensemble-based AI verification pipeline combined with contextual news analysis",
+        "Formulated for scalability and latency minimization, the system asynchronously scrapes news with fault-tolerant architecture using modern concurrency paradigms, also improving speed upto 1.5x",
+      ],
+    },
   // {
   //   id: 3,
   //   title: "Website Development",
