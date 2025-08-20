@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
@@ -17,36 +17,12 @@ import { ErrorBoundary } from "@/components/error-boundary"
 import {
   ExternalLink,
   Github,
-  Code,
-  ChevronLeft,
-  ChevronRight,
   Calendar,
   Users,
   Star,
-  Layers,
-  Cpu,
-  Globe,
-  Database,
-  BookOpen,
-  Share2,
-  Shield,
-  MessageSquare,
-  Zap,
   Loader2,
+  ChevronRight as ChevronIcon,
 } from "lucide-react"
-
-// Project categories
-const projectCategories = [
-  { id: "all", name: "All Projects" },
-  // { id: "ai", name: "AI & ML", icon: <Cpu className="h-4 w-4" /> },
-  // { id: "audio", name: "Audio", icon: <Zap className="h-4 w-4" /> },
-  { id: "web", name: "Web Dev", icon: <Globe className="h-4 w-4" /> },
-  // { id: "data", name: "Data Science", icon: <Database className="h-4 w-4" /> },
-  // { id: "network", name: "Network", icon: <Share2 className="h-4 w-4" /> },
-  // { id: "security", name: "Security", icon: <Shield className="h-4 w-4" /> },
-  // { id: "communication", name: "Communication", icon: <MessageSquare className="h-4 w-4" /> },
-  // { id: "research", name: "Research", icon: <BookOpen className="h-4 w-4" /> },
-]
 
 // Project data
 const projects = [
@@ -188,40 +164,11 @@ const projects = [
 ]
 
 export default function RedesignedProjects() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
-  const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
   const isClient = useIsClient()
-
-  // Get featured projects
-  const featuredProjects = projects
-
-  // Filter projects based on category
-  const filteredProjects =
-    selectedCategory === "all"
-      ? projects.filter(project => project.id !== featuredProjects[currentFeaturedIndex].id)
-      : projects.filter(
-          project => 
-            project.category === selectedCategory && 
-            project.id !== featuredProjects[currentFeaturedIndex].id
-        )
-
-  const handleNext = () => {
-    if (!isClient) return
-    setDirection(1)
-    setCurrentFeaturedIndex((prev) => (prev + 1) % featuredProjects.length)
-  }
-
-  const handlePrev = () => {
-    if (!isClient) return
-    setDirection(-1)
-    setCurrentFeaturedIndex((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length)
-  }
 
   const handleDemoClick = (url: string) => {
     if (!isClient) return
@@ -268,202 +215,35 @@ export default function RedesignedProjects() {
       <SectionHeader
         title="Project Portfolio"
         subtitle="Explore my portfolio of AI, machine learning, and software development projects. Each project demonstrates different skills and technologies."
+        titleClassName="bg-clip-text text-transparent bg-gradient-to-r from-happy-hearts to-golden-nugget"
+        subtitleClassName="text-foreground/80"
       />
 
-      {featuredProjects.length > 0 && (
-        <div className="mb-16">
-          <ScrollReveal>
-            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 justify-center text-foreground">
-              <Layers className="h-5 w-5 text-primary" />
-              <span>Featured Projects</span>
-            </h3>
-          </ScrollReveal>
 
-          <ScrollReveal>
-            <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/20 bg-background/50 backdrop-blur-sm">
-              <AnimatePresence mode="wait" initial={false} custom={direction}>
-                <motion.div
-                  key={featuredProjects[currentFeaturedIndex].id}
-                  custom={direction}
-                  initial={{
-                    x: direction > 0 ? 500 : -500,
-                    opacity: 0,
-                  }}
-                  animate={{
-                    x: 0,
-                    opacity: 1,
-                    transition: {
-                      x: { type: "spring", stiffness: 100, damping: 20 },
-                      opacity: { duration: 0.4 },
-                    },
-                  }}
-                  exit={{
-                    x: direction < 0 ? 500 : -500,
-                    opacity: 0,
-                    transition: {
-                      x: { type: "spring", stiffness: 100, damping: 20 },
-                      opacity: { duration: 0.3 },
-                    },
-                  }}
-                  className="relative w-full aspect-[16/9]"
-                >
-                  <div className="absolute inset-0 flex flex-col md:flex-row">
-                    <div className="relative w-full h-48 md:h-auto md:w-1/2">
-                      <Image
-                        src={featuredProjects[currentFeaturedIndex].imageUrl || "/placeholder.svg"}
-                        alt={featuredProjects[currentFeaturedIndex].title}
-                        fill
-                        className="object-cover"
-                        priority
-                      />
-                    </div>
-
-                    <div className="w-full md:w-1/2 p-6 flex flex-col justify-center bg-background/95 backdrop-blur-sm border-l border-border/20">
-                      <Badge
-                        variant="outline"
-                        className="w-fit mb-4 bg-primary/10 backdrop-blur-sm border-primary/40 text-primary font-medium"
-                      >
-                        Featured Project
-                      </Badge>
-                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4 text-foreground">
-                        {featuredProjects[currentFeaturedIndex].title}
-                      </h3>
-                      <p className="text-foreground/80 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none font-medium">
-                        {featuredProjects[currentFeaturedIndex].description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-4 md:mb-6">
-                        {featuredProjects[currentFeaturedIndex].technologies.slice(0, 3).map((tech, index) => (
-                          <Badge
-                            key={index}
-                            variant="secondary"
-                            className="bg-muted/80 hover:bg-muted text-foreground/90 backdrop-blur-sm transition-colors border border-border/30 font-medium"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                        {featuredProjects[currentFeaturedIndex].technologies.length > 3 && (
-                          <Badge variant="secondary" className="bg-muted/80 hover:bg-muted text-foreground/90 backdrop-blur-sm transition-colors border border-border/30 font-medium">
-                            +{featuredProjects[currentFeaturedIndex].technologies.length - 3} more
-                          </Badge>
-                        )}
-                      </div>
-
-                      <div className="flex flex-wrap gap-3">
-                        {featuredProjects[currentFeaturedIndex].demoUrl && (
-                          <Button
-                            className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-200 font-medium"
-                            onClick={() => handleDemoClick(featuredProjects[currentFeaturedIndex].demoUrl)}
-                          >
-                            Live Demo
-                            <ExternalLink className="ml-2 h-4 w-4" />
-                          </Button>
-                        )}
-                        <Button
-                          variant="outline"
-                          className="border-border/50 bg-background/80 hover:bg-background/90 text-foreground backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 font-medium"
-                          onClick={() => {
-                            setSelectedProject(featuredProjects[currentFeaturedIndex])
-                            setIsDialogOpen(true)
-                          }}
-                        >
-                          <Code className="h-4 w-4 mr-2" />
-                          View Details
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Navigation controls - improved for light mode */}
-              <Button
-                size="icon"
-                variant="ghost"
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/95 backdrop-blur-sm hover:bg-background border border-border/40 shadow-md hover:shadow-lg transition-all duration-200"
-                onClick={handlePrev}
-              >
-                <ChevronLeft className="h-5 w-5 text-foreground" />
-              </Button>
-
-              <Button
-                size="icon"
-                variant="ghost"
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/95 backdrop-blur-sm hover:bg-background border border-border/40 shadow-md hover:shadow-lg transition-all duration-200"
-                onClick={handleNext}
-              >
-                <ChevronRight className="h-5 w-5 text-foreground" />
-              </Button>
-
-              {/* Progress dots - improved visibility */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1">
-                {featuredProjects.map((_, index) => (
-                  <button
-                    key={index}
-                    className={cn(
-                      "w-2 h-2 rounded-full transition-all",
-                      currentFeaturedIndex === index ? "bg-primary scale-125 shadow-sm" : "bg-foreground/50 hover:bg-foreground/70 shadow-sm",
-                    )}
-                    onClick={() => {
-                      setDirection(index > currentFeaturedIndex ? 1 : -1)
-                      setCurrentFeaturedIndex(index)
-                    }}
-                    aria-label={`Go to project ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      )}
 
       <ScrollReveal>
-        <Tabs defaultValue="all" onValueChange={setSelectedCategory} className="w-full">
-          <div className="overflow-x-auto pb-2 no-scrollbar">
-            <TabsList className="flex justify-start gap-2 mb-8 bg-background/80 backdrop-blur-sm border border-border/40 w-max mx-auto shadow-sm">
-              {projectCategories.map((category) => (
-                <TabsTrigger
-                  key={category.id}
-                  value={category.id}
-                  className={cn(
-                    "px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all data-[state=active]:shadow-md whitespace-nowrap",
-                    selectedCategory === category.id
-                      ? "bg-primary text-primary-foreground shadow-md"
-                      : "bg-background/70 hover:bg-background/90 text-foreground/90 hover:text-foreground backdrop-blur-sm border border-border/30 shadow-sm",
-                  )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence>
+            {projects.map((project, index) => (
+              <ErrorBoundary key={project.id}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="flex items-center gap-1 sm:gap-2">
-                    {category.icon && category.icon}
-                    <span>{category.name}</span>
-                  </div>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <AnimatePresence>
-              {filteredProjects.map((project, index) => (
-                <ErrorBoundary key={project.id}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <ProjectCard
-                      project={project}
-                      onSelect={() => {
-                        setSelectedProject(project)
-                        setIsDialogOpen(true)
-                      }}
-                    />
-                  </motion.div>
-                </ErrorBoundary>
-              ))}
-            </AnimatePresence>
-          </div>
-        </Tabs>
+                  <ProjectCard
+                    project={project}
+                    onSelect={() => {
+                      setSelectedProject(project)
+                      setIsDialogOpen(true)
+                    }}
+                  />
+                </motion.div>
+              </ErrorBoundary>
+            ))}
+          </AnimatePresence>
+        </div>
       </ScrollReveal>
 
       {/* Project details dialog - improved for light mode */}
@@ -663,33 +443,23 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
 
   return (
     <Card
-      className="overflow-hidden h-full flex flex-col bg-background/95 backdrop-blur-sm border border-border/40 shadow-lg hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group hover:border-primary/40 cursor-pointer"
+      className="relative overflow-hidden h-full bg-card/80 backdrop-blur-sm border border-border/50 shadow-md hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:border-primary/20 cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onSelect}
     >
-      <div className="relative aspect-video overflow-hidden">
-        <Image
-          src={project.imageUrl || "/placeholder.svg"}
-          alt={project.title}
-          fill
-          className={cn(
-            "object-cover transition-transform duration-500",
-            isClient && isHovered ? "scale-110" : "scale-100",
-          )}
-        />
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-70 transition-opacity duration-300 bg-background/50 backdrop-blur-sm" />
-
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button variant="outline" className="border-border/60 bg-background/95 hover:bg-background text-foreground backdrop-blur-sm shadow-md font-medium">
-            View Details
-          </Button>
-        </div>
-      </div>
-
-      <CardContent className="p-4 flex-1 flex flex-col bg-background/90 backdrop-blur-sm border-t border-border/30">
-        <div className="flex justify-between items-start mb-2">
-          <Badge variant="outline" className="text-xs border-border/60 bg-background/80 text-foreground/90 backdrop-blur-sm font-medium">
+      <CardContent className="p-6 bg-card/50">
+        <div className="flex justify-between items-start mb-3">
+          <Badge 
+            className={cn(
+              "px-3 py-1 text-xs font-medium rounded-full",
+              project.category === "web" 
+                ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
+                : project.category === "ai"
+                  ? "bg-purple-500/20 text-purple-500 border-purple-500/30"
+                  : "bg-green-500/20 text-green-500 border-green-500/30"
+            )}
+          >
             {project.category === "ai"
               ? "AI & ML"
               : project.category === "web"
@@ -710,33 +480,40 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
           </div>
         </div>
 
-        <h3 className="font-bold mb-2 line-clamp-1 text-foreground">{project.title}</h3>
-        <p className="text-foreground/80 text-sm line-clamp-3 mb-4 font-medium">{project.description}</p>
+        <h3 className="text-lg font-semibold mb-2 text-foreground flex items-center gap-2 group-hover:text-primary transition-colors">
+          {project.title}
+          <ChevronIcon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+        </h3>
+        
+        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{project.description}</p>
 
-        <div className="flex flex-wrap gap-1 mb-4 mt-auto">
-          {project.technologies.slice(0, 3).map((tech, i) => (
-            <Badge key={i} variant="secondary" className="text-xs bg-muted/80 hover:bg-muted text-foreground/90 transition-colors border border-border/30 font-medium">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.slice(0, 4).map((tech, i) => (
+            <Badge key={i} variant="secondary" className="text-xs bg-muted/60 text-foreground/80 border-none">
               {tech}
             </Badge>
           ))}
-          {project.technologies.length > 3 && (
-            <Badge variant="secondary" className="text-xs bg-muted/80 hover:bg-muted text-foreground/90 transition-colors border border-border/30 font-medium">
-              +{project.technologies.length - 3} more
+          {project.technologies.length > 4 && (
+            <Badge variant="secondary" className="text-xs bg-muted/60 text-foreground/80 border-none">
+              +{project.technologies.length - 4} more
             </Badge>
           )}
         </div>
 
-        <div className="flex justify-between items-center text-xs text-foreground/80">
+        <div className="flex justify-between items-center text-xs text-muted-foreground mt-auto">
           <div className="flex items-center gap-1">
             <Calendar className="h-3 w-3" />
-            <span className="font-medium">{project.completed}</span>
+            <span>{project.completed}</span>
           </div>
           <div className="flex items-center gap-1">
             <Users className="h-3 w-3" />
-            <span className="font-medium">Team: {project.teamSize}</span>
+            <span>Team: {project.teamSize}</span>
           </div>
         </div>
       </CardContent>
+
+      {/* Bottom gradient accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-happy-hearts to-golden-nugget opacity-0 group-hover:opacity-100 transition-opacity" />
     </Card>
   )
 }
