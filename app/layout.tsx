@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import ResponsiveHeader from "@/components/responsive-header"
 import ClientDiagnosticWrapper from "@/components/client-diagnostic-wrapper"
+import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,10 +56,12 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} theme-transition`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <ResponsiveHeader />
-          {children}
-          <Toaster />
-          <ClientDiagnosticWrapper />
+          <SmoothScrollProvider>
+            <ResponsiveHeader />
+            {children}
+            <Toaster />
+            <ClientDiagnosticWrapper />
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>
