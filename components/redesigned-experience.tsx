@@ -204,25 +204,25 @@ const experiences = [
   //   color: "from-green-600 to-emerald-600",
   // },
   {
-    id: "power-zi",
-    title: "PowerZI - A Powerful Agentic tool for MS apps",
-    company: "Personal Project",
+    id: "Adsense",
+    title: "Generative AI for Personalized Content Creation",
+    company: "Team Research Project",
     location: "Rajkot, India",
-    period: "2025 - present",
+    period: "2025 March - 2025 September",
     type: "research",
     description:
-      "Research in progress",
+      "Research in progressThis project develops a generative AI system for personalized content creation, leveraging large language models to produce tailored media for marketing or education.",
     responsibilities: [
-      "Research in progress",
-      "Research in progress",
-      "Research in progress",
+      "Design and implement UI/UX",
+      "Design system architecture",
+      "Research on the latest technologies",
       "Research in progress",
     ],
-    skills: ["Python", "Data Analysis", "Research", "Scientific Computing", "ML", "Agentic AI", "Microservices"],
+    skills: ["Python", "Data Analysis", "Research", "Scientific Computing", "ML", "Agentic AI", "Microservices", "NextJS", "MongoDB", "React", "TailwindCSS", "TypeScript"],
     metrics: [
-      { value: ":)", label: "Publications" },
-      { value: ":)", label: "Conferences" },
-      { value: ":)", label: "Research Grants" },
+      { value: "3", label: "Team Size" },
+      { value: "1", label: "Research Grants" },
+      { value: "95%", label: "Success Rate" },
     ],
     // screenshots: [
     //   {
