@@ -51,6 +51,12 @@ const readingList: ReadingItem[] = [
     title: "Ikigai",
     author: "Hector Garcia and Francesc Miralles",
     coverImage: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg"
+  },
+  {
+    id: "8",
+    title: "Journey to the West",
+    author: "Wu Cheng'en",
+    coverImage: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg"
   }
 ]
 
