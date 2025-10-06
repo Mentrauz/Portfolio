@@ -302,7 +302,7 @@ export default function RedesignedProjects() {
       <SectionHeader
         title="Project Portfolio"
         subtitle="Explore my portfolio of AI, machine learning, and software development projects. Each project demonstrates different skills and technologies."
-        titleClassName="bg-clip-text text-transparent bg-gradient-to-r from-happy-hearts to-golden-nugget"
+        titleClassName="text-gradient-primary"
         subtitleClassName="text-foreground/80"
       />
 
@@ -600,7 +600,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
       </CardContent>
 
       {/* Bottom gradient accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-happy-hearts to-golden-nugget opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] gradient-primary opacity-0 group-hover:opacity-100 transition-opacity" />
     </Card>
   )
 }

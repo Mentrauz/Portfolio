@@ -319,6 +319,20 @@
   }
 }
 
+/* Theme-driven gradient helpers */
+@layer utilities {
+  .gradient-primary {
+    background-image: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+  }
+  .gradient-primary-br {
+    background-image: linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--secondary)));
+  }
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+  }
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(20px);

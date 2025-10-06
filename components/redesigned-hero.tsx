@@ -126,7 +126,7 @@ export default function RedesignedHero() {
 
           <ScrollReveal delay={0.1}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-happy-hearts to-golden-nugget">
+              <span className="text-gradient-primary">
                 Soumya Singh
               </span>
             </h1>
@@ -179,10 +179,10 @@ export default function RedesignedHero() {
               <Button
                 size="lg"
                 onClick={scrollToProjects}
-                className="group relative overflow-hidden shadow-lg hover:shadow-happy-hearts/20 transition-all duration-300 bg-happy-hearts hover:bg-happy-hearts/90 text-white"
+                className="group relative overflow-hidden shadow-lg transition-all duration-300 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/90 text-[hsl(var(--primary-foreground))]"
               >
                 <span className="relative z-10">View Projects</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-happy-hearts to-bite-tongue opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute inset-0 gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
               </Button>
 
@@ -190,10 +190,10 @@ export default function RedesignedHero() {
                 size="lg"
                 variant="outline"
                 onClick={handleContactClick}
-                className="group relative overflow-hidden border-copper-coin/50 hover:border-copper-coin transition-colors duration-300"
+                className="group relative overflow-hidden border-[hsl(var(--primary))]/50 hover:border-[hsl(var(--primary))] transition-colors duration-300"
               >
                 <span className="relative z-10">Contact Me</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-copper-coin/10 to-golden-nugget/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute inset-0 gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             </div>
           </ScrollReveal>
@@ -204,7 +204,7 @@ export default function RedesignedHero() {
                 variant="ghost"
                 size="icon"
                 asChild
-                className="rounded-full hover:bg-succulent/10 transition-all duration-300 hover:scale-110"
+                className="rounded-full hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
               >
                 <a
                   href="https://github.com/Mentrauz"

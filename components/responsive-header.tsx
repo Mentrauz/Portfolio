@@ -57,7 +57,7 @@ export default function ResponsiveHeader() {
           className="flex items-center gap-2"
         >
           <div className="flex items-center gap-2">
-            <div className="font-bold text-xl bg-gradient-to-r from-happy-hearts to-golden-nugget text-transparent bg-clip-text">
+            <div className="font-bold text-xl text-gradient-primary">
               SW
             </div>
             <div className="hidden md:block">

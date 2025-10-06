@@ -112,8 +112,8 @@ export function ThemeSwitcher() {
             size="icon"
             className="relative overflow-hidden border-border bg-background hover:bg-accent/10"
           >
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 dark:-rotate-90 dark:scale-0 text-golden-nugget" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 dark:rotate-0 dark:scale-100 text-bite-tongue" />
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 dark:-rotate-90 dark:scale-0 text-[hsl(var(--secondary))]" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 dark:rotate-0 dark:scale-100 text-[hsl(var(--primary))]" />
             <span className="sr-only">Toggle theme</span>
           </Button>
         </PopoverTrigger>
