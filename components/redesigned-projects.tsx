@@ -153,9 +153,9 @@ const projects = [
       difficulty: 1,
       achievements: [
         "Built on NextJs and Tailwind CSS, it showcases dystopian style design language",
-        "Leveraged Gemini AI to algorithmically invalidate misinformation, ensuring semantic coherence, factual consistency of upto 97%, and source redundancy before publication",
-        "Achieved a false-positive reduction rate of over 90% using an ensemble-based AI verification pipeline combined with contextual news analysis",
-        "Formulated for scalability and latency minimization, the system asynchronously scrapes news with fault-tolerant architecture using modern concurrency paradigms, also improving speed upto 1.5x",
+        "Smooth and consistent Experience throughout the website",
+        "Easy display of all the information",
+        "Showcases Dystopian style design language",
       ],
     },
   // {

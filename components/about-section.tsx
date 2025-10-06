@@ -84,11 +84,11 @@ export default function AboutSection() {
               <Card className="border-none bg-transparent">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-primary" />
+                    {/* <Award className="h-5 w-5 text-primary" />
                     <div>
                       <div className="text-sm font-medium">Experience</div>
-                      <div className="text-2xl font-bold">2+ Years</div>
-                    </div>
+                      <div className="text-2xl font-bold">1 Year (Fresher)</div>
+                    </div> */}
                   </div>
                 </CardContent>
               </Card>
