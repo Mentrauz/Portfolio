@@ -58,7 +58,7 @@ export default function ResponsiveHeader() {
         >
           <div className="flex items-center gap-2">
             <div className="font-bold text-xl text-gradient-primary">
-              SW
+              SS
             </div>
             <div className="hidden md:block">
               <div className="font-bold">Soumya Singh</div>
