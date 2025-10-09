@@ -56,7 +56,17 @@ export function SectionHeader({
           <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary/80 to-primary/20 rounded-full" />
         )}
       </h2>
-      {subtitle && <p className={cn("mt-4 text-muted-foreground max-w-2xl mx-auto", subtitleClassName)}>{subtitle}</p>}
+      {subtitle && (
+        <p
+          className={cn(
+            "mt-4 text-muted-foreground",
+            align === "center" ? "max-w-2xl mx-auto" : "max-w-3xl",
+            subtitleClassName,
+          )}
+        >
+          {subtitle}
+        </p>
+      )}
     </div>
   )
 }
