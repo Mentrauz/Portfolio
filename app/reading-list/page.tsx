@@ -12,9 +12,9 @@ interface ReadingItem {
 const readingList: ReadingItem[] = [
   {
     id: "1",
-    title: "The Brand Gap",
-    author: "Marty Neumeier",
-    coverImage: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTu6T5VSve2eQ3YkxFj-wefbU90rOWNReR3fmap4im_mRKCpmzs"
+    title: "Journey to the West",
+    author: "Wu Cheng'en",
+    coverImage: "https://press.uchicago.edu/dam/ucp/books/jacket/978/02/26/97/9780226971322.jpg"
   },
   {
     id: "2",
@@ -30,9 +30,9 @@ const readingList: ReadingItem[] = [
   },
   {
     id: "4",
-    title: "Penguin Highway",
-    author: "Tomihiko Morimi",
-    coverImage: "https://m.media-amazon.com/images/I/715fozvgYRL._AC_UF1000,1000_QL80_.jpg"
+    title: "Ikigai",
+    author: "Hector Garcia and Francesc Miralles",
+    coverImage: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg"
   },
   {
     id: "5",
@@ -48,15 +48,15 @@ const readingList: ReadingItem[] = [
   },
   {
     id: "7",
-    title: "Ikigai",
-    author: "Hector Garcia and Francesc Miralles",
-    coverImage: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg"
+    title: "Penguin Highway",
+    author: "Tomihiko Morimi",
+    coverImage: "https://m.media-amazon.com/images/I/715fozvgYRL._AC_UF1000,1000_QL80_.jpg"
   },
   {
     id: "8",
-    title: "Journey to the West",
-    author: "Wu Cheng'en",
-    coverImage: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg"
+    title: "The Brand Gap",
+    author: "Marty Neumeier",
+    coverImage: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTu6T5VSve2eQ3YkxFj-wefbU90rOWNReR3fmap4im_mRKCpmzs"
   }
 ]
 
