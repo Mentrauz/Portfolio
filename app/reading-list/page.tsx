@@ -88,72 +88,82 @@ const itemVariants = {
 export default function ReadingListPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SectionContainer>
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <SectionHeader
-            title="Reading List"
-            subtitle="Reading more is one of my biggest goals. This list shifts and grows as new titles find their way into my hands"
-            align="left"
-            titleClassName="tracking-tight"
-            subtitleClassName="max-w-3xl"
-          />
-        </motion.div>
+      {/* Desktop/Tablet content */}
+      <div className="hidden md:block">
+        <SectionContainer>
+          {/* Header Section */}
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionHeader
+              title="Reading List"
+              subtitle="Reading more is one of my biggest goals. This list shifts and grows as new titles find their way into my hands"
+              align="left"
+              titleClassName="tracking-tight"
+              subtitleClassName="max-w-3xl"
+            />
+          </motion.div>
 
-        {/* Books Grid */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {readingList.map((book) => (
-            <motion.div key={book.id} variants={itemVariants}>
-              <Card className="group overflow-hidden bg-card/80 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg">
-                <div className="p-4 pb-0">
-                  <AspectRatio ratio={3/4}>
-                    <img
-                      src={book.coverImage}
-                      alt={`${book.title} cover`}
-                      className="w-full h-full object-cover rounded-lg md:rounded-xl shadow-sm transition-transform duration-700 group-hover:scale-[1.03]"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.src = `https://via.placeholder.com/300x400/6B7280/ffffff?text=${encodeURIComponent(book.title)}`
-                      }}
-                    />
-                    <div className="absolute inset-0 rounded-lg md:rounded-xl bg-gradient-to-b from-transparent via-transparent to-black/0 group-hover:to-black/10 transition-colors" />
-                  </AspectRatio>
-                </div>
-                <CardContent className="pt-5 pb-6">
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-lg md:text-xl leading-snug tracking-tight group-hover:text-primary transition-colors">
-                      {book.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm md:text-base">by {book.author}</p>
+          {/* Books Grid */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {readingList.map((book) => (
+              <motion.div key={book.id} variants={itemVariants}>
+                <Card className="group overflow-hidden bg-card/80 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg">
+                  <div className="p-4 pb-0">
+                    <AspectRatio ratio={3/4}>
+                      <img
+                        src={book.coverImage}
+                        alt={`${book.title} cover`}
+                        className="w-full h-full object-cover rounded-lg md:rounded-xl shadow-sm transition-transform duration-700 group-hover:scale-[1.03]"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          target.src = `https://via.placeholder.com/300x400/6B7280/ffffff?text=${encodeURIComponent(book.title)}`
+                        }}
+                      />
+                      <div className="absolute inset-0 rounded-lg md:rounded-xl bg-gradient-to-b from-transparent via-transparent to-black/0 group-hover:to-black/10 transition-colors" />
+                    </AspectRatio>
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+                  <CardContent className="pt-5 pb-6">
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-lg md:text-xl leading-snug tracking-tight group-hover:text-primary transition-colors">
+                        {book.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm md:text-base">by {book.author}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
 
-        {/* Footer Note */}
-        <motion.div
-          className="mt-20 md:mt-24 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <p className="text-sm text-muted-foreground/70 font-light max-w-2xl mx-auto">
-            This collection represents books that have shaped my perspective on design, technology, and creativity.
-            Each title offers unique insights that continue to influence my work and thinking.
-          </p>
-        </motion.div>
-      </SectionContainer>
+          {/* Footer Note */}
+          <motion.div
+            className="mt-20 md:mt-24 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <p className="text-sm text-muted-foreground/70 font-light max-w-2xl mx-auto">
+              This collection represents books that have shaped my perspective on design, technology, and creativity.
+              Each title offers unique insights that continue to influence my work and thinking.
+            </p>
+          </motion.div>
+        </SectionContainer>
+      </div>
+
+      {/* Mobile-only message */}
+      <div className="md:hidden min-h-screen flex items-center justify-center p-8">
+        <p className="text-center text-sm text-muted-foreground">
+          Looks good on desktop.
+        </p>
+      </div>
     </div>
   )
 } 

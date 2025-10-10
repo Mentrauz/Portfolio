@@ -55,14 +55,24 @@ export default function RootLayout({
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </head>
       <body className={`${inter.className} theme-transition`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <SmoothScrollProvider>
-            <ResponsiveHeader />
-            {children}
-            <Toaster />
-            <ClientDiagnosticWrapper />
-          </SmoothScrollProvider>
-        </ThemeProvider>
+        {/* Desktop/Tablet (md+) content */}
+        <div className="hidden md:block">
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+            <SmoothScrollProvider>
+              <ResponsiveHeader />
+              {children}
+              <Toaster />
+              <ClientDiagnosticWrapper />
+            </SmoothScrollProvider>
+          </ThemeProvider>
+        </div>
+
+        {/* Mobile-only message */}
+        <div className="md:hidden min-h-screen flex items-center justify-center p-8">
+          <p className="text-center text-sm text-muted-foreground">
+            Looks good on desktop.
+          </p>
+        </div>
       </body>
     </html>
   )
