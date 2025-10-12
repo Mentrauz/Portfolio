@@ -112,10 +112,8 @@ export default function AboutSection() {
 
             <StaggerItem>
               <p className="text-muted-foreground mb-6">
-                My work spans from developing cutting-edge voice cloning technology to creating community-focused
-                programs that have positively impacted many people. I'm dedicated to creating systems that
-                support activist networks, educational platforms, and community-building initiatives while addressing
-                systemic challenges through socially responsible technology.
+                My work spans from developing high-quality web applications to creating community-focused
+                programs that have positively impacted many people.
               </p>
             </StaggerItem>
 

@@ -45,6 +45,7 @@ export default function SkillsGlobe() {
   const [isGlobeInitialized, setIsGlobeInitialized] = useState(false)
   const [isError, setIsError] = useState(false)
   const isClient = useIsClient()
+  const hoveredSkillRef = useRef<string | null>(null)
 
   // Get unique categories
   const categories = Array.from(new Set(skills.map((skill) => skill.category)))
@@ -65,6 +66,20 @@ export default function SkillsGlobe() {
       mouse: any,
       skillNodes: any[] = []
 
+    // Quick feature test to avoid attempting a WebGL context if unsupported or blocked
+    const isWebGLAvailable = (): boolean => {
+      try {
+        const testCanvas = document.createElement("canvas")
+        const gl =
+          (testCanvas.getContext("webgl2") as WebGL2RenderingContext | null) ||
+          (testCanvas.getContext("webgl") as WebGLRenderingContext | null) ||
+          (testCanvas.getContext("experimental-webgl") as WebGLRenderingContext | null)
+        return !!gl
+      } catch {
+        return false
+      }
+    }
+
     const init = async () => {
       try {
         // Dynamically import Three.js
@@ -77,7 +92,7 @@ export default function SkillsGlobe() {
 
         if (!THREE) return
 
-        const { OrbitControls } = await import("three/examples/jsm/controls/OrbitControls").catch((err) => {
+        const { OrbitControls } = await import("three/addons/controls/OrbitControls.js").catch((err) => {
           console.error("Failed to load OrbitControls:", err)
           setIsError(true)
           setIsLoading(false)
@@ -88,6 +103,13 @@ export default function SkillsGlobe() {
 
         if (!canvasRef.current || !containerRef.current) return
 
+        // Proactively bail if WebGL is unavailable; prevents Three from logging renderer errors
+        if (!isWebGLAvailable()) {
+          setIsError(true)
+          setIsLoading(false)
+          return
+        }
+
         // Get container dimensions
         const width = containerRef.current.clientWidth
         const height = containerRef.current.clientHeight
@@ -97,13 +119,62 @@ export default function SkillsGlobe() {
         camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
         camera.position.z = 200
 
-        renderer = new THREE.WebGLRenderer({
-          canvas: canvasRef.current,
-          alpha: true,
-          antialias: true,
-        })
-        renderer.setSize(width, height)
-        renderer.setPixelRatio(window.devicePixelRatio)
+        // Try to create WebGL renderer with error handling
+        // Suppress THREE.js console errors temporarily
+        const originalConsoleError = console.error
+        let hadRendererError = false
+        
+        console.error = (...args: any[]) => {
+          const message = args.join(" ")
+          if (message.includes("WebGLRenderer") || message.includes("WebGL context")) {
+            hadRendererError = true
+            // Silently catch WebGL errors - we handle them gracefully with fallback UI
+            return
+          }
+          originalConsoleError.apply(console, args)
+        }
+
+        try {
+          renderer = new THREE.WebGLRenderer({
+            canvas: canvasRef.current,
+            alpha: true,
+            antialias: true,
+            powerPreference: "default",
+            context: undefined, // Let Three.js create its own context
+          })
+          
+          // Check if renderer was created successfully
+          if (!renderer || !renderer.domElement) {
+            throw new Error("Renderer creation failed")
+          }
+          
+          renderer.setSize(width, height)
+          renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1))
+        } catch (rendererError) {
+          hadRendererError = true
+        } finally {
+          // Restore original console.error
+          console.error = originalConsoleError
+          
+          // Check if there was an error
+          if (hadRendererError) {
+            setIsError(true)
+            setIsLoading(false)
+            return
+          }
+        }
+
+        // Handle context loss gracefully
+        const onContextLost = (event: Event) => {
+          event.preventDefault()
+          setIsError(true)
+        }
+        const onContextRestored = () => {
+          // We could attempt re-init here; for now, show fallback to avoid user confusion
+          setIsError(true)
+        }
+        renderer.domElement.addEventListener("webglcontextlost", onContextLost, false)
+        renderer.domElement.addEventListener("webglcontextrestored", onContextRestored, false)
 
         // Add orbit controls
         const controls = new OrbitControls(camera, renderer.domElement)
@@ -195,9 +266,12 @@ export default function SkillsGlobe() {
 
           if (intersects.length > 0) {
             const intersectedObject = intersects[0].object
-            setHoveredSkill(intersectedObject.userData.skill)
+            const skillName = intersectedObject.userData.skill
+            hoveredSkillRef.current = skillName
+            setHoveredSkill(skillName)
             document.body.style.cursor = "pointer"
           } else {
+            hoveredSkillRef.current = null
             setHoveredSkill(null)
             document.body.style.cursor = "default"
           }
@@ -216,20 +290,20 @@ export default function SkillsGlobe() {
             // Update skill nodes
             skillNodes.forEach((node) => {
               // Make hovered skill pulse
-              if (node.userData.skill === hoveredSkill) {
+              if (node.userData.skill === hoveredSkillRef.current) {
                 node.scale.x = 1.2 + Math.sin(Date.now() * 0.01) * 0.1
                 node.scale.y = 1.2 + Math.sin(Date.now() * 0.01) * 0.1
                 node.scale.z = 1.2 + Math.sin(Date.now() * 0.01) * 0.1
 
                 // Increase emissive intensity
                 if (node.material) {
-                  const material = node.material as THREE.MeshPhongMaterial
+                  const material = node.material as any
                   material.emissiveIntensity = 0.8
                 }
               } else {
                 node.scale.set(1, 1, 1)
                 if (node.material) {
-                  const material = node.material as THREE.MeshPhongMaterial
+                  const material = node.material as any
                   material.emissiveIntensity = 0.3
                 }
               }
@@ -268,6 +342,10 @@ export default function SkillsGlobe() {
           globe.material.dispose()
           scene.remove(globe)
 
+          if (renderer?.domElement) {
+            renderer.domElement.removeEventListener("webglcontextlost", onContextLost)
+            renderer.domElement.removeEventListener("webglcontextrestored", onContextRestored)
+          }
           renderer.dispose()
         }
       } catch (error) {
@@ -278,16 +356,20 @@ export default function SkillsGlobe() {
     }
 
     // Only initialize if component is mounted
+    let cleanup: (() => void) | void
     if (isClient) {
-      init()
+      init().then((fn) => {
+        cleanup = fn
+      })
     }
 
     return () => {
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId)
       }
+      if (typeof cleanup === "function") cleanup()
     }
-  }, [hoveredSkill, selectedCategory, isClient])
+  }, [selectedCategory, isClient])
 
   // If not client-side yet, show a simple loading state
   if (!isClient) {
@@ -329,9 +411,14 @@ export default function SkillsGlobe() {
         <Card className="relative w-full max-w-xl mx-auto bg-card/50 border-none overflow-hidden backdrop-blur-sm p-6">
           <div className="flex flex-col items-center justify-center mb-6">
             <AlertTriangle className="h-8 w-8 text-amber-500 mb-2" />
-            <h3 className="text-lg font-semibold mb-1">3D Visualization Unavailable</h3>
-            <p className="text-muted-foreground text-center mb-4">
-              The 3D skills globe couldn't be loaded. Here's a simplified view of my skills instead.
+            <h3 className="text-lg font-semibold mb-1">Can't Render 3D Globe</h3>
+            <p className="text-muted-foreground text-center text-sm mb-2">
+              Unable to initialize WebGL. This is usually a hardware acceleration issue.
+            </p>
+            <p className="text-xs text-muted-foreground text-center mb-4">
+              Try toggling <span className="font-semibold">hardware acceleration</span> in your browser settings and refresh the page.
+              <br />
+              Meanwhile, here's a simplified view of my skills:
             </p>
           </div>
 
