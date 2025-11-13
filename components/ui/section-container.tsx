@@ -49,18 +49,24 @@ export function SectionHeader({
   decorative = true,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("mb-12", `text-${align}`)}>
-      <h2 className={cn("text-3xl md:text-4xl font-bold relative inline-block", titleClassName)}>
-        {title}
-        {decorative && (
-          <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary/80 to-primary/20 rounded-full" />
+    <div className={cn("mb-12", align === "center" && "flex flex-col items-center")}>
+      <h2 
+        className={cn(
+          "text-3xl md:text-4xl lg:text-5xl font-bold relative inline-block pb-3 mb-4",
+          "text-primary transition-colors duration-300",
+          titleClassName
         )}
+        style={{
+          borderBottom: decorative ? "3px solid currentColor" : undefined,
+        }}
+      >
+        {title}
       </h2>
       {subtitle && (
         <p
           className={cn(
-            "mt-4 text-muted-foreground",
-            align === "center" ? "max-w-2xl mx-auto" : "max-w-3xl",
+            "text-base md:text-lg text-muted-foreground",
+            align === "center" ? "max-w-3xl text-center" : "max-w-3xl",
             subtitleClassName,
           )}
         >

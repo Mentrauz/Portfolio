@@ -13,7 +13,17 @@ export default function Education() {
   return (
     <section id="education" className="py-12 px-3 sm:px-4">
       <div className="mx-auto max-w-5xl lg:max-w-6xl">
-        <h2 className="text-3xl font-bold text-center mb-12">Education</h2>
+        <div className="flex flex-col items-center mb-12">
+          <h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary pb-3 mb-4 transition-colors duration-300"
+            style={{ borderBottom: "3px solid currentColor" }}
+          >
+            Education
+          </h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl text-center">
+            My academic background and educational journey in Computer Science and Engineering.
+          </p>
+        </div>
 
         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm border-border/50 shadow-md hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:border-primary/20 w-full rounded-xl">
           <CardHeader className="pb-4">

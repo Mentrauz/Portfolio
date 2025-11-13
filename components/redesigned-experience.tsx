@@ -41,7 +41,7 @@ const experiences = [
     title: "Payroll Developer for a Start-Up",
     company: "TMS Groups",
     location: "Gurgaon, India",
-    period: "December 2024 - May 2025",
+    period: "December 2024 - December 2025",
     type: "work",
     description:
       "Developed a payroll system for a start-up using NextJS and MongoDB",

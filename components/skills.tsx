@@ -169,11 +169,18 @@ export default function Skills() {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl font-bold text-center mb-4">Technical Skills</h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-          A comprehensive overview of my technical expertise across various domains, from machine learning and AI to
-          software development and research.
-        </p>
+        <div className="flex flex-col items-center mb-12">
+          <h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary pb-3 mb-4 transition-colors duration-300"
+            style={{ borderBottom: "3px solid currentColor" }}
+          >
+            Technical Skills
+          </h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl text-center">
+            A comprehensive overview of my technical expertise across various domains, from machine learning and AI to
+            software development and research.
+          </p>
+        </div>
       </motion.div>
 
       <motion.div

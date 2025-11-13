@@ -80,10 +80,17 @@ export default function Testimonials() {
 
   return (
     <section className="py-12">
-      <h2 className="text-3xl font-bold text-center mb-4">Client Testimonials</h2>
-      <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-        Hear what clients and colleagues have to say about working with me.
-      </p>
+      <div className="flex flex-col items-center mb-12">
+        <h2 
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary pb-3 mb-4 transition-colors duration-300"
+          style={{ borderBottom: "3px solid currentColor" }}
+        >
+          Client Testimonials
+        </h2>
+        <p className="text-base md:text-lg text-muted-foreground max-w-3xl text-center">
+          Hear what clients and colleagues have to say about working with me.
+        </p>
+      </div>
 
       <div
         className="relative max-w-4xl mx-auto px-4"

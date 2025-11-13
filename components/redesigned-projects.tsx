@@ -36,7 +36,7 @@ const projects = [
     longDescription:
       "A comprehensive payroll and HR management platform built for Indian businesses featuring multi-unit operations, complete statutory compliance (ESIC, EPF, LWF), integrated double-entry accounting system, GPS-based attendance tracking, automated salary calculations, and advanced reporting capabilities. The system supports role-based access control with 5 user roles and includes PWA functionality for mobile access.",
     technologies: ["Next.js 15", "React 19", "TypeScript", "MongoDB", "Tailwind CSS", "NextAuth.js", "Chart.js", "ExcelJS", "@react-pdf/renderer"],
-    imageUrl: "/tms.png",
+    // imageUrl: "/tms.png",
     demoUrl: "http://payroll-uid.vercel.app/",
     githubUrl: "https://github.com/Mentrauz/payroll-uid",
     featured: false,

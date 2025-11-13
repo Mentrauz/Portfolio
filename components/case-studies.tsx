@@ -98,11 +98,18 @@ export default function CaseStudies() {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-center mb-4">Case Studies</h2>
-          <p className="text-muted-foreground text-center max-w-4xl mx-auto mb-12">
-            Detailed examinations of complex technical challenges and their solutions. These case studies showcase
-            problem-solving approaches and technical implementation details.
-          </p>
+          <div className="flex flex-col items-center mb-12">
+            <h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary pb-3 mb-4 transition-colors duration-300"
+              style={{ borderBottom: "3px solid currentColor" }}
+            >
+              Case Studies
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-3xl text-center">
+              Detailed examinations of complex technical challenges and their solutions. These case studies showcase
+              problem-solving approaches and technical implementation details.
+            </p>
+          </div>
         </motion.div>
 
         <div className="space-y-8">
