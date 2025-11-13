@@ -171,7 +171,7 @@ export function DiagnosticTool() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="text-xs space-y-3 max-h-96 overflow-y-auto">
+          <CardContent className="text-xs space-y-3 max-h-96 overflow-y-auto custom-scrollbar">
             {activeTab === "system" ? (
               <>
                 <div>

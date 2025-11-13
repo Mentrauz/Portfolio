@@ -204,7 +204,7 @@ export default function Skills() {
           />
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 custom-scrollbar-auto">
           <Button
             variant={selectedLevel === "All" ? "default" : "outline"}
             onClick={() => setSelectedLevel("All")}

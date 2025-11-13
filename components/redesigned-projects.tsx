@@ -430,7 +430,7 @@ export default function RedesignedProjects() {
                 <div
                   ref={scrollRef}
                   data-lenis-prevent
-                  className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-200px)] overscroll-contain touch-pan-y"
+                  className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-200px)] overscroll-contain touch-pan-y custom-scrollbar"
                   style={{ scrollBehavior: 'smooth' }}
                   onWheel={(e) => {
                     // Prevent scroll from bubbling to parent

@@ -292,6 +292,8 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Apply custom scrollbar to the entire page */
+    @apply custom-scrollbar;
   }
 
   /* Improve touch targets on mobile */
@@ -511,14 +513,75 @@
   @apply border-l-0;
 }
 
-/* Custom scrollbar for better mobile experience */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Modern custom scrollbar - completely invisible until hover */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
 
-.no-scrollbar {
-  -ms-overflow-style: none;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.6);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* For Firefox - ensure consistent behavior */
+.custom-scrollbar {
+  -ms-overflow-style: auto;
+}
+
+/* Auto-hide scrollbar on elements that don't need it */
+.custom-scrollbar-auto {
+  scrollbar-width: auto;
+  scrollbar-color: transparent transparent;
+}
+
+.custom-scrollbar-auto::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.custom-scrollbar-auto:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+  background: hsl(var(--primary) / 0.6);
+}
+
+.custom-scrollbar-auto::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Hide scrollbar completely when content fits */
+.custom-scrollbar-hidden {
   scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }
 
 /* Dynamic background gradients */

@@ -332,7 +332,7 @@ export default function RedesignedExperience() {
           onValueChange={(value) => setExperienceType(value as "all" | "work" | "education" | "research")}
           className="w-full"
         >
-          <div className="overflow-x-auto pb-2 no-scrollbar">
+          <div className="overflow-x-auto pb-2 custom-scrollbar-auto">
             <TabsList className="flex justify-center gap-2 mb-8 bg-card/30 backdrop-blur-sm border border-border/20 w-fit mx-auto">
               <TabsTrigger
                 value="all"
