@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
@@ -22,12 +22,41 @@ import {
   Star,
   Loader2,
   ChevronRight as ChevronIcon,
+  X,
 } from "lucide-react"
 
 // Project data
 const projects = [
   {
     id: 1,
+    title: "Payroll Management System",
+    category: "web",
+    description:
+      "Enterprise-grade payroll management system with multi-unit support, statutory compliance, and integrated accounting for Indian businesses",
+    longDescription:
+      "A comprehensive payroll and HR management platform built for Indian businesses featuring multi-unit operations, complete statutory compliance (ESIC, EPF, LWF), integrated double-entry accounting system, GPS-based attendance tracking, automated salary calculations, and advanced reporting capabilities. The system supports role-based access control with 5 user roles and includes PWA functionality for mobile access.",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "MongoDB", "Tailwind CSS", "NextAuth.js", "Chart.js", "ExcelJS", "@react-pdf/renderer"],
+    imageUrl: "/tms.png",
+    demoUrl: "http://payroll-uid.vercel.app/",
+    githubUrl: "https://github.com/Mentrauz/payroll-uid",
+    featured: false,
+    completed: "September 2025 - Present",
+    teamSize: 1,
+    difficulty: 5,
+    inProgress: true,
+    achievements: [
+      "Built a complete payroll ecosystem supporting multi-unit businesses with 50+ features including employee management, attendance tracking, and statutory compliance",
+      "Implemented GPS-based attendance system with location verification and real-time tracking capabilities",
+      "Developed integrated accounting module with double-entry bookkeeping, financial reports (Balance Sheet, P&L, Trial Balance), and voucher management",
+      "Created automated statutory compliance system for ESIC, EPF, and LWF with export capabilities for government filings",
+      "Built advanced reporting engine supporting PDF/Excel exports with flexible consolidation options (unit-wise, month-wise, custom selections)",
+      "Implemented role-based access control system with 5 user roles (Admin, Accounts, Data Operations, Supervisor, HR) and dynamic permissions",
+      "Developed bulk upload functionality for mass employee data import and processing",
+      "Created PWA-enabled application with offline capabilities",
+    ],
+  },
+  {
+    id: 2,
     title: "Daily Pulse",
     category: "web",
     description:
@@ -39,7 +68,7 @@ const projects = [
     demoUrl: "https://news-theta-sepia.vercel.app/",
     // githubUrl: "Coming Soon",
     featured: true,
-    completed: "2025",
+    completed: "June 2025",
     teamSize: 1,
     difficulty: 1,
     achievements: [
@@ -50,7 +79,7 @@ const projects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: "Frontend Demo",
     category: "web",
     description: "A frontend demo",
@@ -61,7 +90,7 @@ const projects = [
     demoUrl: "https://simple-frontend-liart.vercel.app/",
     githubUrl: "#",
     featured: false,
-    completed: "2024",
+    completed: "October 2024",
     teamSize: 1,
     difficulty: 1,
     achievements: [
@@ -72,7 +101,7 @@ const projects = [
     ],
   },
   {
-      id: 3,
+      id: 4,
       title: "Website Development",
       category: "web",
       description: "Designed the website for Chowdeshwari Catering",
@@ -84,7 +113,7 @@ const projects = [
       githubUrl: "https://github.com/Mentrauz/urban-eats-catering",
       color: "from-green-600 to-teal-600",
       featured: false,
-      completed: "2024",
+      completed: "December 2024",
       teamSize: 1,
       difficulty: 2,
       achievements: [
@@ -94,7 +123,7 @@ const projects = [
       ],
     },
     {
-      id: 4,
+      id: 5,
       title: "Pokemon Game",
       category: "web",
       description: "Guess the pokemon game based on HTML",
@@ -106,7 +135,7 @@ const projects = [
       githubUrl: "https://github.com/Mentrauz/Poke-game",
       color: "from-green-600 to-teal-600",
       featured: false,
-      completed: "2024",
+      completed: "July 2024",
       teamSize: 1,
       difficulty: 2,
       achievements: [
@@ -115,7 +144,7 @@ const projects = [
       ],
     },
     {
-      id: 5,
+      id: 6,
       title: "Analytics Dashboard",
       category: "web",
       description: "Analytics Dashboard for Admybrand (Internship Test Project)",
@@ -127,7 +156,7 @@ const projects = [
       githubUrl: "https://github.com/Mentrauz/admybrand-ai-dashboard",
       color: "from-green-600 to-teal-600",
       featured: false,
-      completed: "2024",
+      completed: "July 2025",
       teamSize: 1,
       difficulty: 2,
       achievements: [
@@ -136,7 +165,7 @@ const projects = [
       ],
     },
     {
-      id: 6,
+      id: 7,
       title: "Gaming News",
       category: "web",
       description:
@@ -148,7 +177,7 @@ const projects = [
       demoUrl: "https://gaming-news-sooty.vercel.app/",
       githubUrl: "https://github.com/Mentrauz/Gaming-News",
       featured: true,
-      completed: "2025",
+      completed: "September 2025",
       teamSize: 1,
       difficulty: 1,
       achievements: [
@@ -256,6 +285,7 @@ export default function RedesignedProjects() {
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
   const isClient = useIsClient()
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleDemoClick = (url: string) => {
     if (!isClient) return
@@ -335,33 +365,49 @@ export default function RedesignedProjects() {
 
       {/* Project details dialog - improved for light mode */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 w-[95vw] bg-background/95 backdrop-blur-sm border-border/50 shadow-xl">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 w-[95vw] bg-background/95 backdrop-blur-sm border-border/50 shadow-xl [&>button]:hidden">
           {selectedProject && (
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full max-h-[90vh]">
               <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-2 border-b border-border/20">
                 <div className="flex justify-between items-start">
-                  <div>
-                    <Badge className="mb-2 bg-primary/15 text-primary border-primary/30 font-medium">
-                      {selectedProject.category === "ai"
-                        ? "AI & Machine Learning"
-                        : selectedProject.category === "web"
-                          ? "Web Development"
-                          : selectedProject.category === "data"
-                            ? "Data Science"
-                            : selectedProject.category === "audio"
-                              ? "Audio & Voice Tech"
-                              : "Research"}
-                    </Badge>
+                  <div className="flex-1">
+                    <div className="flex gap-2 items-center mb-2">
+                      <Badge className="bg-primary/15 text-primary border-primary/30 font-medium">
+                        {selectedProject.category === "ai"
+                          ? "AI & Machine Learning"
+                          : selectedProject.category === "web"
+                            ? "Web Development"
+                            : selectedProject.category === "data"
+                              ? "Data Science"
+                              : selectedProject.category === "audio"
+                                ? "Audio & Voice Tech"
+                                : "Research"}
+                      </Badge>
+                      {(selectedProject as any).inProgress && (
+                        <Badge className="px-3 py-1 text-xs font-medium rounded-full bg-orange-500/20 text-orange-500 border-orange-500/30">
+                          Work in Progress
+                        </Badge>
+                      )}
+                    </div>
                     <DialogTitle className="text-xl sm:text-2xl text-foreground">{selectedProject.title}</DialogTitle>
                     <DialogDescription className="mt-2 text-sm text-foreground/80 font-medium">{selectedProject.description}</DialogDescription>
                   </div>
-                  <div className="flex">
+                  <div className="flex items-center gap-3">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
                         className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
                       />
                     ))}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 p-0 hover:bg-accent rounded-full"
+                      onClick={() => setIsDialogOpen(false)}
+                    >
+                      <X className="h-4 w-4" />
+                      <span className="sr-only">Close</span>
+                    </Button>
                   </div>
                 </div>
               </DialogHeader>
@@ -381,8 +427,17 @@ export default function RedesignedProjects() {
                   </TabsList>
                 </div>
 
-                <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-                  <TabsContent value="overview" className="mt-0 h-full">
+                <div
+                  ref={scrollRef}
+                  data-lenis-prevent
+                  className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-200px)] overscroll-contain touch-pan-y"
+                  style={{ scrollBehavior: 'smooth' }}
+                  onWheel={(e) => {
+                    // Prevent scroll from bubbling to parent
+                    e.stopPropagation()
+                  }}
+                >
+                  <TabsContent value="overview" className="mt-0 min-h-0">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                       <div className="lg:col-span-2">
                         <h4 className="text-lg font-semibold mb-3 text-foreground">Project Details</h4>
@@ -458,7 +513,7 @@ export default function RedesignedProjects() {
                     </div>
                   </TabsContent>
 
-                  <TabsContent value="details" className="mt-0">
+                  <TabsContent value="details" className="mt-0 min-h-0">
                     <div className="relative aspect-video mb-6 rounded-lg overflow-hidden border border-border/20">
                       <Image
                         src={selectedProject.imageUrl || "/placeholder.svg"}
@@ -494,7 +549,7 @@ export default function RedesignedProjects() {
                     </div>
                   </TabsContent>
 
-                  <TabsContent value="gallery" className="mt-0">
+                  <TabsContent value="gallery" className="mt-0 min-h-0">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {[1, 2, 3, 4].map((index) => (
                         <div key={index} className="overflow-hidden rounded-lg border border-border/20">
@@ -537,26 +592,33 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
     >
       <CardContent className="p-6 bg-card/50">
         <div className="flex justify-between items-start mb-3">
-          <Badge 
-            className={cn(
-              "px-3 py-1 text-xs font-medium rounded-full",
-              project.category === "web" 
-                ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
-                : project.category === "ai"
-                  ? "bg-purple-500/20 text-purple-500 border-purple-500/30"
-                  : "bg-green-500/20 text-green-500 border-green-500/30"
+          <div className="flex gap-2 items-center">
+            <Badge 
+              className={cn(
+                "px-3 py-1 text-xs font-medium rounded-full",
+                project.category === "web" 
+                  ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
+                  : project.category === "ai"
+                    ? "bg-purple-500/20 text-purple-500 border-purple-500/30"
+                    : "bg-green-500/20 text-green-500 border-green-500/30"
+              )}
+            >
+              {project.category === "ai"
+                ? "AI & ML"
+                : project.category === "web"
+                  ? "Web Dev"
+                  : project.category === "data"
+                    ? "Data Science"
+                    : project.category === "audio"
+                      ? "Audio"
+                      : "Research"}
+            </Badge>
+            {(project as any).inProgress && (
+              <Badge className="px-2 py-1 text-xs font-medium rounded-full bg-orange-500/20 text-orange-500 border-orange-500/30">
+                WIP
+              </Badge>
             )}
-          >
-            {project.category === "ai"
-              ? "AI & ML"
-              : project.category === "web"
-                ? "Web Dev"
-                : project.category === "data"
-                  ? "Data Science"
-                  : project.category === "audio"
-                    ? "Audio"
-                    : "Research"}
-          </Badge>
+          </div>
           <div className="flex">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
