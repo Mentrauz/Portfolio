@@ -132,7 +132,15 @@ export default function FloatingNav() {
       setIsOpen(false) // Close mobile menu on click
       return
     }
-    
+
+    // If href is just "#", scroll to top
+    if (href === "#") {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      setIsOpen(false) // Close mobile menu on click
+      return
+    }
+
     e.preventDefault()
     const element = document.querySelector(href)
     if (element) {

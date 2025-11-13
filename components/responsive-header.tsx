@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { rafThrottle } from "@/lib/throttle"
 
 export default function ResponsiveHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -21,11 +22,14 @@ export default function ResponsiveHeader() {
       setIsScrolled(window.scrollY > 10)
     }
 
+    // Throttle using RAF for smooth 60fps updates
+    const throttledHandleScroll = rafThrottle(handleScroll)
+
     // Initial check
     handleScroll()
-    // Only add event listener client-side
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    // Use passive event listener for better scroll performance
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", throttledHandleScroll)
   }, [])
 
   const navItems = [

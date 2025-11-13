@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
+import { rafThrottle } from "@/lib/throttle"
 
 export default function ScrollProgress() {
   const [isVisible, setIsVisible] = useState(false)
@@ -20,8 +21,16 @@ export default function ScrollProgress() {
       setIsVisible(window.scrollY > 100)
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    // Throttle using RAF for smooth 60fps updates
+    const throttledHandleScroll = rafThrottle(handleScroll)
+
+    // Use passive event listener for better scroll performance
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true })
+    
+    // Initial check
+    handleScroll()
+    
+    return () => window.removeEventListener("scroll", throttledHandleScroll)
   }, [])
 
   if (!isVisible) return null

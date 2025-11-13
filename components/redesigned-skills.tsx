@@ -9,7 +9,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import dynamic from "next/dynamic"
 import {
   Code,
   Cpu,
@@ -19,25 +18,12 @@ import {
   PenToolIcon as Tool,
   Microscope,
   Laptop,
-  BarChart3,
   Globe,
   MessageSquare,
   Shield,
   Zap,
   Briefcase,
-  Loader2,
 } from "lucide-react"
-
-// Dynamically import the 3D globe component with no SSR
-const SkillsGlobe = dynamic(() => import("@/components/3d-skills-globe"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[500px] flex items-center justify-center">
-      <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      <span className="ml-2">Loading 3D Globe...</span>
-    </div>
-  ),
-})
 
 // Skill categories with icons
 const skillCategories = [
@@ -274,7 +260,6 @@ const skillsData = {
 
 export default function RedesignedSkills() {
   const [activeCategory, setActiveCategory] = useState("webdev")
-  const [visualizationType, setVisualizationType] = useState<"chart" | "globe">("chart")
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -310,81 +295,52 @@ export default function RedesignedSkills() {
             ))}
           </TabsList>
 
-          <div className="flex justify-center mb-8 mt-16">
-            <div className="bg-muted rounded-full p-1.5 flex gap-2">
-              <button
-                onClick={() => setVisualizationType("chart")}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2",
-                  visualizationType === "chart" ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-muted/80",
-                )}
-              >
-                <BarChart3 className="h-4 w-4" />
-                <span>Chart View</span>
-              </button>
-              <button
-                onClick={() => setVisualizationType("globe")}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2",
-                  visualizationType === "globe" ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-muted/80",
-                )}
-              >
-                <Globe className="h-4 w-4" />
-                <span>3D Globe</span>
-              </button>
-            </div>
-          </div>
-
           {skillCategories.map((category) => (
             <TabsContent key={category.id} value={category.id} className="mt-0">
               <Card className="border-none bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm">
                 <CardContent className="p-6">
-                  {visualizationType === "chart" ? (
-                    <StaggeredContainer className="grid md:grid-cols-2 gap-8">
-                      {/* Left column - Skill bars */}
-                      <div>
-                        <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                          {category.icon}
-                          <span>{category.name} Proficiency</span>
-                        </h3>
+                  <StaggeredContainer className="grid md:grid-cols-2 gap-8">
+                    {/* Left column - Skill bars */}
+                    <div>
+                      <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                        {category.icon}
+                        <span>{category.name} Proficiency</span>
+                      </h3>
 
-                        <div className="space-y-6">
-                          {skillsData[category.id as keyof typeof skillsData].map((skill, index) => (
-                            <StaggerItem key={skill.name} className="space-y-2">
-                              <div className="flex justify-between items-center">
-                                <span className="font-medium">{skill.name}</span>
-                                <Badge
-                                  className={cn(
-                                    "px-2 py-0.5 text-xs",
-                                    skill.level >= 90
-                                      ? "bg-green-500/20 text-green-500 border-green-500/30"
-                                      : skill.level >= 75
-                                        ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
-                                        : "bg-amber-500/20 text-amber-500 border-amber-500/30",
-                                  )}
-                                >
-                                  {skill.level}%
-                                </Badge>
-                              </div>
-                              <Progress value={skill.level} className="h-2" />
-                            </StaggerItem>
-                          ))}
-                        </div>
+                      <div className="space-y-6">
+                        {skillsData[category.id as keyof typeof skillsData].map((skill, index) => (
+                          <StaggerItem key={skill.name} className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="font-medium">{skill.name}</span>
+                              <Badge
+                                className={cn(
+                                  "px-2 py-0.5 text-xs",
+                                  skill.level >= 90
+                                    ? "bg-green-500/20 text-green-500 border-green-500/30"
+                                    : skill.level >= 75
+                                      ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
+                                      : "bg-amber-500/20 text-amber-500 border-amber-500/30",
+                                )}
+                              >
+                                {skill.level}%
+                              </Badge>
+                            </div>
+                            <Progress value={skill.level} className="h-2" />
+                          </StaggerItem>
+                        ))}
                       </div>
+                    </div>
 
-                      {/* Right column - Skill visualization */}
-                      <div className="flex items-center justify-center">
-                        {isMounted && (
-                          <SkillVisualization
-                            category={category}
-                            skills={skillsData[category.id as keyof typeof skillsData]}
-                          />
-                        )}
-                      </div>
-                    </StaggeredContainer>
-                  ) : (
-                    <div className="flex justify-center">{isMounted && <SkillsGlobe />}</div>
-                  )}
+                    {/* Right column - Skill visualization */}
+                    <div className="flex items-center justify-center">
+                      {isMounted && (
+                        <SkillVisualization
+                          category={category}
+                          skills={skillsData[category.id as keyof typeof skillsData]}
+                        />
+                      )}
+                    </div>
+                  </StaggeredContainer>
                 </CardContent>
               </Card>
             </TabsContent>
