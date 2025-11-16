@@ -48,6 +48,13 @@ export default function FloatingNav() {
         setShowBackToTop(false)
       }
 
+      // Check if we're on a specific page route (like reading-list)
+      const currentPath = window.location.pathname
+      if (currentPath === '/reading-list') {
+        setActiveSection('reading-list')
+        return
+      }
+
       // First, determine active section normally
       const sections = navItems.map((item) => item.href.slice(1)).filter(Boolean)
       const currentSection = sections.reduce((current, section) => {
@@ -177,7 +184,7 @@ export default function FloatingNav() {
                     onClick={(e) => handleItemClick(e, item.href)}
                     className={cn(
                       "relative px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-300",
-                      activeSection === item.href.slice(1)
+                      (activeSection === item.href.slice(1) || (item.href === '/reading-list' && activeSection === 'reading-list'))
                         ? "text-white bg-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-accent",
                     )}
@@ -185,7 +192,7 @@ export default function FloatingNav() {
                     {item.icon}
                     <span>{item.name}</span>
 
-                    {activeSection === item.href.slice(1) && (
+                    {(activeSection === item.href.slice(1) || (item.href === '/reading-list' && activeSection === 'reading-list')) && (
                       <motion.span
                         layoutId="activeIndicator"
                         className="absolute inset-0 rounded-full bg-primary -z-10"
@@ -243,7 +250,7 @@ export default function FloatingNav() {
                   onClick={(e) => handleItemClick(e, item.href)}
                   className={cn(
                     "px-3 py-2 rounded-md flex items-center gap-3 transition-all duration-200",
-                    activeSection === item.href.slice(1)
+                    (activeSection === item.href.slice(1) || (item.href === '/reading-list' && activeSection === 'reading-list'))
                       ? "bg-primary/10 text-primary"
                       : "hover:bg-accent text-muted-foreground hover:text-foreground",
                   )}

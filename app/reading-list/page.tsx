@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
+import FloatingNav from "@/components/floating-nav"
 
 interface ReadingItem {
   id: string
@@ -60,6 +61,12 @@ const readingList: ReadingItem[] = [
     title: "The Brand Gap",
     author: "Marty Neumeier",
     coverImage: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTu6T5VSve2eQ3YkxFj-wefbU90rOWNReR3fmap4im_mRKCpmzs"
+  },
+  {
+    id: "9",
+    title: "Art of War",
+    author: "Sun Tzu",
+    coverImage: "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781626860605/the-art-of-war-9781626860605_hr.jpg"
   }
 ]
 
@@ -88,9 +95,10 @@ const itemVariants = {
 export default function ReadingListPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <FloatingNav />
       {/* Desktop/Tablet content */}
       <div className="hidden md:block">
-        <SectionContainer>
+        <SectionContainer id="reading-list">
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: -16 }}
