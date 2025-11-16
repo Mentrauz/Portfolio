@@ -294,6 +294,25 @@
     -webkit-tap-highlight-color: transparent;
     /* Apply custom scrollbar to the entire page */
     @apply custom-scrollbar;
+    /* Ensure scrollbar is always visible */
+    scrollbar-width: thin !important;
+    overflow-y: auto !important;
+  }
+
+  html::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.6) !important;
+    border-radius: 4px !important;
+    border: 2px solid transparent !important;
+    background-clip: padding-box !important;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent !important;
   }
 
   /* Improve touch targets on mobile */
@@ -513,10 +532,10 @@
   @apply border-l-0;
 }
 
-/* Modern custom scrollbar - invisible by default, visible on hover */
+/* Modern custom scrollbar - visible by default */
 .custom-scrollbar {
-  scrollbar-width: none; /* Hide scrollbar in Firefox by default */
-  scrollbar-color: transparent transparent;
+  scrollbar-width: thin; /* Show scrollbar in Firefox */
+  scrollbar-color: hsl(var(--primary) / 0.6) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -529,25 +548,20 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: hsl(var(--primary) / 0.6);
   border-radius: 4px;
   border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-/* Show scrollbar on hover */
-.custom-scrollbar:hover {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--primary) / 0.7) transparent;
-}
-
+/* Enhanced scrollbar on hover */
 .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.7);
-  border-radius: 4px;
+  background: hsl(var(--primary) / 0.8);
   transition: background 0.2s ease;
 }
 
 .custom-scrollbar:hover::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.9);
+  background: hsl(var(--primary) / 1.0);
 }
 
 .custom-scrollbar::-webkit-scrollbar-corner {

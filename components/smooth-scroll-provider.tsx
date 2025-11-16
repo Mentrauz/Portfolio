@@ -17,6 +17,10 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     // Prevent double smoothing with CSS scroll-behavior
     document.documentElement.style.scrollBehavior = "auto"
 
+    // Ensure scrollbar remains visible
+    const originalOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = "auto"
+
     const lenis = new Lenis({
       // Larger duration and lower wheel multiplier slow down the scroll
       duration: 1.2,
@@ -36,6 +40,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       cancelAnimationFrame(rafId)
       lenis.destroy()
       document.documentElement.style.scrollBehavior = originalScrollBehavior
+      document.documentElement.style.overflow = originalOverflow
     }
   }, [])
 
