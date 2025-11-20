@@ -421,9 +421,6 @@ export default function RedesignedProjects() {
                     <TabsTrigger value="details" className="text-sm text-foreground/80 data-[state=active]:text-foreground font-medium">
                       Details
                     </TabsTrigger>
-                    <TabsTrigger value="gallery" className="text-sm text-foreground/80 data-[state=active]:text-foreground font-medium">
-                      Gallery
-                    </TabsTrigger>
                   </TabsList>
                 </div>
 
@@ -549,21 +546,6 @@ export default function RedesignedProjects() {
                     </div>
                   </TabsContent>
 
-                  <TabsContent value="gallery" className="mt-0 min-h-0">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {[1, 2, 3, 4].map((index) => (
-                        <div key={index} className="overflow-hidden rounded-lg border border-border/20">
-                          <Image
-                            src={`/placeholder.svg?height=400&width=600&text=Screenshot ${index}`}
-                            alt={`${selectedProject.title} screenshot ${index}`}
-                            width={600}
-                            height={400}
-                            className="w-full h-auto object-cover transition-transform duration-500 hover:scale-110"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </TabsContent>
                 </div>
               </Tabs>
             </div>
