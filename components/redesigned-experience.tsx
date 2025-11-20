@@ -22,17 +22,9 @@ import {
   Users,
   Target,
   NotebookTabs,
-  Image as ImageIcon,
-  ExternalLink,
-  ZoomIn
+  ExternalLink
 } from "lucide-react"
 
-// Screenshot interface
-interface Screenshot {
-  url: string
-  caption: string
-  alt: string
-}
 
 // Experience data
 const experiences = [
@@ -55,33 +47,6 @@ const experiences = [
       { value: "1500+", label: "Employees" },
       { value: "1", label: "Solo Developer" },
     ],
-    screenshots: [
-      {
-        url: "/screenshot/tms-1.png",
-        caption: "Landing Page",
-        alt: "TMS Groups payroll system landing page"
-      },
-      {
-        url: "/screenshot/tms-2.png",
-        caption: "Bulk Uploads Processing Page",
-        alt: "Bulk employee data upload and processing interface"
-      },
-      {
-        url: "/screenshot/tms-3.png",
-        caption: "Attendance Page",
-        alt: "Employee attendance tracking and management system"
-      },
-      {
-        url: "/screenshot/tms-4.png",
-        caption: "Login Page",
-        alt: "Secure login interface for payroll system access"
-      },
-      {
-        url: "/screenshot/tms-5.png",
-        caption: "Reports and Analytics Dashboard",
-        alt: "Comprehensive reporting and analytics dashboard"
-      }
-    ],
     color: "from-indigo-600 to-purple-600",
   },
   {
@@ -103,28 +68,6 @@ const experiences = [
       { value: "2000+", label: "Users Daily" },
       { value: "8", label: "Team Project" },
     ],
-    screenshots: [
-      {
-        url: "/screenshot/le-1.png",
-        caption: "Landing Page",
-        alt: "Lieferando.de redesigned landing page with modern UI"
-      },
-      {
-        url: "/screenshot/le2.png",
-        caption: "Design 2",
-        alt: "Lieferando.de redesigned landing page with modern UI"
-      },
-      {
-        url: "/screenshot/le3.png",
-        caption: "Design 3",
-        alt: "Lieferando.de redesigned landing page with modern UI"
-      },
-      {
-        url: "/screenshot/le4.png",
-        caption: "Design 4",
-        alt: "Lieferando.de redesigned landing page with modern UI"
-      }
-    ],
     color: "from-indigo-600 to-purple-600",
   },
   {
@@ -145,28 +88,6 @@ const experiences = [
     metrics: [
       { value: "100+", label: "Visitors Daily" },
       { value: "1", label: "Solo Project" },
-    ],
-    screenshots: [
-      {
-        url: "/screenshot/cat1.png",
-        caption: "Homepage with hero section and services overview",
-        alt: "Chowdeshwari Catering website homepage"
-      },
-      {
-        url: "/screenshot/cat2.png",
-        caption: "Services Page",
-        alt: "Chowdeshwari Catering website homepage"
-      },
-      {
-        url: "/screenshot/cat3.png",
-        caption: "Menu Page",
-        alt: "Chowdeshwari Catering website homepage"
-      },
-      {
-        url: "/screenshot/cat4.png",
-        caption: "Cloudinary Kitchen",
-        alt: "Chowdeshwari Catering website homepage"
-      },
     ],
     color: "from-indigo-600 to-purple-600",
   },
@@ -266,7 +187,6 @@ const experiences = [
 export default function RedesignedExperience() {
   const [expandedExperience, setExpandedExperience] = useState<string | null>(null)
   const [experienceType, setExperienceType] = useState<"all" | "work" | "education" | "research">("all")
-  const [selectedScreenshot, setSelectedScreenshot] = useState<Screenshot | null>(null)
 
   const toggleExpand = (id: string) => {
     setExpandedExperience(expandedExperience === id ? null : id)
@@ -279,45 +199,6 @@ export default function RedesignedExperience() {
   // When rendering the list, add a check to prevent duplicates by ID
   const renderedExperienceIds = new Set()
 
-  // Screenshot Modal Component
-  const ScreenshotModal = ({ screenshot, onClose }: { screenshot: Screenshot; onClose: () => void }) => (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
-      >
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          className="relative max-w-4xl w-full bg-card/95 backdrop-blur-sm border border-border/50 rounded-lg overflow-hidden"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="relative">
-            <img
-              src={screenshot.url}
-              alt={screenshot.alt}
-              className="w-full h-auto max-h-[80vh] object-contain"
-            />
-            <Button
-              variant="secondary"
-              size="icon"
-              className="absolute top-4 right-4"
-              onClick={onClose}
-            >
-              ×
-            </Button>
-          </div>
-          <div className="p-4">
-            <p className="text-sm text-muted-foreground">{screenshot.caption}</p>
-          </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
-  )
 
   return (
     <SectionContainer id="experience" className="bg-gradient-to-b from-background/95 to-background">
@@ -542,45 +423,6 @@ export default function RedesignedExperience() {
                                   </div>
                                 </div>
 
-                                {/* Screenshots Section */}
-                                {experience.screenshots && experience.screenshots.length > 0 && (
-                                  <div className="mt-8 pt-6 border-t">
-                                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                                      <ImageIcon className="h-5 w-5 text-primary" />
-                                      Project Screenshots
-                                    </h4>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                                      {experience.screenshots.map((screenshot, i) => (
-                                        <motion.div
-                                          key={i}
-                                          whileHover={{ scale: 1.02 }}
-                                          className="group relative bg-muted/50 backdrop-blur-sm border border-border/20 rounded-lg overflow-hidden cursor-pointer hover:border-primary/20 transition-colors"
-                                          onClick={() => setSelectedScreenshot(screenshot)}
-                                        >
-                                          <div className="aspect-video relative">
-                                            <img
-                                              src={screenshot.url}
-                                              alt={screenshot.alt}
-                                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-300 flex items-center justify-center">
-                                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div className="bg-card/90 backdrop-blur-sm rounded-full p-2 border border-border/20">
-                                                  <ZoomIn className="h-5 w-5 text-foreground" />
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="p-3">
-                                            <p className="text-sm text-muted-foreground line-clamp-2">
-                                              {screenshot.caption}
-                                            </p>
-                                          </div>
-                                        </motion.div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
                               </div>
                             </motion.div>
                           )}
@@ -595,13 +437,6 @@ export default function RedesignedExperience() {
         </Tabs>
       </ScrollReveal>
 
-      {/* Screenshot Modal */}
-      {selectedScreenshot && (
-        <ScreenshotModal
-          screenshot={selectedScreenshot}
-          onClose={() => setSelectedScreenshot(null)}
-        />
-      )}
     </SectionContainer>
   )
 }

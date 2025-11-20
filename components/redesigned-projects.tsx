@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
 import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Card, CardContent } from "@/components/ui/card"
@@ -38,7 +37,7 @@ const projects = [
     technologies: ["Next.js 15", "React 19", "TypeScript", "MongoDB", "Tailwind CSS", "NextAuth.js", "Chart.js", "ExcelJS", "@react-pdf/renderer"],
     // imageUrl: "/tms.png",
     demoUrl: "http://payroll-uid.vercel.app/",
-    githubUrl: "https://github.com/Mentrauz/payroll-uid",
+    // githubUrl: "https://github.com/Mentrauz/payroll-uid",
     featured: false,
     completed: "September 2025 - Present",
     teamSize: 1,
@@ -511,14 +510,6 @@ export default function RedesignedProjects() {
                   </TabsContent>
 
                   <TabsContent value="details" className="mt-0 min-h-0">
-                    <div className="relative aspect-video mb-6 rounded-lg overflow-hidden border border-border/20">
-                      <Image
-                        src={selectedProject.imageUrl || "/placeholder.svg"}
-                        alt={selectedProject.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
 
                     <div className="space-y-6">
                       <div>
