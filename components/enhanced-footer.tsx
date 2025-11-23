@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { ThemePreview } from "@/components/theme-preview"
+import { Tooltip } from "@/components/ui/animated-tooltip"
+import Image from "next/image"
 
 // Form validation schema
 const subscribeSchema = z.object({
@@ -62,8 +64,8 @@ export default function EnhancedFooter() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer 
-      id="contact" 
+    <footer
+      id="contact"
       className="relative bg-muted/30 backdrop-blur-sm border-t border-border/30 pt-16 pb-8 shadow-lg"
     >
       <div className="container mx-auto px-4 py-12">
@@ -85,13 +87,50 @@ export default function EnhancedFooter() {
                   icon={<Github className="h-5 w-5" />}
                   url="https://github.com/Mentrauz"
                   label="GitHub"
+                  tooltipContent={
+                    <div className="w-[600px] h-auto">
+                      <Image
+                        src="/github.png"
+                        alt="GitHub Profile"
+                        width={600}
+                        height={400}
+                        className="rounded-lg object-cover w-full h-auto"
+                      />
+                    </div>
+                  }
                 />
                 <SocialButton
                   icon={<Linkedin className="h-5 w-5" />}
                   url="https://www.linkedin.com/in/mentrauz-soumyasingh/"
                   label="LinkedIn"
+                  tooltipContent={
+                    <div className="w-[500px] h-auto">
+                      <Image
+                        src="/linkedin.png"
+                        alt="LinkedIn Profile"
+                        width={500}
+                        height={300}
+                        className="rounded-lg object-cover w-full h-auto"
+                      />
+                    </div>
+                  }
                 />
-                <SocialButton icon={<Twitter className="h-5 w-5" />} url="https://twitter.com/mentrauz" label="Twitter" />
+                <SocialButton
+                  icon={<Twitter className="h-5 w-5" />}
+                  url="https://twitter.com/mentrauz"
+                  label="Twitter"
+                  tooltipContent={
+                    <div className="w-[400px] h-auto">
+                      <Image
+                        src="/twitter.png"
+                        alt="Twitter Profile"
+                        width={400}
+                        height={300}
+                        className="rounded-lg object-cover w-full h-auto"
+                      />
+                    </div>
+                  }
+                />
                 <SocialButton
                   icon={<Mail className="h-5 w-5" />}
                   url="mailto:11soumyasingh2@gmail.com"
@@ -240,10 +279,11 @@ interface SocialButtonProps {
   icon: React.ReactNode
   url: string
   label: string
+  tooltipContent?: React.ReactNode
 }
 
-function SocialButton({ icon, url, label }: SocialButtonProps) {
-  return (
+function SocialButton({ icon, url, label, tooltipContent }: SocialButtonProps) {
+  const button = (
     <Button
       variant="outline"
       size="icon"
@@ -255,6 +295,16 @@ function SocialButton({ icon, url, label }: SocialButtonProps) {
       </a>
     </Button>
   )
+
+  if (tooltipContent) {
+    return (
+      <Tooltip content={tooltipContent}>
+        {button}
+      </Tooltip>
+    )
+  }
+
+  return button
 }
 
 interface FooterLinkProps {
@@ -278,4 +328,3 @@ function FooterLink({ href, label }: FooterLinkProps) {
     </li>
   )
 }
-

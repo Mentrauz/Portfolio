@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { CustomGradientBackground } from "@/components/custom-gradient-background"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { Tooltip } from "@/components/ui/animated-tooltip"
 import { Github, Linkedin, Mail, ArrowDown, ExternalLink } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 import { useIsClient } from "@/hooks/use-is-client"
@@ -46,7 +47,7 @@ export default function RedesignedHero() {
       description: "Email: 11soumyasingh2@gmail.com | Phone: +91 9641564644",
       duration: 5000,
     })
-    
+
     // Scroll to the footer/contact section
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
   }
@@ -63,16 +64,16 @@ export default function RedesignedHero() {
 
   useEffect(() => {
     if (!isClient) return
-    
+
     // Explicitly reset everything
     setDisplayedText("")
     setTypingComplete(false)
-    
+
     // Use a timeout to ensure DOM is ready
     const timeout = setTimeout(() => {
       let text = ""
       let index = 0
-      
+
       const typingInterval = setInterval(() => {
         if (index < fullText.length) {
           text += fullText.charAt(index)
@@ -83,10 +84,10 @@ export default function RedesignedHero() {
           setTypingComplete(true)
         }
       }, 30)
-      
+
       return () => clearInterval(typingInterval)
     }, 100)
-    
+
     return () => clearTimeout(timeout)
   }, [fullText, isClient])
 
@@ -200,46 +201,91 @@ export default function RedesignedHero() {
 
           <ScrollReveal delay={0.5}>
             <div className="flex gap-4 justify-center md:justify-start">
-              <Button
-                variant="ghost"
-                size="icon"
-                asChild
-                className="rounded-full hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
-              >
-                <a
-                  href="https://github.com/Mentrauz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
+              <Tooltip content={
+                <div className="w-[600px] h-auto">
+                  <Image
+                    src="/github.png"
+                    alt="GitHub Profile"
+                    width={600}
+                    height={400}
+                    className="rounded-lg object-cover w-full h-auto"
+                  />
+                </div>
+              }>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  asChild
+                  className="rounded-full border-border/50 bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary/50 text-foreground shadow-md hover:shadow-lg transition-all duration-300"
                 >
-                  <Github className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                asChild
-                className="rounded-full hover:bg-white/10 transition-all duration-300 hover:scale-110"
-              >
-                <a
-                  href="https://www.linkedin.com/in/mentrauz-soumyasingh/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
+                  <a
+                    href="https://github.com/Mentrauz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                  >
+                    <Github className="h-5 w-5" />
+                  </a>
+                </Button>
+              </Tooltip>
+
+              <Tooltip content={
+                <div className="w-[400px] h-auto">
+                  <Image
+                    src="/twitter.png"
+                    alt="Twitter Profile"
+                    width={400}
+                    height={300}
+                    className="rounded-lg object-cover w-full h-auto"
+                  />
+                </div>
+              }>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  asChild
+                  className="rounded-full border-border/50 bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary/50 text-foreground shadow-md hover:shadow-lg transition-all duration-300"
                 >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                asChild
-                className="rounded-full hover:bg-white/10 transition-all duration-300 hover:scale-110"
-              >
-                <a href="mailto:11soumyasingh2@gmail.com" aria-label="Email">
-                  <Mail className="h-5 w-5" />
-                </a>
-              </Button>
+                  <a
+                    href="https://twitter.com/your-handle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Twitter"
+                  >
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                  </a>
+                </Button>
+              </Tooltip>
+
+              <Tooltip content={
+                <div className="w-[500px] h-auto">
+                  <Image
+                    src="/linkedin.png"
+                    alt="LinkedIn Profile"
+                    width={500}
+                    height={300}
+                    className="rounded-lg object-cover w-full h-auto"
+                  />
+                </div>
+              }>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  asChild
+                  className="rounded-full border-border/50 bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary/50 text-foreground shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  <a
+                    href="https://www.linkedin.com/in/mentrauz-soumyasingh/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                </Button>
+              </Tooltip>
             </div>
           </ScrollReveal>
         </div>
@@ -252,9 +298,9 @@ export default function RedesignedHero() {
               animate={
                 isClient && isHovered
                   ? {
-                      x: mousePosition.x * -0.5,
-                      y: mousePosition.y * -0.5,
-                    }
+                    x: mousePosition.x * -0.5,
+                    y: mousePosition.y * -0.5,
+                  }
                   : {}
               }
               transition={{ type: "spring", stiffness: 150, damping: 15 }}
