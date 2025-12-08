@@ -37,7 +37,7 @@ const projects = [
     technologies: ["Next.js 15", "React 19", "TypeScript", "MongoDB", "Tailwind CSS", "NextAuth.js", "Chart.js", "ExcelJS", "@react-pdf/renderer"],
     // imageUrl: "/tms.png",
     demoUrl: "http://payroll-uid.vercel.app/",
-    // githubUrl: "https://github.com/Mentrauz/payroll-uid",
+    githubUrl: "https://github.com/Mentrauz/OpenRoll",
     featured: false,
     completed: "September 2025 - Present",
     teamSize: 1,
