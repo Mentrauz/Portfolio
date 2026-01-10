@@ -99,28 +99,6 @@ const projects = [
       "Built a web interface for text-to-image generation",
     ],
   },
-  {
-      id: 4,
-      title: "Website Development",
-      category: "web",
-      description: "Designed the website for Chowdeshwari Catering",
-      longDescription:
-        "User friendly and professional design that perfectly meets clent's and user's expectations",
-      technologies: ["NextJs", "Tailwind", "NodeJs"],
-      imageUrl: "/urbaneats.png",
-      demoUrl: "https://urban-eats-catering.vercel.app/",
-      githubUrl: "https://github.com/Mentrauz/urban-eats-catering",
-      color: "from-green-600 to-teal-600",
-      featured: false,
-      completed: "December 2024",
-      teamSize: 1,
-      difficulty: 2,
-      achievements: [
-        "User Friendly UI",
-        "Smooth and consistent Experience throughout the website",
-        "Easy display of all the information",
-      ],
-    },
     {
       id: 5,
       title: "Pokemon Game",
