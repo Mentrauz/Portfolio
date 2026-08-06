@@ -1,0 +1,545 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
+import { ScrollReveal, StaggeredContainer, StaggerItem } from "@/components/ui/scroll-reveal"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { Card, CardContent } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
+import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+import {
+  Code,
+  Cpu,
+  Database,
+  Cloud,
+  BookOpen,
+  PenToolIcon as Tool,
+  Microscope,
+  Laptop,
+  Globe,
+  MessageSquare,
+  Shield,
+  Zap,
+  Briefcase,
+} from "lucide-react"
+
+// Skill categories with icons
+const skillCategories = [
+  {
+    id: "ml-ai",
+    name: "Machine Learning & AI",
+    icon: <Laptop className="h-5 w-5" />,
+    color: "from-blue-500 to-indigo-500",
+  },
+  // {
+  //   id: "audio",
+  //   name: "Audio & Voice Tech",
+  //   icon: <Zap className="h-5 w-5" />,
+  //   color: "from-purple-500 to-violet-500",
+  // },
+  {
+    id: "programming",
+    name: "Programming",
+    icon: <Code className="h-5 w-5" />,
+    color: "from-emerald-500 to-green-500",
+  },
+  {
+    id: "webdev",
+    name: "Web Development",
+    icon: <Globe className="h-5 w-5" />,
+    color: "from-purple-500 to-violet-500",
+  },
+  // {
+  //   id: "frameworks",
+  //   name: "AI Frameworks",
+  //   icon: <Cpu className="h-5 w-5" />,
+  //   color: "from-purple-500 to-violet-500",
+  // },
+  // {
+  //   id: "data",
+  //   name: "Data Science",
+  //   icon: <Database className="h-5 w-5" />,
+  //   color: "from-amber-500 to-yellow-500",
+  // },
+  // {
+  //   id: "network",
+  //   name: "Network Analysis",
+  //   icon: <Globe className="h-5 w-5" />,
+  //   color: "from-cyan-500 to-blue-500",
+  // },
+  {
+    id: "cloud",
+    name: "Cloud & DevOps",
+    icon: <Cloud className="h-5 w-5" />,
+    color: "from-sky-500 to-blue-500",
+  },
+  // {
+  //   id: "chatbots",
+  //   name: "Chatbots & AI",
+  //   icon: <MessageSquare className="h-5 w-5" />,
+  //   color: "from-green-500 to-emerald-500",
+  // },
+  // {
+  //   id: "security",
+  //   name: "Cybersecurity",
+  //   icon: <Shield className="h-5 w-5" />,
+  //   color: "from-red-500 to-rose-500",
+  // },
+  {
+    id: "research",
+    name: "Research",
+    icon: <BookOpen className="h-5 w-5" />,
+    color: "from-rose-500 to-pink-500",
+  },
+  {
+    id: "tools",
+    name: "Tools",
+    icon: <Tool className="h-5 w-5" />,
+    color: "from-orange-500 to-amber-500",
+  },
+  {
+    id: "transferable",
+    name: "Transferable Skills",
+    icon: <Briefcase className="h-5 w-5" />,
+    color: "from-indigo-500 to-blue-500",
+  },
+  // {
+  //   id: "math",
+  //   name: "Mathematics",
+  //   icon: <Microscope className="h-5 w-5" />,
+  //   color: "from-cyan-500 to-teal-500",
+  // },
+]
+
+// Skill data
+const skillsData = {
+  "ml-ai": [
+    { name: "Deep Learning", level: 90 },
+    { name: "NLP", level: 85 },
+    { name: "Computer Vision", level: 40 },
+    { name: "Reinforcement Learning", level: 35 },
+    { name: "Generative AI", level: 50 },
+    { name: "Object Detection", level: 70 },
+  ],
+  audio: [
+    { name: "Real-time Voice Cloning", level: 5 },
+    { name: "One-Shot Voice Cloning", level: 15 },
+    { name: "TensorFlow TTS", level: 10 },
+    { name: "Speaker Diarization", level: 10 },
+    { name: "Whisper Transcription", level: 10 },
+    { name: "Audio Processing", level: 5 },
+    { name: "Audiobook Generation", level: 10 },
+    { name: "Real-time Audio Adjustments", level: 5 },
+  ],
+  programming: [
+    { name: "Python", level: 90 },
+    { name: "JavaScript/TypeScript", level: 90 },
+    { name: "SQL", level: 70 },
+    { name: "R", level: 45 },
+    { name: "MATLAB", level: 45 },
+    { name: "Go", level: 70 },
+    { name: "Java", level: 80 },
+  ],
+  webdev: [
+    { name: "React", level: 90 },
+    { name: "Next.js", level: 100 },
+    { name: "HTML/CSS", level: 95 },
+    { name: "Tailwind CSS", level: 90 },
+    { name: "Node.js", level: 95 },
+    { name: "Express.js", level: 80 },
+    { name: "MongoDB", level: 90 },
+    { name: "PostgreSQL", level: 90 },
+    { name: "REST APIs", level: 90 },
+    { name: "GraphQL", level: 90 },
+    { name: "Redux", level: 90 },
+    { name: "Webpack", level: 90 },
+    { name: "Vite", level: 90 },
+    { name: "Jest", level: 95 },
+    { name: "Cypress", level: 75 },
+    { name: "Responsive Design", level: 100 },
+    { name: "Web Performance", level: 90 },
+    { name: "SEO", level: 95 },
+  ],
+  frameworks: [
+    { name: "PyTorch", level: 90 },
+    { name: "TensorFlow", level: 85 },
+    { name: "Scikit-learn", level: 95 },
+    { name: "Hugging Face", level: 90 },
+    { name: "CUDA", level: 85 },
+    { name: "TensorRT", level: 67 },
+    { name: "MLflow", level: 50 },
+    { name: "React", level: 80 },
+    { name: "Node.js", level: 90 },
+  ],
+  data: [
+    { name: "Data Mining", level: 50 },
+    { name: "Business Intelligence", level: 60 },
+    { name: "Big Data Processing", level: 40 },
+    { name: "Pandas", level: 95 },
+    { name: "Tableau", level: 70 },
+    { name: "Data Visualization", level: 85 },
+    { name: "Predictive Modeling", level: 90 },
+    { name: "Text Analysis", level: 85 },
+    { name: "Sentiment Analysis", level: 80 },
+    { name: "Social Media Analysis", level: 75 },
+  ],
+  network: [
+    { name: "Social Network Analysis", level: 85 },
+    { name: "Graph Analytics", level: 80 },
+    { name: "Community Detection", level: 75 },
+    { name: "Network Visualization", level: 80 },
+    { name: "Friend Recommendation Systems", level: 85 },
+    { name: "Topic Connection Analysis", level: 80 },
+    { name: "NetworkX", level: 90 },
+  ],
+  cloud: [
+    { name: "AWS", level: 80 },
+    { name: "GCP", level: 75 },
+    { name: "Docker", level: 80 },
+    { name: "Kubernetes", level: 80 },
+    { name: "Microservices", level: 80 },
+    { name: "DevOps", level: 80 },
+  ],
+  chatbots: [
+    { name: "Emotion-Aware Chatbots", level: 60 },
+    { name: "NLP Integration", level: 90 },
+    { name: "Conversational AI", level: 85 },
+    { name: "Rule-Based Systems", level: 80 },
+    { name: "Sentiment Tracking", level: 85 },
+    { name: "Topic Tracking", level: 80 },
+    { name: "Customer Service Automation", level: 75 },
+  ],
+  security: [
+    { name: "Vulnerability Detection", level: 80 },
+    { name: "IoT Security", level: 75 },
+    { name: "ML for Cybersecurity", level: 85 },
+    { name: "Ethical Hacking", level: 70 },
+    { name: "Security Tools Development", level: 80 },
+    { name: "RF Security", level: 65 },
+    { name: "Web Security", level: 75 },
+  ],
+  research: [
+    { name: "Grant Writing", level: 75 },
+    { name: "Peer Review", level: 80 },
+    { name: "Research Methods", level: 90 },
+    { name: "Experimental Design", level: 85 },
+    { name: "Scientific Writing", level: 90 },
+    { name: "Literature Review", level: 85 },
+    { name: "Academic Publishing", level: 75 },
+  ],
+  tools: [
+    { name: "Git/GitHub", level: 95 },
+    { name: "Linux/MacOs", level: 95 },
+    { name: "Jupyter Notebooks", level: 95 },
+    { name: "VS Code", level: 90 },
+  ],
+  transferable: [
+    { name: "Project Management", level: 90 },
+    { name: "Technical Documentation", level: 85 },
+    { name: "Data-Driven Decision Making", level: 90 },
+    { name: "Innovation & Problem-Solving", level: 95 },
+    { name: "Collaboration", level: 90 },
+    { name: "Communication", level: 85 },
+    { name: "Leadership", level: 90 },
+    { name: "Time Management", level: 40 },
+  ],
+  math: [
+    { name: "Linear Algebra", level: 50 },
+    { name: "Differential Equations", level: 50 },
+    { name: "Complex Analysis", level: 50 },
+    { name: "Group Theory", level: 50 },
+    { name: "Quantum Mechanics", level: 50 },
+    { name: "Statistical Mechanics", level: 50 },
+    { name: "Mathematical Physics", level: 50 },
+    { name: "Statistics", level: 50 },
+    { name: "Probability Theory", level: 50 },
+  ],
+}
+
+export default function RedesignedSkills() {
+  const [activeCategory, setActiveCategory] = useState("webdev")
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  return (
+    <SectionContainer id="skills" className="bg-gradient-to-b from-background to-background/95">
+      <SectionHeader
+        title="Technical Skills"
+        subtitle="A comprehensive overview of my technical expertise across various domains, from machine learning and AI to Web development and research."
+      />
+
+      <ScrollReveal>
+        <Tabs defaultValue="webdev" onValueChange={setActiveCategory} className="w-full">
+          <TabsList className="flex h-auto flex-wrap justify-center gap-2 mb-8 bg-transparent">
+            {skillCategories.map((category) => (
+              <TabsTrigger
+                key={category.id}
+                value={category.id}
+                className={cn(
+                  "px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium transition-all data-[state=active]:shadow-lg",
+                  activeCategory === category.id
+                    ? `bg-gradient-to-r ${category.color} text-white`
+                    : "bg-muted hover:bg-muted/80",
+                )}
+              >
+                <div className="flex items-center gap-2">
+                  {category.icon}
+                  <span>{category.name}</span>
+                </div>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {skillCategories.map((category) => (
+            <TabsContent key={category.id} value={category.id} className="mt-0">
+              <Card className="border-none bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm">
+                <CardContent className="p-4 sm:p-6">
+                  <StaggeredContainer className="grid gap-8 lg:grid-cols-2">
+                    {/* Left column - Skill bars */}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-semibold mb-6 flex items-center gap-2">
+                        {category.icon}
+                        <span>{category.name} Proficiency</span>
+                      </h3>
+
+                      <div className="space-y-6">
+                        {skillsData[category.id as keyof typeof skillsData].map((skill, index) => (
+                          <StaggerItem key={skill.name} className="space-y-2">
+                            <div className="flex justify-between items-center gap-3">
+                              <span className="min-w-0 font-medium">{skill.name}</span>
+                              <Badge
+                                className={cn(
+                                  "px-2 py-0.5 text-xs",
+                                  skill.level >= 90
+                                    ? "bg-green-500/20 text-green-500 border-green-500/30"
+                                    : skill.level >= 75
+                                      ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
+                                      : "bg-amber-500/20 text-amber-500 border-amber-500/30",
+                                )}
+                              >
+                                {skill.level}%
+                              </Badge>
+                            </div>
+                            <Progress value={skill.level} className="h-2" />
+                          </StaggerItem>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right column - Skill visualization */}
+                    <div className="flex items-center justify-center overflow-hidden">
+                      {isMounted && (
+                        <SkillVisualization
+                          category={category}
+                          skills={skillsData[category.id as keyof typeof skillsData]}
+                        />
+                      )}
+                    </div>
+                  </StaggeredContainer>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </ScrollReveal>
+
+      <div className="mt-12 text-center">
+        <ScrollReveal>
+          <p className="text-muted-foreground">
+            These skills represent my technical expertise developed over years of professional experience and continuous
+            learning.
+            <br />
+            I'm constantly expanding my knowledge and staying up-to-date with the latest advancements in AI and
+            technology.
+          </p>
+        </ScrollReveal>
+      </div>
+    </SectionContainer>
+  )
+}
+
+interface SkillVisualizationProps {
+  category: (typeof skillCategories)[0]
+  skills: { name: string; level: number }[]
+}
+
+function SkillVisualization({ category, skills }: SkillVisualizationProps) {
+  // Helper function to safely extract colors from gradient string
+  const getColorFromGradient = (gradientString: string, position: "from" | "to") => {
+    // Default colors in case parsing fails
+    const defaultColors = {
+      from: "#3b82f6", // blue-500
+      to: "#6366f1", // indigo-500
+    }
+
+    try {
+      // Find the part that starts with 'from-' or 'to-'
+      const parts = gradientString.split(" ")
+      const colorPart = parts.find((part) => part.startsWith(position + "-"))
+
+      if (!colorPart) return defaultColors[position]
+
+      // Extract the color name (e.g., 'blue-500' from 'from-blue-500')
+      const colorName = colorPart.replace(position + "-", "")
+
+      // Map color names to actual hex values
+      // This is a simplified mapping - you might want to expand this
+      const colorMap: Record<string, string> = {
+        "blue-500": "#3b82f6",
+        "indigo-500": "#6366f1",
+        "purple-500": "#a855f7",
+        "violet-500": "#8b5cf6",
+        "emerald-500": "#10b981",
+        "green-500": "#22c55e",
+        "amber-500": "#f59e0b",
+        "yellow-500": "#eab308",
+        "sky-500": "#0ea5e9",
+        "rose-500": "#f43f5e",
+        "pink-500": "#ec4899",
+        "orange-500": "#f97316",
+        "cyan-500": "#06b6d4",
+        "teal-500": "#14b8a6",
+        "red-500": "#ef4444",
+      }
+
+      return colorMap[colorName] || defaultColors[position]
+    } catch (error) {
+      console.error("Error parsing gradient color:", error)
+      return defaultColors[position]
+    }
+  }
+
+  // Create a radar chart visualization
+  const numSkills = skills.length
+  const angleStep = (Math.PI * 2) / numSkills
+
+  // Calculate coordinates for each skill point
+  const skillPoints = skills.map((skill, i) => {
+    const angle = i * angleStep - Math.PI / 2 // Start from top
+    const radius = (skill.level / 100) * 120 // Scale to fit in container
+    return {
+      x: 150 + radius * Math.cos(angle),
+      y: 150 + radius * Math.sin(angle),
+      name: skill.name,
+      level: skill.level,
+    }
+  })
+
+  // Create polygon points string
+  const polygonPoints = skillPoints.map((point) => `${point.x},${point.y}`).join(" ")
+
+  return (
+    <div className="relative aspect-square w-[min(300px,calc(100vw-3rem))] max-w-full">
+      <svg width="300" height="300" viewBox="0 0 300 300" className="h-full w-full">
+        {/* Background circles */}
+        {[25, 50, 75, 100].map((level) => (
+          <circle
+            key={level}
+            cx="150"
+            cy="150"
+            r={(level / 100) * 120}
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.1"
+            strokeWidth="1"
+          />
+        ))}
+
+        {/* Axis lines */}
+        {Array.from({ length: numSkills }).map((_, i) => {
+          const angle = i * angleStep - Math.PI / 2
+          const x2 = 150 + 120 * Math.cos(angle)
+          const y2 = 150 + 120 * Math.sin(angle)
+          return (
+            <line key={i} x1="150" y1="150" x2={x2} y2={y2} stroke="currentColor" strokeOpacity="0.1" strokeWidth="1" />
+          )
+        })}
+
+        {/* Skill polygon */}
+        <motion.polygon
+          points={polygonPoints}
+          fill={`url(#gradient-${category.id})`}
+          fillOpacity="0.3"
+          stroke={`url(#gradient-${category.id})`}
+          strokeWidth="2"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        />
+
+        {/* Gradient definition */}
+        <defs>
+          <linearGradient id={`gradient-${category.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            {/* Extract colors safely from the gradient string */}
+            <stop offset="0%" stopColor={getColorFromGradient(category.color, "from")} />
+            <stop offset="100%" stopColor={getColorFromGradient(category.color, "to")} />
+          </linearGradient>
+        </defs>
+
+        {/* Skill points */}
+        {skillPoints.map((point, i) => (
+          <motion.circle
+            key={i}
+            cx={point.x}
+            cy={point.y}
+            r="4"
+            fill="white"
+            stroke={`url(#gradient-${category.id})`}
+            strokeWidth="2"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: i * 0.05 }}
+          />
+        ))}
+
+        {/* Skill labels */}
+        {skillPoints.map((point, i) => {
+          const angle = i * angleStep - Math.PI / 2
+          const labelRadius = 135
+          const labelX = 150 + labelRadius * Math.cos(angle)
+          const labelY = 150 + labelRadius * Math.sin(angle)
+
+          // Adjust text anchor based on position
+          const textAnchor =
+            angle > -Math.PI / 4 && angle < Math.PI / 4
+              ? "start"
+              : angle > (Math.PI * 3) / 4 || angle < (-Math.PI * 3) / 4
+                ? "end"
+                : "middle"
+
+          // Adjust vertical alignment
+          const dy =
+            angle > Math.PI / 4 && angle < (Math.PI * 3) / 4
+              ? "0.8em"
+              : angle > (-Math.PI * 3) / 4 && angle < -Math.PI / 4
+                ? "-0.5em"
+                : "0.3em"
+
+          return (
+            <motion.text
+              key={i}
+              x={labelX}
+              y={labelY}
+              textAnchor={textAnchor}
+              dy={dy}
+              fontSize="10"
+              fill="currentColor"
+              fillOpacity="0.7"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: i * 0.05 + 0.3 }}
+            >
+              {point.name}
+            </motion.text>
+          )
+        })}
+      </svg>
+    </div>
+  )
+}
+
