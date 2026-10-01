@@ -18,14 +18,76 @@ import {
   GitBranch,
   Calendar,
   Users,
-  Star,
   Loader2,
   ChevronRight as ChevronIcon,
   X,
 } from "lucide-react"
 
+export interface Project {
+  id: number
+  title: string
+  category: "ai" | "web" | "data" | "audio" | "research"
+  description: string
+  longDescription: string
+  technologies: string[]
+  imageUrl?: string
+  demoUrl?: string
+  githubUrl?: string
+  color?: string
+  featured?: boolean
+  completed: string
+  teamSize: number
+  difficulty?: number
+  inProgress?: boolean
+  achievements: string[]
+  implementationDetails?: string
+  challenges?: string
+}
+
 // Project data
-const projects = [
+const projects: Project[] = [
+  {
+    id: 8,
+    title: "AgentHUB",
+    category: "ai",
+    description:
+      "Full-stack visual AI agent orchestration platform to design, connect, execute, monitor, and persist multi-agent workflows through an interactive node-based canvas.",
+    longDescription:
+      "AgentHUB is a full-stack visual AI agent orchestration platform built to move beyond simple chatbot prompts and treat complex AI workflows as visual, executable graphs. Instead of building agent workflows through hardcoded chains of functions, AgentHUB provides an interactive node-based canvas powered by XYFlow where users can place, configure, and connect nodes across 14 distinct types. Workflows are executed through a stateful LangGraph-based runtime engine supporting multi-agent collaboration, Model Context Protocol (MCP) tool integration, dynamic multi-LLM routing (Groq, OpenRouter), custom code logic via an embedded editor, real-time streaming execution logs, and full PostgreSQL/Prisma persistence containerized with Docker.",
+    technologies: [
+      "LangGraph",
+      "Model Context Protocol (MCP)",
+      "Next.js",
+      "TypeScript",
+      "XYFlow",
+      "Groq",
+      "OpenRouter",
+      "PostgreSQL",
+      "Prisma",
+      "Docker",
+      "React",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/Mentrauz/AgentHUB",
+    demoUrl: "https://agenthub-seven-rouge.vercel.app/",
+    featured: true,
+    completed: "May 2026 - September 2026",
+    teamSize: 1,
+    difficulty: 5,
+    achievements: [
+      "Architected an interactive visual workflow builder using XYFlow with 14 specialized node types, custom handles, and reactive graph wiring",
+      "Engineered a stateful graph execution engine using LangGraph, modeling multi-agent workflows as state machines with cyclical loops, conditional routing, and context preservation",
+      "Integrated Model Context Protocol (MCP) to standardize external tool calling and capabilities, giving agents standardized access to local and remote tools",
+      "Built multi-LLM provider flexibility with decoupled routing across Groq and OpenRouter for optimized speed, cost, and task-specific model selection",
+      "Created an embedded code editor allowing workflows to interleave visual nodes with custom JavaScript/TypeScript code execution and custom agent logic",
+      "Designed real-time execution observability with live logs and visual execution graph states, clearly distinguishing design-time graphs from runtime execution paths",
+      "Implemented reliable workflow and state persistence using PostgreSQL and Prisma ORM, containerizing the entire platform with Docker for reproducible deployment",
+    ],
+    implementationDetails:
+      "AgentHUB combines Next.js, React, TypeScript, and XYFlow on the frontend with a graph-based state machine execution engine powered by LangGraph. Workflows are modeled as directed acyclic and cyclical graphs where each node encapsulates distinct logic—from LLM prompting and tool execution to conditional branching and multi-agent delegation. External integrations adhere to the Model Context Protocol (MCP), and LLM calls are dynamically routed through Groq and OpenRouter. Data persistence is managed with PostgreSQL and Prisma ORM, all containerized via Docker.",
+    challenges:
+      "Key engineering hurdles included mapping visual node-and-edge graphs to executable LangGraph state machines, maintaining synchronized state between design-time and runtime representations, managing asynchronous streaming LLM responses and execution logs in real time, and isolating custom user-written code execution within the workflow environment.",
+  },
   {
     id: 1,
     title: "Payroll Management System",
@@ -257,7 +319,7 @@ const projects = [
 ]
 
 export default function RedesignedProjects() {
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
@@ -311,8 +373,6 @@ export default function RedesignedProjects() {
         subtitle="Explore my portfolio of AI, machine learning, and software development projects. Each project demonstrates different skills and technologies."
       />
 
-
-
       <ScrollReveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence>
@@ -358,7 +418,7 @@ export default function RedesignedProjects() {
                                 ? "Audio & Voice Tech"
                                 : "Research"}
                       </Badge>
-                      {(selectedProject as any).inProgress && (
+                      {selectedProject.inProgress && (
                         <Badge className="px-3 py-1 text-xs font-medium rounded-full bg-orange-500/20 text-orange-500 border-orange-500/30">
                           Work in Progress
                         </Badge>
@@ -367,15 +427,7 @@ export default function RedesignedProjects() {
                     <DialogTitle className="text-xl sm:text-2xl text-foreground">{selectedProject.title}</DialogTitle>
                     <DialogDescription className="mt-2 text-sm text-foreground/80 font-medium">{selectedProject.description}</DialogDescription>
                   </div>
-                  <div className="flex items-center justify-between gap-3 sm:justify-end">
-                    <div className="flex">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
-                        />
-                      ))}
-                    </div>
+                  <div className="flex items-center justify-end">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -449,9 +501,9 @@ export default function RedesignedProjects() {
                               Live Demo
                             </Button>
                           )}
-                          {(selectedProject as any).githubUrl && (
+                          {selectedProject.githubUrl && (
                             <Button variant="outline" className="gap-2 bg-background/70 border-border/50 text-foreground shadow-sm hover:shadow-md transition-all duration-200 font-medium" asChild>
-                              <a href={(selectedProject as any).githubUrl} target="_blank" rel="noopener noreferrer">
+                              <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
                                 <GitBranch className="h-4 w-4" />
                                 GitHub
                               </a>
@@ -471,24 +523,12 @@ export default function RedesignedProjects() {
                             <span className="text-sm text-foreground/70 font-medium">Team Size</span>
                             <span className="text-foreground font-medium">{selectedProject.teamSize} people</span>
                           </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm text-foreground/70 font-medium">Difficulty</span>
-                            <div className="flex">
-                              {Array.from({ length: 5 }).map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`h-4 w-4 ${i < selectedProject.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
-                                />
-                              ))}
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </TabsContent>
 
                   <TabsContent value="details" className="mt-0 min-h-0">
-
                     <div className="space-y-6">
                       <div>
                         <h4 className="text-lg font-semibold mb-2 text-foreground">Project Description</h4>
@@ -498,23 +538,20 @@ export default function RedesignedProjects() {
                       <div>
                         <h4 className="text-lg font-semibold mb-2 text-foreground">Implementation Details</h4>
                         <p className="text-sm sm:text-base text-foreground/80 font-medium">
-                          This project was implemented using {selectedProject.technologies.join(", ")}. The development
-                          process involved careful planning, iterative development, and rigorous testing to ensure
-                          high-quality results.
+                          {selectedProject.implementationDetails ||
+                            `This project was implemented using ${selectedProject.technologies.join(", ")}. The development process involved careful planning, iterative development, and rigorous testing to ensure high-quality results.`}
                         </p>
                       </div>
 
                       <div>
                         <h4 className="text-lg font-semibold mb-2 text-foreground">Challenges & Solutions</h4>
                         <p className="text-sm sm:text-base text-foreground/80 font-medium">
-                          During development, we encountered several challenges including performance optimization,
-                          scalability concerns, and integration complexities. These were addressed through innovative
-                          approaches and best practices in software engineering.
+                          {selectedProject.challenges ||
+                            `During development, we encountered several challenges including performance optimization, scalability concerns, and integration complexities. These were addressed through innovative approaches and best practices in software engineering.`}
                         </p>
                       </div>
                     </div>
                   </TabsContent>
-
                 </div>
               </Tabs>
             </div>
@@ -526,7 +563,7 @@ export default function RedesignedProjects() {
 }
 
 interface ProjectCardProps {
-  project: (typeof projects)[0]
+  project: Project
   onSelect: () => void
 }
 
@@ -542,42 +579,27 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
       onClick={onSelect}
     >
       <CardContent className="p-6 bg-card/50">
-        <div className="flex justify-between items-start gap-3 mb-3">
-          <div className="flex min-w-0 gap-2 items-center">
-            <Badge
-              className={cn(
-                "px-3 py-1 text-xs font-medium rounded-full",
-                project.category === "web"
-                  ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
-                  : project.category === "ai"
-                    ? "bg-purple-500/20 text-purple-500 border-purple-500/30"
-                    : "bg-green-500/20 text-green-500 border-green-500/30"
-              )}
-            >
-              {project.category === "ai"
-                ? "AI & ML"
-                : project.category === "web"
-                  ? "Web Dev"
-                  : project.category === "data"
-                    ? "Data Science"
-                    : project.category === "audio"
-                      ? "Audio"
-                      : "Research"}
-            </Badge>
-            {/* {(project as any).inProgress && (
-              <Badge className="px-2 py-1 text-xs font-medium rounded-full bg-orange-500/20 text-orange-500 border-orange-500/30">
-                WIP
-              </Badge>
-            )} */}
-          </div>
-          <div className="flex shrink-0">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className={`h-3 w-3 ${i < project.difficulty ? "fill-yellow-500 text-yellow-500" : "text-foreground/30"}`}
-              />
-            ))}
-          </div>
+        <div className="flex items-center gap-2 mb-3">
+          <Badge
+            className={cn(
+              "px-3 py-1 text-xs font-medium rounded-full",
+              project.category === "web"
+                ? "bg-blue-500/20 text-blue-500 border-blue-500/30"
+                : project.category === "ai"
+                  ? "bg-purple-500/20 text-purple-500 border-purple-500/30"
+                  : "bg-green-500/20 text-green-500 border-green-500/30"
+            )}
+          >
+            {project.category === "ai"
+              ? "AI & ML"
+              : project.category === "web"
+                ? "Web Dev"
+                : project.category === "data"
+                  ? "Data Science"
+                  : project.category === "audio"
+                    ? "Audio"
+                    : "Research"}
+          </Badge>
         </div>
 
         <h3 className="text-base sm:text-lg font-semibold mb-2 text-foreground flex items-start gap-2 group-hover:text-primary transition-colors">
@@ -617,4 +639,3 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
     </Card>
   )
 }
-

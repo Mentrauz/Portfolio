@@ -29,6 +29,25 @@ import {
 // Experience data
 const experiences = [
   {
+    id: "intern",
+    title: "SDE & AI Intern",
+    company: "BDA Technologies",
+    location: "Remote, India",
+    period: "September 2026 - Present",
+    type: "work",
+    description:
+      "Develop Business Operating Systems and AI Integrations",
+    responsibilities: [
+      "Develop and consult on Business Operating Systems and help with AI transformation",
+    ],
+    skills: ["NextJS", "MongoDB", "NodeJS", "BOS", "React", "TailwindCSS", "TypeScript"],
+    metrics: [
+      { value: "50+", label: "Employees" },
+      { value: "2", label: "Team Members" },
+    ],
+    color: "from-indigo-600 to-purple-600",
+  },
+  {
     id: "payroll",
     title: "Payroll Developer for a Start-Up",
     company: "TMS Groups",
@@ -81,7 +100,7 @@ const experiences = [
   //     "Developed a system for detecting calories in Vegetables and Fruits images using Python and TensorFlow",
   //   responsibilities: [
   //     "To Process and train the model on the dataset",
-  //     "Fix technical issues in the model",  
+  //     "Fix technical issues in the model",
   //   ],
   //   skills: ["Python", "TensorFlow", "Machine Learning", "Image Processing"],
   //   metrics: [
@@ -411,4 +430,3 @@ export default function RedesignedExperience() {
     </SectionContainer>
   )
 }
-
