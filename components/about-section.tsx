@@ -79,16 +79,16 @@ export default function AboutSection() {
             {/* Experience counter - moved from top to bottom */}
             <motion.div
               whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-              className="absolute -bottom-5 right-3 w-32 sm:w-40 shadow-lg backdrop-blur-sm bg-background/80 border-white/10 rounded-lg overflow-hidden z-30 lg:-right-16 xl:-right-24"
+              className="absolute -bottom-5 right-3 shadow-lg backdrop-blur-sm bg-background/80 border border-white/10 rounded-lg overflow-hidden z-30 lg:-right-16 xl:-right-24"
             >
               <Card className="border-none bg-transparent">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2">
-                    {/* <Award className="h-5 w-5 text-primary" />
+                    <Award className="h-5 w-5 text-primary" />
                     <div>
-                      <div className="text-sm font-medium">Experience</div>
-                      <div className="text-2xl font-bold">1 Year (Fresher)</div>
-                    </div> */}
+                      <div className="text-xs text-muted-foreground">Status</div>
+                      <div className="text-sm font-bold text-primary">Open to Work</div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

@@ -8,6 +8,8 @@ const DiagnosticTool = dynamic(() => import("@/components/diagnostic-tool").then
 })
 
 export default function ClientDiagnosticWrapper() {
+  // Only show diagnostic tool in development
+  if (process.env.NODE_ENV !== "development") return null
   return <DiagnosticTool />
 }
 

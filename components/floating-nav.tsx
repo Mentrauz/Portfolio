@@ -37,18 +37,10 @@ export default function FloatingNav() {
   useEffect(() => {
     const handleScroll = () => {
       // Show nav after scrolling down a bit
-      if (window.scrollY > 300) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
+      setIsVisible(window.scrollY > 300)
 
       // Show back to top button after scrolling down further
-      if (window.scrollY > 800) {
-        setShowBackToTop(true)
-      } else {
-        setShowBackToTop(false)
-      }
+      setShowBackToTop(window.scrollY > 800)
 
       // Check if we're on a specific page route (like reading-list)
       const currentPath = window.location.pathname
@@ -57,13 +49,12 @@ export default function FloatingNav() {
         return
       }
 
-      // First, determine active section normally
+      // Determine active section by checking which section is in the top half of the viewport
       const sections = navItems.map((item) => item.href.slice(1)).filter(Boolean)
       const currentSection = sections.reduce((current, section) => {
         const element = document.getElementById(section)
         if (element) {
           const rect = element.getBoundingClientRect()
-          // Consider a section active if it's in the top half of the viewport
           if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
             return section
           }
@@ -71,56 +62,7 @@ export default function FloatingNav() {
         return current
       }, "")
 
-      // THEN check for testimonials - this ensures it overrides other sections
-      // Try multiple possible IDs and class-based selectors
-      const possibleTestimonialSelectors = [
-        "#testimonials", 
-        "#clients", 
-        "#testimonial", 
-        "#client",
-        ".testimonials-section",
-        ".client-testimonials",
-        "[data-section='testimonials']",
-        "section.testimonials",
-        "section.clients"
-      ];
-      
-      // Try to find the testimonial section using various selectors
-      let testimonialElement = null;
-      for (const selector of possibleTestimonialSelectors) {
-        const element = document.querySelector(selector);
-        if (element) {
-          testimonialElement = element;
-          break;
-        }
-      }
-
-      // If a testimonial element was found, check if it's in view
-      if (testimonialElement) {
-        const rect = testimonialElement.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
-          // If testimonial is in view, force "contact" as active section
-          setActiveSection("contact");
-          return;
-        }
-      }
-
-      // Fallback: check for testimonial-like content by title text
-      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-      for (const heading of headings) {
-        const text = heading.textContent?.toLowerCase() || '';
-        if (text.includes('testimonial') || text.includes('client') || text.includes('review')) {
-          const rect = heading.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
-            // If testimonial heading is in view, set contact as active
-            setActiveSection("contact");
-            return;
-          }
-        }
-      }
-
-      // If no testimonial section found, use the normal section
-      setActiveSection(currentSection);
+      setActiveSection(currentSection)
     }
 
     // Initial check needs a small delay to ensure DOM is fully loaded
@@ -155,6 +97,14 @@ export default function FloatingNav() {
     }
 
     e.preventDefault()
+
+    // If not on the home page, redirect there with the hash anchor
+    if (window.location.pathname !== '/') {
+      window.location.href = '/' + href
+      setIsOpen(false)
+      return
+    }
+
     const element = document.querySelector(href)
     if (element) {
       if (lenis) {

@@ -71,7 +71,7 @@ const experiences = [
   {
     id: "Web Developer (Remote)",
     title: "Website redesign (remote)",
-    company: "Leiferando.de",
+    company: "Lieferando.de",
     location: "Germany",
     period: "July 2024",
     type: "work",
@@ -130,7 +130,7 @@ const experiences = [
     period: "2025 March - 2025 September",
     type: "research",
     description:
-      "Research in progressThis project develops a generative AI system for personalized content creation, leveraging large language models to produce tailored media for marketing or education.",
+      "Research in progress. This project develops a generative AI system for personalized content creation, leveraging large language models to produce tailored media for marketing or education.",
     responsibilities: [
       "Design and implement UI/UX",
       "Design system architecture",

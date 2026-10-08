@@ -27,17 +27,17 @@ interface ColorOption {
 const themeOptions: ThemeOption[] = [
   {
     value: "light",
-    label: "",
+    label: "Light",
     icon: <Sun className="h-4 w-4" />,
   },
   {
     value: "dark",
-    label: "",
+    label: "Dark",
     icon: <Moon className="h-4 w-4" />,
   },
   {
     value: "system",
-    label: "",
+    label: "System",
     icon: <Laptop className="h-4 w-4" />,
   },
 ]

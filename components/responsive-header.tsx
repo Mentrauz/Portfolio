@@ -19,7 +19,8 @@ export default function ResponsiveHeader() {
     setIsMounted(true)
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      // Hide just before the floating nav becomes visible at 300px
+      setIsScrolled(window.scrollY > 280)
     }
 
     // Throttle using RAF for smooth 60fps updates
@@ -41,7 +42,7 @@ export default function ResponsiveHeader() {
     { name: "Reading List", href: "/reading-list" },
   ]
 
-  // If not mounted yet or user has scrolled, don't render the header
+  // Hide header once floating nav takes over; keep visible before it appears
   if (!isMounted || isScrolled) {
     return null;
   }

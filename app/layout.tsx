@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -13,7 +13,14 @@ const inter = Inter({
   display: "swap", // Ensure text remains visible during font loading
 })
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+}
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://soumyasingh.site'),
   title: "Soumya Singh | AI Enthusiast & Web Developer",
   description:
     "Portfolio of Soumya Singh, AI and DevOps Enthusiast and Specializing NextJS Web Development.",
@@ -32,6 +39,29 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://soumyasingh.site',
+    siteName: 'Soumya Singh Portfolio',
+    title: 'Soumya Singh | AI Enthusiast & Web Developer',
+    description: 'Portfolio of Soumya Singh — AI and DevOps Enthusiast specializing in NextJS Web Development.',
+    images: [
+      {
+        url: '/android-chrome-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'Soumya Singh Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Soumya Singh | AI Enthusiast & Web Developer',
+    description: 'Portfolio of Soumya Singh — AI and DevOps Enthusiast specializing in NextJS Web Development.',
+    creator: '@mentrauz',
+    images: ['/android-chrome-512x512.png'],
+  },
 }
 
 export default function RootLayout({
@@ -41,19 +71,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Preload critical resources */}
-        <link rel="preload" href="/placeholder.svg?height=400&width=400" as="image" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-
-        {/* Add preload hints for critical JavaScript */}
-        <link rel="preload" href="/_next/static/chunks/framework.js" as="script" />
-
-        {/* Add meta tags for better performance */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      </head>
       <body className={`${inter.className} theme-transition`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SmoothScrollProvider>

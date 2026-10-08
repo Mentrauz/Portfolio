@@ -11,17 +11,11 @@ import FloatingNav from "@/components/floating-nav"
 import ScrollProgress from "@/components/scroll-progress"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { SectionFallback } from "@/components/section-fallback"
-import { Loader2 } from "lucide-react"
-
-// Simple loading component
-function LoadingSection({ name }: { name: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center py-20">
-      <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
-      <p className="text-muted-foreground">Loading {name} section...</p>
-    </div>
-  )
-}
+import { HeroSkeleton } from "@/components/skeletons/hero-skeleton"
+import { AboutSkeleton } from "@/components/skeletons/about-skeleton"
+import { ExperienceSkeleton } from "@/components/skeletons/experience-skeleton"
+import { ProjectsSkeleton } from "@/components/skeletons/projects-skeleton"
+import { SkillsSkeleton } from "@/components/skeletons/skills-skeleton"
 
 export default function Home() {
   return (
@@ -30,13 +24,13 @@ export default function Home() {
       <FloatingNav />
 
       <ErrorBoundary fallback={<SectionFallback title="Hero" />}>
-        <Suspense fallback={<LoadingSection name="Hero" />}>
+        <Suspense fallback={<HeroSkeleton />}>
           <RedesignedHero />
         </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="About" />}>
-        <Suspense fallback={<LoadingSection name="About" />}>
+        <Suspense fallback={<AboutSkeleton />}>
           <AboutSection />
         </Suspense>
       </ErrorBoundary>
@@ -46,25 +40,25 @@ export default function Home() {
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Experience" />}>
-        <Suspense fallback={<LoadingSection name="Experience" />}>
+        <Suspense fallback={<ExperienceSkeleton />}>
           <RedesignedExperience />
         </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Projects" />}>
-        <Suspense fallback={<LoadingSection name="Projects" />}>
+        <Suspense fallback={<ProjectsSkeleton />}>
           <RedesignedProjects />
         </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Education" />}>
-        <Suspense fallback={<LoadingSection name="Education" />}>
+        <Suspense fallback={<SkillsSkeleton />}>
           <Education />
         </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Testimonials" />}>
-        <Suspense fallback={<LoadingSection name="Testimonials" />}>
+        <Suspense fallback={<SkillsSkeleton />}>
           <Testimonials />
         </Suspense>
       </ErrorBoundary>
@@ -73,4 +67,3 @@ export default function Home() {
     </main>
   )
 }
-

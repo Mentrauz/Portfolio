@@ -124,7 +124,7 @@ const projects: Project[] = [
       "A news website built with Next.js, Tailwind CSS, and Shadcn UI",
     longDescription:
       "No more fake news, only verified news from best and trusted sources, with a user friendly interface and a lot of features to make it more engaging and informative.",
-    technologies: ["NextJs", "Tailwind", "NodeJs, Typescript, ShadcnUI, Gemini"],
+    technologies: ["NextJs", "Tailwind", "NodeJs", "Typescript", "ShadcnUI", "Gemini"],
     imageUrl: "/dailypulse.png",
     demoUrl: "https://news-theta-sepia.vercel.app/",
     // githubUrl: "Coming Soon",
@@ -155,10 +155,10 @@ const projects: Project[] = [
     teamSize: 1,
     difficulty: 1,
     achievements: [
-      "Implemented the full DALL-E 2 architecture with PyTorch",
-      "Optimized for CUDA acceleration with 40% performance improvement",
-      "Created Docker containers for easy deployment",
-      "Built a web interface for text-to-image generation",
+      "Built a polished frontend showcase using React, Next.js, and Tailwind CSS",
+      "Demonstrated component composition and responsive layout techniques",
+      "Used TypeScript for type safety across all components",
+      "Integrated Shadcn UI components for accessible, consistent design",
     ],
   },
   {
@@ -199,8 +199,8 @@ const projects: Project[] = [
     teamSize: 1,
     difficulty: 2,
     achievements: [
-      "Simple and clean UI",
-      "AI Dashboa",
+      "Clean, professional analytics dashboard UI with real-time heartbeat updates to simulate backend data",
+      "AI-powered insights panel with dynamic chart rendering",
     ],
   },
   {
@@ -211,7 +211,7 @@ const projects: Project[] = [
       "A news website built with Next.js, Tailwind CSS, and Shadcn UI, for gaming news",
     longDescription:
       "A news website built with Next.js, Tailwind CSS, and Shadcn UI, for gaming news",
-    technologies: ["NextJs", "Tailwind", "NodeJs, Typescript, ShadcnUI, Gemini"],
+    technologies: ["NextJs", "Tailwind", "NodeJs", "Typescript", "ShadcnUI", "Gemini"],
     imageUrl: "/gamingnews.png",
     demoUrl: "https://gaming-news-sooty.vercel.app/",
     githubUrl: "https://github.com/Mentrauz/Gaming-News",

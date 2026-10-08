@@ -35,6 +35,6 @@ export default function ScrollProgress() {
 
   if (!isVisible) return null
 
-  return <motion.div className="progress-bar fixed top-0 left-0 right-0 h-[3px] bg-primary z-50" style={{ scaleX }} />
+  return <motion.div className="fixed top-0 left-0 right-0 h-[3px] bg-primary z-50 origin-left" style={{ scaleX }} />
 }
 
