@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, type ReactNode } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
@@ -317,7 +317,8 @@ const projects: Project[] = [
   // },
 ]
 
-export default function RedesignedProjects() {
+// activity is a server-rendered block (GitHub contributions) shown under the project grid
+export default function RedesignedProjects({ activity }: { activity?: ReactNode }) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const { toast } = useToast()
@@ -368,6 +369,8 @@ export default function RedesignedProjects() {
           </AnimatePresence>
         </div>
       </ScrollReveal>
+
+      {activity}
 
       {/* Project details dialog - improved for light mode */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

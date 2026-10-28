@@ -4,6 +4,7 @@ import AboutSection from "@/components/about-section"
 import RedesignedSkills from "@/components/redesigned-skills"
 import RedesignedExperience from "@/components/redesigned-experience"
 import RedesignedProjects from "@/components/redesigned-projects"
+import GitHubActivity from "@/components/github-activity"
 import Education from "@/components/education"
 import Testimonials from "@/components/testimonials"
 import EnhancedFooter from "@/components/enhanced-footer"
@@ -47,7 +48,13 @@ export default function Home() {
 
       <ErrorBoundary fallback={<SectionFallback title="Projects" />}>
         <Suspense fallback={<ProjectsSkeleton />}>
-          <RedesignedProjects />
+          <RedesignedProjects
+            activity={
+              <Suspense fallback={null}>
+                <GitHubActivity />
+              </Suspense>
+            }
+          />
         </Suspense>
       </ErrorBoundary>
 

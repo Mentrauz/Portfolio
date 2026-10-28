@@ -51,16 +51,15 @@ export default function FloatingNav() {
         return
       }
 
-      // Determine active section by checking which section is in the top half of the viewport
+      // The active section is the last one whose top has reached the middle of the viewport, so it stays
+      // lit through sections that aren't in the nav (like Testimonials) instead of falling back to Home
       const sections = navItems.map((item) => item.href.slice(1)).filter(Boolean)
+      // The footer can be too short to ever reach the middle, so the bottom of the page always counts as Contact
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
       const currentSection = sections.reduce((current, section) => {
         const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
-            return section
-          }
-        }
+        if (!element) return current
+        if (atBottom || element.getBoundingClientRect().top <= window.innerHeight / 2) return section
         return current
       }, "")
 
