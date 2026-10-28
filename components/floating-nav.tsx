@@ -3,8 +3,9 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Home, Code, Briefcase, GraduationCap, Book, Send, Menu, X, ChevronUp } from "lucide-react"
+import { Home, Code, Briefcase, FolderGit2, GraduationCap, Book, Send, Menu, X, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useLenis } from "@/components/smooth-scroll-provider"
@@ -20,7 +21,7 @@ const navItems: NavItem[] = [
   { name: "Home", href: "#", icon: <Home className="h-[18px] w-[18px]" /> },
   { name: "Skills", href: "#skills", icon: <Code className="h-[18px] w-[18px]" /> },
   { name: "Experience", href: "#experience", icon: <Briefcase className="h-[18px] w-[18px]" /> },
-  { name: "Projects", href: "#projects", icon: <Code className="h-[18px] w-[18px] rotate-90" /> },
+  { name: "Projects", href: "#projects", icon: <FolderGit2 className="h-[18px] w-[18px]" /> },
   { name: "Education", href: "#education", icon: <GraduationCap className="h-[18px] w-[18px]" /> },
   { name: "Contact", href: "#contact", icon: <Send className="h-[18px] w-[18px]" /> },
   { name: "Reading List", href: "/reading-list", icon: <Book className="h-[18px] w-[18px]" /> },
@@ -33,6 +34,7 @@ export default function FloatingNav() {
   const [isOpen, setIsOpen] = useState(false)
   const { toast } = useToast()
   const lenis = useLenis()
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,7 +102,7 @@ export default function FloatingNav() {
 
     // If not on the home page, redirect there with the hash anchor
     if (window.location.pathname !== '/') {
-      window.location.href = '/' + href
+      router.push('/' + href)
       setIsOpen(false)
       return
     }
@@ -142,15 +144,18 @@ export default function FloatingNav() {
                     key={item.name}
                     href={item.href}
                     onClick={(e) => handleItemClick(e, item.href)}
+                    aria-label={item.name}
+                    title={item.name}
                     className={cn(
-                      "relative px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-300",
+                      "relative px-3 lg:px-4 py-2 rounded-full flex items-center gap-2 whitespace-nowrap transition-all duration-300",
                       (activeSection === item.href.slice(1) || (item.href === '/reading-list' && activeSection === 'reading-list'))
                         ? "text-white bg-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-accent",
                     )}
                   >
                     {item.icon}
-                    <span>{item.name}</span>
+                    {/* Icon-only on tablets, where seven labelled items don't fit */}
+                    <span className="hidden lg:inline">{item.name}</span>
 
                     {(activeSection === item.href.slice(1) || (item.href === '/reading-list' && activeSection === 'reading-list')) && (
                       <motion.span
@@ -185,6 +190,8 @@ export default function FloatingNav() {
               size="icon"
               className="h-12 w-12 rounded-full shadow-lg bg-primary text-white"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close navigation" : "Open navigation"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -240,6 +247,7 @@ export default function FloatingNav() {
               className="h-10 w-10 rounded-full shadow-md bg-background/80 backdrop-blur-sm hover:bg-accent"
               onClick={() => { if (lenis) { lenis.scrollTo(0, { lerp: 0.05 }) } else { window.scrollTo({ top: 0, behavior: "smooth" }) } }}
               title="Back to top"
+              aria-label="Back to top"
             >
               <ChevronUp className="h-5 w-5" />
             </Button>

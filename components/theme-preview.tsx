@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useIsClient } from "@/hooks/use-is-client"
 import { motion } from "framer-motion"
 import { useExtendedTheme, type ColorTheme } from "@/components/theme-provider"
 import { Button } from "@/components/ui/button"
@@ -61,12 +62,7 @@ const colorOptions: ColorOption[] = [
 export function ThemePreview({ className }: ThemePreviewProps) {
   const { theme, setTheme, resolvedTheme, colorTheme, setColorTheme } = useExtendedTheme()
   const [hoveredTheme, setHoveredTheme] = useState<ColorTheme | null>(null)
-  const [mounted, setMounted] = useState(false)
-
-  // After mounting, we can safely access theme information
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useIsClient()
 
   if (!mounted) {
     return (

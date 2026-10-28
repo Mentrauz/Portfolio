@@ -2,7 +2,8 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useIsClient } from "@/hooks/use-is-client"
 import { motion } from "framer-motion"
 import { useExtendedTheme, type ColorTheme, type Theme } from "@/components/theme-provider"
 import { Button } from "@/components/ui/button"
@@ -85,12 +86,7 @@ export function ThemeSwitcher() {
   const { theme, setTheme, resolvedTheme, colorTheme, setColorTheme } = useExtendedTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<"mode" | "color">("mode")
-  const [mounted, setMounted] = useState(false)
-
-  // After mounting, we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useIsClient()
 
   if (!mounted) {
     return (

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
@@ -15,13 +15,12 @@ import { useIsClient } from "@/hooks/use-is-client"
 import { ErrorBoundary } from "@/components/error-boundary"
 import {
   ExternalLink,
-  GitBranch,
   Calendar,
   Users,
-  Loader2,
   ChevronRight as ChevronIcon,
   X,
 } from "lucide-react"
+import { siGithub } from "simple-icons"
 
 export interface Project {
   id: number
@@ -321,7 +320,6 @@ const projects: Project[] = [
 export default function RedesignedProjects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
   const isClient = useIsClient()
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -336,32 +334,6 @@ export default function RedesignedProjects() {
     window.open(url, "_blank")
   }
 
-  // Simulate loading delay
-  useEffect(() => {
-    if (isClient) {
-      const timer = setTimeout(() => {
-        setIsLoading(false)
-      }, 500)
-      return () => clearTimeout(timer)
-    }
-  }, [isClient])
-
-  // If not client-side yet, show a loading state
-  if (!isClient || isLoading) {
-    return (
-      <SectionContainer className="relative">
-        <SectionHeader
-          title="Project Portfolio"
-          subtitle="Explore my portfolio of AI, machine learning, and software development projects."
-        />
-        <div className="flex justify-center items-center py-20">
-          <Loader2 className="h-8 w-8 animate-spin text-primary mr-2" />
-          <span>Loading projects...</span>
-        </div>
-      </SectionContainer>
-    )
-  }
-
   return (
     <SectionContainer id="projects" className="relative">
       {/* Background decorative elements - improved for light mode */}
@@ -370,7 +342,6 @@ export default function RedesignedProjects() {
 
       <SectionHeader
         title="Project Portfolio"
-        subtitle="Explore my portfolio of AI, machine learning, and software development projects. Each project demonstrates different skills and technologies."
       />
 
       <ScrollReveal>
@@ -504,7 +475,9 @@ export default function RedesignedProjects() {
                           {selectedProject.githubUrl && (
                             <Button variant="outline" className="gap-2 bg-background/70 border-border/50 text-foreground shadow-sm hover:shadow-md transition-all duration-200 font-medium" asChild>
                               <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
-                                <GitBranch className="h-4 w-4" />
+                                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                  <path d={siGithub.path} />
+                                </svg>
                                 GitHub
                               </a>
                             </Button>
@@ -568,17 +541,21 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, onSelect }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
-  const isClient = useIsClient()
-
   return (
     <Card
-      className="relative overflow-hidden h-full bg-card/80 backdrop-blur-sm border border-border/50 shadow-md hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:border-primary/20 cursor-pointer group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative overflow-hidden h-full bg-card/80 backdrop-blur-sm border border-border/50 shadow-md hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:border-primary/20 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onClick={onSelect}
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${project.title}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          onSelect()
+        }
+      }}
     >
-      <CardContent className="p-6 bg-card/50">
+      <CardContent className="flex h-full flex-col p-6 bg-card/50">
         <div className="flex items-center gap-2 mb-3">
           <Badge
             className={cn(

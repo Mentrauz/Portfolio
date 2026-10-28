@@ -2,8 +2,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { MapPin, Link as LinkIcon, Mail } from "lucide-react";
 
 export const Tooltip = ({
   content,
@@ -140,6 +138,8 @@ export const Tooltip = ({
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Hover previews only; on touch screens a tap should go straight to the link
+    if (window.matchMedia("(hover: none)").matches) return;
     setIsVisible(true);
     const rect = e.currentTarget.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -161,42 +161,6 @@ export const Tooltip = ({
     updateMousePosition(mouseX, mouseY);
   };
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    const touch = e.touches[0];
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = touch.clientX - rect.left;
-    const mouseY = touch.clientY - rect.top;
-    updateMousePosition(mouseX, mouseY);
-    setIsVisible(true);
-  };
-
-  const handleTouchEnd = () => {
-    // Delay hiding to allow for tap interaction
-    setTimeout(() => {
-      setIsVisible(false);
-      setMouse({ x: 0, y: 0 });
-      setPosition({ x: 0, y: 0 });
-    }, 2000);
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Toggle visibility on click for mobile devices
-    if (window.matchMedia("(hover: none)").matches) {
-      e.preventDefault();
-      if (isVisible) {
-        setIsVisible(false);
-        setMouse({ x: 0, y: 0 });
-        setPosition({ x: 0, y: 0 });
-      } else {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        updateMousePosition(mouseX, mouseY);
-        setIsVisible(true);
-      }
-    }
-  };
-
   useEffect(() => {
     if (isVisible && contentRef.current) {
       const newPosition = calculatePosition(mouse.x, mouse.y);
@@ -211,9 +175,6 @@ export const Tooltip = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onClick={handleClick}
     >
       {children}
       <AnimatePresence>

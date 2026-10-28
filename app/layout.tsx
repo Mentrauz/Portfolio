@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://soumyasingh.site'),
   title: "Soumya Singh | AI Enthusiast & Web Developer",
   description:
-    "Portfolio of Soumya Singh, AI and DevOps Enthusiast and Specializing NextJS Web Development.",
+    "Portfolio of Soumya Singh, a Bengaluru-based web developer specializing in Next.js and learning ML and DevOps.",
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     url: 'https://soumyasingh.site',
     siteName: 'Soumya Singh Portfolio',
     title: 'Soumya Singh | AI Enthusiast & Web Developer',
-    description: 'Portfolio of Soumya Singh — AI and DevOps Enthusiast specializing in NextJS Web Development.',
+    description: 'Portfolio of Soumya Singh, a Bengaluru-based web developer specializing in Next.js and learning ML and DevOps.',
     images: [
       {
         url: '/android-chrome-512x512.png',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Soumya Singh | AI Enthusiast & Web Developer',
-    description: 'Portfolio of Soumya Singh — AI and DevOps Enthusiast specializing in NextJS Web Development.',
+    description: 'Portfolio of Soumya Singh, a Bengaluru-based web developer specializing in Next.js and learning ML and DevOps.',
     creator: '@mentrauz',
     images: ['/android-chrome-512x512.png'],
   },

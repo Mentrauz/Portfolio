@@ -26,14 +26,22 @@ export function usePerformanceMonitor(enabled = true) {
   })
 
   const frameCountRef = useRef(0)
-  const lastTimeRef = useRef(performance.now())
+  // Timestamps are set in effects, since reading the clock during render is impure
+  const lastTimeRef = useRef(0)
   const animationFrameRef = useRef<number | null>(null)
-  const startTimeRef = useRef<number>(performance.now())
-  const renderStartTimeRef = useRef<number>(performance.now())
+  const startTimeRef = useRef(0)
+  const renderStartTimeRef = useRef(0)
 
   // Calculate FPS
   useEffect(() => {
     if (!enabled) return
+
+    const startedAt = performance.now()
+    if (!startTimeRef.current) {
+      startTimeRef.current = startedAt
+      renderStartTimeRef.current = startedAt
+    }
+    lastTimeRef.current = startedAt
 
     const calculateFPS = () => {
       const now = performance.now()
@@ -45,8 +53,8 @@ export function usePerformanceMonitor(enabled = true) {
 
         // Get memory info if available
         let memory
-        if (performance && (performance as any).memory) {
-          const memoryInfo = (performance as any).memory
+        const memoryInfo = (performance as Performance & { memory?: NonNullable<PerformanceMetrics["memory"]> }).memory
+        if (memoryInfo) {
           memory = {
             usedJSHeapSize: memoryInfo.usedJSHeapSize,
             totalJSHeapSize: memoryInfo.totalJSHeapSize,

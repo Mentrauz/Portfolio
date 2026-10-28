@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import RedesignedHero from "@/components/redesigned-hero"
 import AboutSection from "@/components/about-section"
-import SkillsSectionWrapper from "@/components/skills-section-wrapper"
+import RedesignedSkills from "@/components/redesigned-skills"
 import RedesignedExperience from "@/components/redesigned-experience"
 import RedesignedProjects from "@/components/redesigned-projects"
 import Education from "@/components/education"
@@ -36,7 +36,7 @@ export default function Home() {
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Skills" />}>
-        <SkillsSectionWrapper />
+        <RedesignedSkills />
       </ErrorBoundary>
 
       <ErrorBoundary fallback={<SectionFallback title="Experience" />}>

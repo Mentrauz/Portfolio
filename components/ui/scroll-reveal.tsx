@@ -33,6 +33,7 @@ export const ScrollReveal = memo(function ScrollReveal({
   // Only run on client-side
   useEffect(() => {
     if (!isClient || !ref.current) return
+    const element = ref.current
 
     let observer: IntersectionObserver | null = null
 
@@ -41,8 +42,8 @@ export const ScrollReveal = memo(function ScrollReveal({
         ([entry]) => {
           if (entry.isIntersecting) {
             setIsVisible(true)
-            if (once && ref.current) {
-              observer?.unobserve(ref.current)
+            if (once) {
+              observer?.unobserve(element)
             }
           } else if (!once) {
             setIsVisible(false)
@@ -51,9 +52,7 @@ export const ScrollReveal = memo(function ScrollReveal({
         { threshold },
       )
 
-      if (ref.current) {
-        observer.observe(ref.current)
-      }
+      observer.observe(element)
     } catch (error) {
       console.error("Error setting up IntersectionObserver:", error)
       // Fallback: just show the content
@@ -61,9 +60,7 @@ export const ScrollReveal = memo(function ScrollReveal({
     }
 
     return () => {
-      if (observer && ref.current) {
-        observer.unobserve(ref.current)
-      }
+      observer?.unobserve(element)
     }
   }, [isClient, once, threshold])
 
@@ -81,7 +78,7 @@ export const ScrollReveal = memo(function ScrollReveal({
       transition: {
         duration,
         delay,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   }
@@ -127,6 +124,7 @@ export const StaggeredContainer = memo(function StaggeredContainer({
 
   useEffect(() => {
     if (!isClient || !ref.current) return
+    const element = ref.current
 
     let observer: IntersectionObserver | null = null
 
@@ -135,8 +133,8 @@ export const StaggeredContainer = memo(function StaggeredContainer({
         ([entry]) => {
           if (entry.isIntersecting) {
             setIsVisible(true)
-            if (once && ref.current) {
-              observer?.unobserve(ref.current)
+            if (once) {
+              observer?.unobserve(element)
             }
           } else if (!once) {
             setIsVisible(false)
@@ -145,9 +143,7 @@ export const StaggeredContainer = memo(function StaggeredContainer({
         { threshold },
       )
 
-      if (ref.current) {
-        observer.observe(ref.current)
-      }
+      observer.observe(element)
     } catch (error) {
       console.error("Error setting up IntersectionObserver:", error)
       // Fallback: just show the content
@@ -155,9 +151,7 @@ export const StaggeredContainer = memo(function StaggeredContainer({
     }
 
     return () => {
-      if (observer && ref.current) {
-        observer.unobserve(ref.current)
-      }
+      observer?.unobserve(element)
     }
   }, [isClient, once, threshold])
 
@@ -212,7 +206,7 @@ export const StaggerItem = memo(function StaggerItem({
       y: 0,
       transition: {
         duration,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   }

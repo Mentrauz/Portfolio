@@ -1,14 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useSyncExternalStore } from "react"
 
+const subscribe = () => () => {}
+
+// false during SSR and hydration, true once rendering on the client
 export function useIsClient() {
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  return isClient
+  return useSyncExternalStore(subscribe, () => true, () => false)
 }
-

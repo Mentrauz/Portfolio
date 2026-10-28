@@ -1,15 +1,12 @@
 let userConfig = undefined
 try {
   userConfig = await import('./v0-user-next.config')
-} catch (e) {
-  // ignore error
+} catch {
+  // no user config
 }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
   },

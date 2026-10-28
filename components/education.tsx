@@ -4,12 +4,9 @@ import type React from "react"
 import { BookOpen, GraduationCap, Trophy, CheckCircle } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { useExtendedTheme, type ColorTheme } from "@/components/theme-provider"
 import { Separator } from "@/components/ui/separator"
 
 export default function Education() {
-  const { colorTheme } = useExtendedTheme()
-
   return (
     <section id="education" className="relative py-12 px-3 sm:px-4">
       <div className="mx-auto max-w-5xl lg:max-w-6xl">
@@ -20,9 +17,6 @@ export default function Education() {
           >
             Education
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl text-center">
-            My academic background and educational journey in Computer Science and Engineering.
-          </p>
         </div>
 
         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm border-border/50 shadow-md hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:border-primary/20 w-full rounded-xl">
@@ -36,13 +30,10 @@ export default function Education() {
               <span className="hidden sm:inline">•</span>
               <span>Rajkot, Gujarat</span>
               <div className="flex items-center gap-3 sm:ml-auto">
-                <span>2022 - 2026</span>
+                <span>2022 - Feb 2026</span>
                 <span className="hidden sm:inline">•</span>
                 <span>GPA: 7</span>
               </div>
-            </div>
-            <div className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed">
-              Relevant Coursework: Machine Learning, Data Structures, Web Development, Networking, Cloud Computing
             </div>
           </CardHeader>
           <Separator className="opacity-50" />
@@ -66,12 +57,12 @@ export default function Education() {
                   <AchievementItem
                     icon={<Trophy className="h-5 w-5" />}
                     title="Research Excellence"
-                    description="Developed Generative AI for Personalized Content Creation"
+                    description="Built a generative AI system for personalized content creation as a team research project."
                   />
                   <AchievementItem
                     icon={<CheckCircle className="h-5 w-5" />}
                     title="Technical Innovation"
-                    description="Developed a system for generating high quality code with personalized UI, all while adhering to SOLID principles and DRY principles."
+                    description="Developed a system for generating high-quality code with a personalized UI, following SOLID and DRY principles."
                   />
                   <AchievementItem
                     icon={<BookOpen className="h-5 w-5" />}
@@ -86,10 +77,10 @@ export default function Education() {
             <div className="mt-8">
               <h3 className="text-lg font-semibold mb-4">Skills Developed</h3>
               <div className="grid gap-5 sm:grid-cols-2">
-                <SkillProgressItem name="ML Research" value={90} colorTheme={colorTheme} />
-                <SkillProgressItem name="Data Analysis" value={85} colorTheme={colorTheme} />
-                <SkillProgressItem name="Web Development" value={90} colorTheme={colorTheme} />
-                <SkillProgressItem name="Cloud Computing" value={95} colorTheme={colorTheme} />
+                <SkillProgressItem name="ML Research" value={90} />
+                <SkillProgressItem name="Data Analysis" value={85} />
+                <SkillProgressItem name="Web Development" value={90} />
+                <SkillProgressItem name="Cloud Computing" value={95} />
               </div>
             </div>
           </CardContent>
@@ -136,10 +127,9 @@ function AchievementItem({ icon, title, description }: AchievementItemProps) {
 interface SkillProgressItemProps {
   name: string
   value: number
-  colorTheme: ColorTheme
 }
 
-function SkillProgressItem({ name, value, colorTheme }: SkillProgressItemProps) {
+function SkillProgressItem({ name, value }: SkillProgressItemProps) {
   return (
     <div className="bg-card/50 backdrop-blur-sm border border-border/20 rounded-lg p-3 hover:border-primary/20 transition-colors">
       <div className="flex justify-between items-center mb-2">

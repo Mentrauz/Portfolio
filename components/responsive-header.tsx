@@ -12,12 +12,9 @@ import { rafThrottle } from "@/lib/throttle"
 export default function ResponsiveHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
 
   // Handle scroll effect
   useEffect(() => {
-    setIsMounted(true)
-
     const handleScroll = () => {
       // Hide just before the floating nav becomes visible at 300px
       setIsScrolled(window.scrollY > 280)
@@ -38,12 +35,13 @@ export default function ResponsiveHeader() {
     { name: "Skills", href: "/#skills" },
     { name: "Experience", href: "/#experience" },
     { name: "Projects", href: "/#projects" },
+    { name: "Education", href: "/#education" },
     { name: "Contact", href: "/#contact" },
     { name: "Reading List", href: "/reading-list" },
   ]
 
   // Hide header once floating nav takes over; keep visible before it appears
-  if (!isMounted || isScrolled) {
+  if (isScrolled) {
     return null;
   }
 
@@ -65,7 +63,7 @@ export default function ResponsiveHeader() {
             <div className="font-bold text-xl text-gradient-primary">
               SS
             </div>
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <div className="font-bold">Soumya Singh</div>
               <div className="text-xs text-muted-foreground">AI Enthusiast & Web Developer</div>
             </div>
@@ -83,7 +81,7 @@ export default function ResponsiveHeader() {
               <Link
                 href={item.href}
                 className={cn(
-                  "relative transition-colors hover:text-primary",
+                  "relative whitespace-nowrap transition-colors hover:text-primary",
                   "after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full",
                 )}
               >
@@ -141,11 +139,6 @@ export default function ResponsiveHeader() {
                   </Link>
                 </motion.div>
               ))}
-              <div className="pt-2 border-t border-border">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Theme settings</span>
-                </div>
-              </div>
             </div>
           </motion.div>
         )}

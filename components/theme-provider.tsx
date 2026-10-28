@@ -19,18 +19,17 @@ export function ThemeProvider({ children, ...props }: ExtendedThemeProviderProps
 export function useExtendedTheme() {
   // Use the useTheme hook from next-themes directly
   const { theme, setTheme, resolvedTheme } = useTheme()
-  const [colorTheme, setColorTheme] = React.useState<ColorTheme>("default")
+  // Consumers only render colour state after mount, so reading storage here can't cause a hydration mismatch
+  const [colorTheme, setColorTheme] = React.useState<ColorTheme>(() =>
+    typeof window === "undefined" ? "default" : ((localStorage.getItem("color-theme") as ColorTheme | null) ?? "default"),
+  )
 
-  // Initialize color theme from localStorage on mount
+  // Apply the saved color theme class on mount
   React.useEffect(() => {
-    // Only run on client
-    if (typeof window === "undefined") return
-
-    const savedColorTheme = localStorage.getItem("color-theme") as ColorTheme | null
-    if (savedColorTheme) {
-      setColorTheme(savedColorTheme)
-      document.documentElement.classList.add(`theme-${savedColorTheme}`)
+    if (colorTheme !== "default") {
+      document.documentElement.classList.add(`theme-${colorTheme}`)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only the initial value needs applying; updates go through updateColorTheme
   }, [])
 
   // Function to update color theme

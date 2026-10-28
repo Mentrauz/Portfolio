@@ -26,32 +26,11 @@ export default function AboutSection() {
 
       <SectionHeader
         title="About Me"
-        subtitle="Get to know more about my background, expertise, and what drives me to create impactful AI solutions."
       />
 
       <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
         <ScrollReveal>
           <div className="relative z-10 mx-auto w-full max-w-sm sm:max-w-md md:max-w-none">
-            {/* Projects counter - positioned above the image */}
-            <div className="absolute right-3 top-3 z-30 sm:-top-4 sm:-right-4 lg:-right-10 xl:-right-20">
-              <motion.div
-                whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-                className="shadow-lg backdrop-blur-sm bg-background/80 border border-white/10 rounded-lg overflow-hidden"
-              >
-                <Card className="border-none bg-transparent">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2">
-                      <Briefcase className="h-5 w-5 text-primary" />
-                      <div>
-                        <div className="text-sm font-medium">Projects</div>
-                        <div className="text-2xl font-bold">5+</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-
             <div className="relative z-20 h-[420px] sm:h-[560px] lg:h-[750px] rounded-lg overflow-hidden border border-white/10 shadow-xl">
               <Image
                 src="/hello.jpg"
@@ -67,7 +46,7 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                 <div className="p-4 text-white">
                   <p className="font-medium">Soumya Singh</p>
-                  <p className="text-sm text-white/80">AI Engineer & NextJs Developer</p>
+                  <p className="text-sm text-white/80">Web Developer & AI Enthusiast</p>
                 </div>
               </div>
             </div>
@@ -104,9 +83,9 @@ export default function AboutSection() {
 
             <StaggerItem>
               <p className="text-muted-foreground mb-6">
-                I'm an innovative Web Developer, AI Enthusiast, and Community Organizer. With a background in CSE and a
-                deep understanding of computational methods, I specialize in NextJs based Web Development and open-source tools for
-                impactful, equitable social change.
+                I&apos;m a Web Developer, AI enthusiast and community organizer based in Bengaluru. I completed my
+                B.Tech in Computer Science and Engineering at Marwadi University, Rajkot, in February 2026, and I
+                specialize in Next.js web development and open-source tools for impactful, equitable social change.
               </p>
             </StaggerItem>
 

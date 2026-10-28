@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
 
 // Testimonial data
 const testimonials = [
@@ -14,7 +15,7 @@ const testimonials = [
     id: 1,
     content:
       "Soumya's Excellence in Web Development helped us build a better HR and Payroll system for our company.",
-    author: "Mr.Abhishek Tondak",
+    author: "Mr. Abhishek Tondak",
     role: "CEO",
     avatar: "",
     company: "TMS Groups",
@@ -31,6 +32,17 @@ const testimonials = [
     rating: 5,
   },
 ]
+
+// "Mr. Abhishek Tondak" -> "AT": honorifics are not part of someone's initials
+function initials(name: string) {
+  return name
+    .replace(/^(mr|mrs|ms|dr|prof)\.?\s+/i, "")
+    .split(/\s+/)
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase()
+}
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -69,18 +81,10 @@ export default function Testimonials() {
   }, [currentIndex, isPaused])
 
   return (
-    <section id="testimonials" className="overflow-hidden py-12 px-4">
-      <div className="flex flex-col items-center mb-12">
-        <h2 
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary pb-3 mb-4 transition-colors duration-300"
-          style={{ borderBottom: "3px solid currentColor" }}
-        >
-          Client Testimonials
-        </h2>
-        <p className="text-base md:text-lg text-muted-foreground max-w-3xl text-center">
-          Hear what clients and colleagues have to say about working with me.
-        </p>
-      </div>
+    <SectionContainer id="testimonials" className="overflow-hidden">
+      <SectionHeader
+        title="Client Testimonials"
+      />
 
       <div
         className="relative max-w-4xl mx-auto"
@@ -121,10 +125,7 @@ export default function Testimonials() {
                       <Avatar className="h-24 w-24 border-4 border-background">
                         <AvatarImage src={testimonials[currentIndex].avatar} alt={testimonials[currentIndex].author} />
                         <AvatarFallback>
-                          {testimonials[currentIndex].author
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
+                          {initials(testimonials[currentIndex].author)}
                         </AvatarFallback>
                       </Avatar>
                       <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground rounded-full p-1.5">
@@ -143,9 +144,9 @@ export default function Testimonials() {
                     </div>
 
                     <blockquote className="text-base sm:text-lg md:text-xl italic mb-6 relative">
-                      <span className="text-primary text-4xl absolute -top-4 -left-2 opacity-20">"</span>
+                      <span className="text-primary text-4xl absolute -top-4 -left-2 opacity-20">&ldquo;</span>
                       {testimonials[currentIndex].content}
-                      <span className="text-primary text-4xl absolute -bottom-10 -right-2 opacity-20">"</span>
+                      <span className="text-primary text-4xl absolute -bottom-10 -right-2 opacity-20">&rdquo;</span>
                     </blockquote>
 
                     <div>
@@ -200,7 +201,7 @@ export default function Testimonials() {
           </Button>
         </div>
       </div>
-    </section>
+    </SectionContainer>
   )
 }
 

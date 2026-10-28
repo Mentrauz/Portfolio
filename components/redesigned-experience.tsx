@@ -7,7 +7,8 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs } from "@/components/ui/tabs"
+import { FilterTabs, type FilterTab } from "@/components/ui/filter-tabs"
 import { cn } from "@/lib/utils"
 import { ErrorBoundary } from "@/components/error-boundary"
 import {
@@ -22,7 +23,7 @@ import {
   Users,
   Target,
   NotebookTabs,
-  ExternalLink
+  Layers,
 } from "lucide-react"
 
 
@@ -127,15 +128,14 @@ const experiences = [
     title: "Generative AI for Personalized Content Creation",
     company: "Team Research Project",
     location: "Rajkot, India",
-    period: "2025 March - 2025 September",
+    period: "March 2025 - September 2025",
     type: "research",
     description:
-      "Research in progress. This project develops a generative AI system for personalized content creation, leveraging large language models to produce tailored media for marketing or education.",
+      "A team research project on a generative AI system for personalized content creation, using large language models to produce tailored media for marketing and education.",
     responsibilities: [
       "Design and implement UI/UX",
       "Design system architecture",
       "Research on the latest technologies",
-      "Research in progress",
     ],
     skills: ["Python", "Data Analysis", "Research", "Scientific Computing", "ML", "Agentic AI", "Microservices", "NextJS", "MongoDB", "React", "TailwindCSS", "TypeScript"],
     metrics: [
@@ -182,6 +182,12 @@ const experiences = [
   // },
 ]
 
+const experienceTabs: FilterTab[] = [
+  { id: "all", label: "All Experience", shortLabel: "All", icon: Layers },
+  { id: "work", label: "Work Experience", shortLabel: "Work", icon: Briefcase },
+  { id: "research", label: "Research", icon: NotebookTabs },
+]
+
 export default function RedesignedExperience() {
   const [expandedExperience, setExpandedExperience] = useState<string | null>(null)
   const [experienceType, setExperienceType] = useState<"all" | "work" | "education" | "research">("all")
@@ -202,69 +208,21 @@ export default function RedesignedExperience() {
     <SectionContainer id="experience" className="bg-gradient-to-b from-background/95 to-background">
       <SectionHeader
         title="Professional Journey"
-        subtitle="My professional experiences and career highlights in AI development, education, and community building."
       />
 
       <ScrollReveal>
         <Tabs
-          defaultValue="all"
+          value={experienceType}
           onValueChange={(value) => setExperienceType(value as "all" | "work" | "education" | "research")}
           className="w-full"
         >
-          <div className="overflow-x-auto pb-2 custom-scrollbar-auto">
-            <TabsList className="flex justify-center gap-2 mb-8 bg-card/30 backdrop-blur-sm border border-border/20 w-fit mx-auto">
-              <TabsTrigger
-                value="all"
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "all" ? "bg-primary text-primary-foreground" : "bg-muted/50 hover:bg-muted/70 backdrop-blur-sm",
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span>All Experience</span>
-                </div>
-              </TabsTrigger>
-
-              <TabsTrigger
-                value="work"
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "work" ? "bg-primary text-primary-foreground" : "bg-muted/50 hover:bg-muted/70 backdrop-blur-sm",
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <Briefcase className="h-4 w-4" />
-                  <span>Work Experience</span>
-                </div>
-              </TabsTrigger>
-
-              {/* <TabsTrigger
-                value="education"
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "educa tion" ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80",
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <GraduationCap className="h-4 w-4" />
-                  <span>Education</span>
-                </div>
-              </TabsTrigger> */}
-
-              <TabsTrigger
-                value="research"
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all data-[state=active]:shadow-lg",
-                  experienceType === "research" ? "bg-primary text-primary-foreground" : "bg-muted/50 hover:bg-muted/70 backdrop-blur-sm",
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <NotebookTabs className="h-4 w-4" />
-                  <span>Research</span>
-                </div>
-              </TabsTrigger>
-            </TabsList>
-          </div>
+          <FilterTabs
+            tabs={experienceTabs}
+            value={experienceType}
+            layoutId="experience-active-tab"
+            ariaLabel="Filter experience by type"
+            className="mb-8"
+          />
 
           <div className="space-y-6">
             {filteredExperiences.map((experience, index) => {
@@ -287,10 +245,19 @@ export default function RedesignedExperience() {
                       <CardContent className="p-0 bg-card/50">
                         <div
                           className={cn(
-                            "p-4 sm:p-6 cursor-pointer transition-all duration-300",
+                            "p-4 sm:p-6 cursor-pointer transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                             expandedExperience === experience.id ? "pb-3" : "",
                           )}
+                          role="button"
+                          tabIndex={0}
+                          aria-expanded={expandedExperience === experience.id}
                           onClick={() => toggleExpand(experience.id)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault()
+                              toggleExpand(experience.id)
+                            }
+                          }}
                         >
                           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                             <div>
@@ -300,8 +267,8 @@ export default function RedesignedExperience() {
                                   experience.type === "work"
                                     ? "bg-primary/20 text-primary border-primary/30"
                                     : experience.type === "research"
-                                      ? "bg-secondary/20 text-secondary-foreground border-secondary/30"
-                                      : "bg-accent/20 text-accent-foreground border-accent/30"
+                                      ? "bg-secondary/20 text-secondary border-secondary/30"
+                                      : "bg-accent/20 text-accent border-accent/30"
                                 )}
                               >
                                 {experience.type === "work" ? (

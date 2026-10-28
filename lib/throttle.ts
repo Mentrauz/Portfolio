@@ -4,14 +4,14 @@
  * @param delay - The delay in milliseconds
  * @returns A throttled version of the function
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: never[]) => unknown>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
   let timeoutId: NodeJS.Timeout | null = null
   let lastExecutedTime = 0
 
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     const now = Date.now()
     const timeSinceLastExecution = now - lastExecutedTime
 
@@ -37,13 +37,13 @@ export function throttle<T extends (...args: any[]) => any>(
  * Request Animation Frame based throttle for scroll handlers
  * This ensures the callback runs at most once per frame
  */
-export function rafThrottle<T extends (...args: any[]) => any>(
+export function rafThrottle<T extends (...args: never[]) => unknown>(
   func: T
 ): (...args: Parameters<T>) => void {
   let rafId: number | null = null
   let lastArgs: Parameters<T> | null = null
 
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     lastArgs = args
     
     if (rafId === null) {

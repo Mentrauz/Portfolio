@@ -10,7 +10,8 @@ import { Badge } from "@/components/ui/badge"
 import { CustomGradientBackground } from "@/components/custom-gradient-background"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Tooltip } from "@/components/ui/animated-tooltip"
-import { GitBranch, Mail, ArrowDown, ExternalLink } from "lucide-react"
+import { ArrowDown, ExternalLink } from "lucide-react"
+import { siGithub } from "simple-icons"
 import { useToast } from "@/components/ui/use-toast"
 import { useIsClient } from "@/hooks/use-is-client"
 import { useLenis } from "@/components/smooth-scroll-provider"
@@ -80,10 +81,6 @@ export default function RedesignedHero() {
 
   useEffect(() => {
     if (!isClient) return
-
-    // Explicitly reset everything
-    setDisplayedText("")
-    setTypingComplete(false)
 
     // Use a timeout to ensure DOM is ready
     const timeout = setTimeout(() => {
@@ -178,13 +175,13 @@ export default function RedesignedHero() {
               </Badge>
               <Badge
                 variant="outline"
-                className="px-2 py-1 sm:px-3 sm:py-1.5 backdrop-blur-sm border-white/20 hover:bg-white/10 transition-colors"
+                className="px-2 py-1 sm:px-3 sm:py-1.5 backdrop-blur-sm border-estragon/30 hover:bg-estragon/10 transition-colors"
               >
                 DevOps
               </Badge>
               <Badge
                 variant="outline"
-                className="px-2 py-1 sm:px-3 sm:py-1.5 backdrop-blur-sm border-white/20 hover:bg-white/10 transition-colors"
+                className="px-2 py-1 sm:px-3 sm:py-1.5 backdrop-blur-sm border-estragon/30 hover:bg-estragon/10 transition-colors"
               >
                 STEM
               </Badge>
@@ -241,7 +238,9 @@ export default function RedesignedHero() {
                     rel="noopener noreferrer"
                     aria-label="GitHub"
                   >
-                    <GitBranch className="h-5 w-5" />
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d={siGithub.path} />
+                    </svg>
                   </a>
                 </Button>
               </Tooltip>
@@ -357,9 +356,9 @@ export default function RedesignedHero() {
           </ScrollReveal>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator - hidden on small screens, where the hero is taller than the viewport and it covers the social links */}
         {isClient && (
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center">
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
@@ -368,7 +367,8 @@ export default function RedesignedHero() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full border border-white/20 backdrop-blur-sm hover:bg-white/10 transition-colors"
+                className="rounded-full border border-border backdrop-blur-sm hover:bg-muted/50 transition-colors"
+                aria-label="Scroll to About section"
                 onClick={() => {
                   const aboutEl = document.getElementById("about")
                   if (aboutEl) {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle, CheckCircle, X, ChevronDown, ChevronUp, Activity, Cpu, Database, Zap } from "lucide-react"
@@ -8,31 +8,35 @@ import { cn } from "@/lib/utils"
 import { usePerformanceMonitor } from "@/hooks/use-performance-monitor"
 import { Progress } from "@/components/ui/progress"
 
+type Diagnostics = {
+  browserInfo: string
+  windowDefined: boolean
+  documentDefined: boolean
+  localStorageAvailable: boolean
+  webGLSupported: boolean
+  errors: string[]
+  warnings: string[]
+}
+
+const emptyDiagnostics: Diagnostics = {
+  browserInfo: "",
+  windowDefined: false,
+  documentDefined: false,
+  localStorageAvailable: false,
+  webGLSupported: false,
+  errors: [],
+  warnings: [],
+}
+
 export function DiagnosticTool() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<"system" | "performance">("system")
-  const [diagnostics, setDiagnostics] = useState<{
-    browserInfo: string
-    windowDefined: boolean
-    documentDefined: boolean
-    localStorageAvailable: boolean
-    webGLSupported: boolean
-    errors: string[]
-    warnings: string[]
-  }>({
-    browserInfo: "",
-    windowDefined: false,
-    documentDefined: false,
-    localStorageAvailable: false,
-    webGLSupported: false,
-    errors: [],
-    warnings: [],
-  })
 
   // Get performance metrics
   const performanceMetrics = usePerformanceMonitor(isOpen)
 
-  useEffect(() => {
+  // Derived from the environment and the latest metrics, so computed rather than stored in state
+  const diagnostics = useMemo<Diagnostics>(() => {
     try {
       // Collect diagnostic information
       const errors: string[] = []
@@ -93,8 +97,7 @@ export function DiagnosticTool() {
         warnings.push("High memory usage detected. This may cause performance issues.")
       }
 
-      // Update state with diagnostic info
-      setDiagnostics({
+      return {
         browserInfo,
         windowDefined,
         documentDefined,
@@ -102,9 +105,10 @@ export function DiagnosticTool() {
         webGLSupported,
         errors,
         warnings,
-      })
+      }
     } catch (error) {
       console.error("Error running diagnostics:", error)
+      return emptyDiagnostics
     }
   }, [performanceMetrics.fps, performanceMetrics.memory])
 

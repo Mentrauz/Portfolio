@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionContainer, SectionHeader } from "@/components/ui/section-container"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
@@ -105,7 +106,6 @@ export default function ReadingListPage() {
         >
           <SectionHeader
             title="Reading List"
-            subtitle="Reading more is one of my biggest goals. This list shifts and grows as new titles find their way into my hands"
             align="left"
             titleClassName="tracking-tight text-3xl sm:text-4xl lg:text-5xl"
             subtitleClassName="max-w-3xl text-sm sm:text-base md:text-lg"
@@ -119,14 +119,17 @@ export default function ReadingListPage() {
           initial="hidden"
           animate="visible"
         >
-          {readingList.map((book) => (
+          {readingList.map((book, index) => (
             <motion.div key={book.id} variants={itemVariants} className="mx-auto w-full max-w-[22rem] sm:max-w-none">
               <Card className="group h-full overflow-hidden bg-card/80 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg">
                 <div className="p-3 pb-0 sm:p-4 sm:pb-0">
                   <AspectRatio ratio={3 / 4}>
-                    <img
+                    <Image
                       src={book.coverImage}
                       alt={`${book.title} cover`}
+                      fill
+                      loading={index < 3 ? "eager" : "lazy"}
+                      sizes="(max-width: 640px) 22rem, (max-width: 1024px) 50vw, 33vw"
                       className="h-full w-full rounded-lg object-cover shadow-sm transition-transform duration-700 group-hover:scale-[1.03] md:rounded-xl"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
